@@ -19,6 +19,7 @@ public class Movement_Adrian : MonoBehaviour {
 
     private float rotY = 0.0f; // rotation around the up/y axis
     private float rotX = 0.0f; // rotation around the right/x axis
+    public float turnSmoothing = 15f; // A smoothing value for turning the player
 
 
 
@@ -39,12 +40,14 @@ public class Movement_Adrian : MonoBehaviour {
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.lockState = CursorLockMode.None;
 
-        float horizontal = Input.GetAxis("Horizontal");
-        float vertical = Input.GetAxis("Vertical");
-        
-        Vector3 fVelocity = new Vector3(horizontal, 0, vertical) * m_speed;
-        m_rb.velocity = fVelocity;
+        float straffe = Input.GetAxis("Horizontal") * m_speed;
+        float translation = Input.GetAxis("Vertical") * m_speed;
+        translation *= Time.deltaTime;
+        straffe *= Time.deltaTime;
 
+        transform.Translate(straffe, 0, translation);
+
+        Vector3 fVelocity = new Vector3(straffe, 0, translation) * m_speed;
 
         //ROTATION
         float mouseX = Input.GetAxis("Mouse X");
@@ -57,5 +60,7 @@ public class Movement_Adrian : MonoBehaviour {
 
         Quaternion localRotation = Quaternion.Euler(rotX, rotY, 0.0f);
         transform.rotation = localRotation;
+
+ 
     }
 }
