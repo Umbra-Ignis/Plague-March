@@ -6,11 +6,12 @@ namespace UnityStandardAssets.Characters.ThirdPerson
 {
     [RequireComponent(typeof (UnityEngine.AI.NavMeshAgent))]
     [RequireComponent(typeof (ThirdPersonCharacter))]
+
     public class AICharacterControl : MonoBehaviour
     {
-        public UnityEngine.AI.NavMeshAgent agent { get; private set; }             // the navmesh agent required for the path finding
-        public ThirdPersonCharacter character { get; private set; } // the character we are controlling
-        public Transform[] targets;                                   // target to aim for
+        public UnityEngine.AI.NavMeshAgent agent { get; private set; }  // the navmesh agent required for the path finding
+        public ThirdPersonCharacter character { get; private set; }     // the character we are controlling
+        public Transform[] targets;                                     // target to aim for
 
         //Used to iterate through targets
         private int i = 0;
@@ -37,9 +38,9 @@ namespace UnityStandardAssets.Characters.ThirdPerson
                 Patrolling();
             }
 
-            if(alerted)
+            else if (alerted)
             {
-                character.Move(Vector3.zero, false, false);
+                Alert();
                 //float timer = 0;
                 //timer += Time.deltaTime;
 
@@ -94,7 +95,9 @@ namespace UnityStandardAssets.Characters.ThirdPerson
 
         public void Alert()
         {
-
+            character.Move(Vector3.zero, false, false);
+            //Vector3 point = transform.position;
+            //character.transform.position = point;
         }
 
         public void SetPatrol()
