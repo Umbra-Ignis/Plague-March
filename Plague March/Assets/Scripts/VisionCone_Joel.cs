@@ -4,11 +4,13 @@ using UnityEngine;
 
 public class VisionCone_Joel : MonoBehaviour
 {
-    public UnityStandardAssets.Characters.ThirdPerson.AICharacterControl AI;
+    public AIMove_Joel AI;
+
+    public float timer = 0.0f;
     // Use this for initialization
     void Start ()
     {
-		
+
 	}
 	
 	// Update is called once per frame
@@ -21,6 +23,11 @@ public class VisionCone_Joel : MonoBehaviour
     {
         Debug.Log("Entered");
         AI.SetAlert();
-        //AI.StopAgent();
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        Debug.Log("Exited");
+        AI.SetPatrol();
     }
 }
