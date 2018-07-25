@@ -113,7 +113,7 @@ GameObject:
   - component: {fileID: 195733583085901278}
   m_Layer: 0
   m_Name: Capsule
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -158,7 +158,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1669349320643072}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 1.7205081, y: -0.862038, z: -4.3470864}
+  m_LocalPosition: {x: 21.53, y: -0.862038, z: -4.3470864}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4506390967839628}
@@ -171,7 +171,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1594024744968910}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.8994918, y: 0.862038, z: 1.4070863}
+  m_LocalPosition: {x: -0.27, y: 1.96, z: 7.561314}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4547319671705844}
@@ -230,7 +230,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1903111762295818}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -9.059492, y: -0.862038, z: 3.2029142}
+  m_LocalPosition: {x: -9.059492, y: -0.862038, z: 18.14}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4506390967839628}
@@ -256,7 +256,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1407111526484470}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 1.8505082, y: -0.862038, z: 3.2029142}
+  m_LocalPosition: {x: 8.99, y: -0.862038, z: 3.2029142}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4506390967839628}
@@ -512,7 +512,7 @@ MonoBehaviour:
   - {fileID: 4840647170343634}
   WaypointWaitTime: 3
   player: {fileID: 0}
-  cone: {fileID: 64508258316108414}
+  TESTPOS: {fileID: 0}
 --- !u!135 &135575493937415864
 SphereCollider:
   m_ObjectHideFlags: 1

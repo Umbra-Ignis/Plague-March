@@ -39,7 +39,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1182199251247266}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -4.8039365, y: 0.25, z: -10.95}
+  m_LocalPosition: {x: -4.8039365, y: 0.25, z: -4.7109284}
   m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
   m_Children: []
   m_Father: {fileID: 0}
@@ -113,7 +113,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   delay: 3
-  AlertRadius: 0
+  AlertRadius: 3
   HitFloorEffect: {fileID: 0}
 --- !u!135 &135699495911359198
 SphereCollider:

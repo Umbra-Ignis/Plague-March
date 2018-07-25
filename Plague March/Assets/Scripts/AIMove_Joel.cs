@@ -174,7 +174,7 @@ public class AIMove_Joel : MonoBehaviour
     {
         agent.SetDestination(pos.position);
 
-        if (Vector3.Distance(pos.position, agent.transform.position) <= 2.0f)
+        if (Vector3.Distance(pos.position, agent.transform.position) <= 10.0f)
         {
             //Used to store the current waypoint, to ensure that the current waypoint is not set to the new waypoint
             int tempi = i;

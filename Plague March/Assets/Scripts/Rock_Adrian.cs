@@ -4,30 +4,26 @@ using UnityEngine;
 
 public class Rock_Adrian : MonoBehaviour {
 
-    public float delay = 3f;
-
-    float countdown;
-
-    bool hasHitFloor = false;
+    
 
     public float AlertRadius;
 
     public GameObject HitFloorEffect;
 
+    
+
 
 	// Use this for initialization
 	void Start () {
-        countdown = delay;
+       
 	}
 	
 	// Update is called once per frame
 	void Update ()
     {
-        countdown -= Time.deltaTime;
-        if (countdown <= 0f && !hasHitFloor)
-        {
+       
             Alert();
-        }
+        
 	}
     
     void Alert()
@@ -40,7 +36,8 @@ public class Rock_Adrian : MonoBehaviour {
         {
             if (collider[i].gameObject.CompareTag("Enemy"))
             {
-                //collider[i].gameObject.GetComponent<AIMove_Joel>().
+                DebugExtension.DebugWireSphere(collider[i].transform.position);
+                collider[i].gameObject.GetComponent<AIMove_Joel>().SetPatrolPoint(transform);
             }
         }
         
