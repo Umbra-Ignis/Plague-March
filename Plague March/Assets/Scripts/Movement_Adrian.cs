@@ -20,6 +20,8 @@ public class Movement_Adrian : MonoBehaviour {
     public float gravityModifier = -1f;
     //Velocity
     protected Vector3 velocity;
+    //Rock Count
+    public int rockCount;
 
 
     // Use this for initialization
@@ -69,12 +71,8 @@ public class Movement_Adrian : MonoBehaviour {
         
         Quaternion localRotation = Quaternion.Euler(0, rotY, 0.0f);
 
+        //Sets local rotation of object
         transform.rotation = localRotation;
-
-       //if (Input.GetKey(KeyCode.W))
-       //{
-       //    //Sets Local rotation to objects rotation
-       //}
     }
 
     private void FixedUpdate()
@@ -85,4 +83,24 @@ public class Movement_Adrian : MonoBehaviour {
         Vector3 move = Vector3.up * deltaPosition.y;
         CharControler.Move(move);
     }
+
+    private void OnTriggerStay(Collider other)
+    {
+        if (other.gameObject.CompareTag("Rock"))
+        {
+            Debug.Log("Rock");
+
+            if (Input.GetKey(KeyCode.E))
+            {
+                Debug.Log("E");
+
+                other.gameObject.SetActive(false);
+                Destroy(other.gameObject);
+                rockCount++;
+            }
+        }
+    }
+
+    public int GetRockCount() { return rockCount; }
+    public void SubtractRockCount() { rockCount--; }
 }

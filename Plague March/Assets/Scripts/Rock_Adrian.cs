@@ -14,6 +14,7 @@ public class Rock_Adrian : MonoBehaviour {
 
     public GameObject HitFloorEffect;
 
+
 	// Use this for initialization
 	void Start () {
         countdown = delay;
@@ -26,7 +27,6 @@ public class Rock_Adrian : MonoBehaviour {
         if (countdown <= 0f && !hasHitFloor)
         {
             Alert();
-            hasHitFloor = true;
         }
 	}
     
@@ -34,10 +34,18 @@ public class Rock_Adrian : MonoBehaviour {
     {
         //Instantiate(HitFloorEffect, transform.position, transform.rotation);
 
-        //Collider[] collider = Physics.OverlapSphere(transform.position, AlertRadius);
+        Collider[] collider = Physics.OverlapSphere(transform.position, AlertRadius);
+
+        for (int i = 0; i < collider.Length; i++)
+        {
+            if (collider[i].gameObject.CompareTag("Enemy"))
+            {
+                //collider[i].gameObject.GetComponent<AIMove_Joel>().
+            }
+        }
         
 
         //Alert Enemy
-        Destroy(gameObject);
+        //Destroy(gameObject);
     }
 }
