@@ -8,16 +8,10 @@ public class VisionCone_Joel : MonoBehaviour
 
     public float timer = 0.0f;
     // Use this for initialization
-    void Start ()
-    {
-
-	}
+    void Start (){}
 	
 	// Update is called once per frame
-	void Update ()
-    {
-		
-	}
+	void Update (){}
 
     private void OnTriggerEnter(Collider other)
     {

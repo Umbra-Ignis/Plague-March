@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEditor.Animations;
 
 public class AIMove_Joel : MonoBehaviour
 {
@@ -31,6 +32,11 @@ public class AIMove_Joel : MonoBehaviour
 
     public Transform TESTPOS;
 
+    private Transform currentTarg;
+
+    private Animator anim;
+    private BlendTree bt;
+
     // Use this for initialization
     void Start ()
     {
@@ -41,11 +47,16 @@ public class AIMove_Joel : MonoBehaviour
         //Randomly sets the first waypoint for the AI to walk towards
         i = Random.Range(0, targets.Length - 1);
         rock = false;
+
+        anim = GetComponent<Animator>();
+        bt = anim.GetComponent<BlendTree>();
     }
 	
 	// Update is called once per frame
 	void Update ()
     {
+        //DEBUG FOR ROCK THROW
+        //=====================================================================
         if(Input.GetKeyDown(KeyCode.L))
         {
             rock = true;
@@ -54,6 +65,7 @@ public class AIMove_Joel : MonoBehaviour
 
         if(rock)
             SetPatrolPoint(TESTPOS);
+        //=====================================================================
 
         //Checks if the AI is patrolling, if it is, it will set its behavior to patrol between waypoints
         if (patrolling)
@@ -68,8 +80,19 @@ public class AIMove_Joel : MonoBehaviour
             Chase();
     }
 
+    private void OnDrawGizmos()
+    {
+        //Draws an arrow for debug purposes to the current target of the NPC
+        if(agent)
+            //Starts at the current position of the NPC, and looks in the direction of the current target
+            DebugExtension.DrawArrow(agent.transform.position, currentTarg.position - agent.transform.position, Color.magenta);
+    }
+
     void Patrol()
     {
+        anim.SetFloat("Blend", 0.0f);
+        agent.speed = 1.0f;
+
         //Ensures the agent can move, to avoid any conflicts when moving from other behaviours
         agent.isStopped = false;
 
@@ -81,6 +104,7 @@ public class AIMove_Joel : MonoBehaviour
             {
                 //If it does exist, the position of the target becomes the new target of the agent
                 agent.SetDestination(targets[i].position);
+                currentTarg = targets[i];
             }
         }
 
@@ -113,12 +137,18 @@ public class AIMove_Joel : MonoBehaviour
 
     void Alert()
     {
+        //Stops the agent to look "alert"
         agent.isStopped = true;
 
+        anim.SetFloat("Blend", 0.5f);
+
+        //Begins a timer to 9count how long the agent has been alert for
         timer += Time.deltaTime;
 
+        //Checks if the timer has reached a certain amount of time
         if(timer >= 3.0f)
         {
+            //If it has, the NPC will be switched to a chase state to chase the player
             SetChase();
         }
     }
@@ -127,11 +157,19 @@ public class AIMove_Joel : MonoBehaviour
     {
         Debug.Log("CHASE");
 
+        anim.SetFloat("Blend", 1.0f);
+        agent.speed = 2.0f;
+
+        //Ensures the agent can move, only getting to this state from the alert state which has stopped the NPC
         agent.isStopped = false;
         
+        //Finds the object tagger with player
         player = GameObject.FindGameObjectWithTag("Player");
 
+        //Sets the destination of the players position to the target for the NPC
         agent.SetDestination(player.transform.position);
+        //Sets the current target to the players position to ensure the arrow is drawn towards them
+        currentTarg = player.transform;
     }
 
     public void SetPatrol()
@@ -173,6 +211,7 @@ public class AIMove_Joel : MonoBehaviour
     public void SetPatrolPoint(Transform pos)
     {
         agent.SetDestination(pos.position);
+        currentTarg = pos;
 
         if (Vector3.Distance(pos.position, agent.transform.position) <= 10.0f)
         {
