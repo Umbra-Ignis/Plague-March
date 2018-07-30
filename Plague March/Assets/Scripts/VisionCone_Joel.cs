@@ -16,7 +16,8 @@ public class VisionCone_Joel : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         Debug.Log("Entered");
-        AI.SetAlert();
+        if(other.tag == ("Player"))
+            AI.SetAlert();
     }
 
     private void OnTriggerExit(Collider other)

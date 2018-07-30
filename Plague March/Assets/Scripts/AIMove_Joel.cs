@@ -35,7 +35,6 @@ public class AIMove_Joel : MonoBehaviour
     private Transform currentTarg;
 
     private Animator anim;
-    private BlendTree bt;
 
     // Use this for initialization
     void Start ()
@@ -49,7 +48,6 @@ public class AIMove_Joel : MonoBehaviour
         rock = false;
 
         anim = GetComponent<Animator>();
-        bt = anim.GetComponent<BlendTree>();
     }
 	
 	// Update is called once per frame
