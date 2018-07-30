@@ -142,7 +142,7 @@ public class AIMove_Joel : MonoBehaviour
 
         anim.SetFloat("Blend", 0.5f);
 
-        //Begins a timer to 9count how long the agent has been alert for
+        //Begins a timer to count how long the agent has been alert for
         timer += Time.deltaTime;
 
         //Checks if the timer has reached a certain amount of time
@@ -157,6 +157,7 @@ public class AIMove_Joel : MonoBehaviour
     {
         Debug.Log("CHASE");
 
+        timer = 0;
         anim.SetFloat("Blend", 1.0f);
         agent.speed = 2.0f;
 
