@@ -36,8 +36,11 @@ public class Rock_Adrian : MonoBehaviour
 
         for (int i = 0; i < collider.Length; i++)
         {
+            Debug.Log("FOR LOOP");
+
             if (collider[i].gameObject.CompareTag("Enemy"))
             {
+                Debug.Log("COLLIDER IF");
                 DebugExtension.DebugWireSphere(collider[i].transform.position, 10, 10);
                 collider[i].gameObject.GetComponent<AIMove_Joel>().SetPatrolPoint(transform);
             }
