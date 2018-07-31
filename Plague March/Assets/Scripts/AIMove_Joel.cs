@@ -91,6 +91,8 @@ public class AIMove_Joel : MonoBehaviour
         anim.SetFloat("Blend", 0.0f);
         agent.speed = 1.0f;
 
+        timer = 0.0f;
+
         //Ensures the agent can move, to avoid any conflicts when moving from other behaviours
         agent.isStopped = false;
 
@@ -212,7 +214,7 @@ public class AIMove_Joel : MonoBehaviour
         agent.SetDestination(pos.position);
         currentTarg = pos;
 
-        if (Vector3.Distance(pos.position, agent.transform.position) <= 10.0f)
+        if (Vector3.Distance(pos.position, agent.transform.position) <= 2.0f)
         {
             //Used to store the current waypoint, to ensure that the current waypoint is not set to the new waypoint
             int tempi = i;

@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class RockThrower_Adrian : MonoBehaviour {
-
-    public float throwForce = 40f;
+public class RockThrower_Adrian : MonoBehaviour
+{
+    public float throwForce = 40.0f;
     public GameObject RockPrefab;
     public Transform spawnPoint;
     private Movement_Adrian moveScript;
@@ -15,8 +15,8 @@ public class RockThrower_Adrian : MonoBehaviour {
     }
 
     // Update is called once per frame
-    void Update () {
-
+    void Update ()
+    {
         if (Input.GetMouseButtonDown(0))
         {
             ThrowRock();

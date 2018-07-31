@@ -2,30 +2,32 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Rock_Adrian : MonoBehaviour {
-
-    
-
+public class Rock_Adrian : MonoBehaviour
+{
     public float AlertRadius;
 
     public GameObject HitFloorEffect;
 
-    
-
+    public Movement_Adrian moveScript;
 
 	// Use this for initialization
-	void Start () {
-       
-	}
+	void Start () 
+    {
+        moveScript = GetComponent<Movement_Adrian>();
+    }
 	
 	// Update is called once per frame
-	void Update ()
+	void Update (){}
+
+    private void OnCollisionEnter(Collision collision)
     {
-       
+        if (collision.other.CompareTag("Ground"))
+        {
+            Debug.Log("COLLISION!!!!!");
             Alert();
-        
-	}
-    
+        }
+    }
+
     void Alert()
     {
         //Instantiate(HitFloorEffect, transform.position, transform.rotation);
@@ -36,12 +38,11 @@ public class Rock_Adrian : MonoBehaviour {
         {
             if (collider[i].gameObject.CompareTag("Enemy"))
             {
-                DebugExtension.DebugWireSphere(collider[i].transform.position);
+                DebugExtension.DebugWireSphere(collider[i].transform.position, 10, 10);
                 collider[i].gameObject.GetComponent<AIMove_Joel>().SetPatrolPoint(transform);
             }
         }
         
-
         //Alert Enemy
         //Destroy(gameObject);
     }
