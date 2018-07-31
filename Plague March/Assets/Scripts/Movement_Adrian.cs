@@ -4,16 +4,21 @@ using UnityEngine;
 
 //Must Have a CharacterController
 [RequireComponent(typeof(CharacterController))]
+[RequireComponent(typeof(Animator))]
 
 
 public class Movement_Adrian : MonoBehaviour {
 
+    //Gets Animator
+    Animator animator;
     //Gets Character Controller
     CharacterController CharControler;
     //Gets Players Speed
-    public int m_speed;
-    //Gets Rotation Y
-    private float rotY = 0.0f; // rotation around the up/y axis
+    public float m_speed;
+    //Gets Gravity
+    public float m_Gravity;
+    //Rotation Speed
+    public float m_rotationSpeed;
     //Gets Mouse Sensitivity
     public float mouseSensitivity = 100.0f;
     //Gravity Modifier
@@ -22,19 +27,24 @@ public class Movement_Adrian : MonoBehaviour {
     protected Vector3 velocity;
     //Rock Count
     public int rockCount;
+    //Move Direction
+    private Vector3 moveDirection = Vector3.zero;
 
 
     // Use this for initialization
     void Start () {
 
         //Presets speed
-        m_speed = 10;
+        m_speed = 0;
+        //Gravity
+        m_Gravity = 20;
         //Gets character controller Component
         CharControler = GetComponent<CharacterController>();
-        //Gets Rotation
-        Vector3 rot = transform.localRotation.eulerAngles;
-        //Sets rotation
-        rotY = rot.y;
+        //Sets Rotation Speed
+        m_rotationSpeed = 0;
+        //Gets Animator
+        animator = GetComponent<Animator>();
+
     }
 	
 	// Update is called once per frame
@@ -45,12 +55,28 @@ public class Movement_Adrian : MonoBehaviour {
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = false;
 
-        //WASD CONTROLS
-        float straffe = Input.GetAxis("Horizontal") * m_speed;
-        float translation = Input.GetAxis("Vertical") * m_speed;
-        translation *= Time.deltaTime;
-        straffe *= Time.deltaTime;
-        transform.Translate(straffe, 0, translation);
+        if (CharControler.isGrounded)
+        {
+            moveDirection = new Vector3(0, 0, Input.GetAxis("Vertical"));
+            moveDirection = transform.TransformDirection(moveDirection);
+            moveDirection *= m_speed;
+
+        }
+        moveDirection.y -= m_Gravity * Time.deltaTime;
+        CharControler.Move(moveDirection * Time.deltaTime);
+
+        transform.Rotate(0, Input.GetAxis("Horizontal"), 0);
+
+        //Forward movement Animation
+        if (Input.GetKeyDown(KeyCode.W))
+        {
+            animator.SetBool("IsMovingForward", true);
+        }
+        else if (Input.GetKeyUp(KeyCode.W))
+        {
+            animator.SetBool("IsMovingForward", false);
+        }
+
 
         //Grounded checks
         if (CharControler.isGrounded)
@@ -63,25 +89,7 @@ public class Movement_Adrian : MonoBehaviour {
             Debug.Log("Not Grounded");
             m_speed = 0;
         }
-        
-        //Gets x axis for look around
-        float mousex = Input.GetAxis("Mouse X");
-        
-        rotY += mousex * mouseSensitivity * Time.deltaTime;
-        
-        Quaternion localRotation = Quaternion.Euler(0, rotY, 0.0f);
 
-        //Sets local rotation of object
-        transform.rotation = localRotation;
-    }
-
-    private void FixedUpdate()
-    {
-        //Gravity
-        velocity += gravityModifier * Physics.gravity * Time.deltaTime;
-        Vector3 deltaPosition = velocity * Time.deltaTime;
-        Vector3 move = Vector3.up * deltaPosition.y;
-        CharControler.Move(move);
     }
 
     private void OnTriggerStay(Collider other)
