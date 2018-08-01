@@ -21,7 +21,7 @@ public class Rock_Adrian : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.other.CompareTag("Ground"))
+        if (collision.collider.CompareTag("Ground"))
         {
             Debug.Log("COLLISION!!!!!");
             Alert();
