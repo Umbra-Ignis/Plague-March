@@ -47,7 +47,7 @@ public class UserControler_Adrian : MonoBehaviour {
         float v = Input.GetAxis("Vertical");
 
         //Sets Crouch Bool
-        bool crouch = Input.GetKey(KeyCode.LeftControl);
+        bool crouch = Input.GetKeyDown(KeyCode.LeftControl);
 
         if (m_Cam != null)
         {
