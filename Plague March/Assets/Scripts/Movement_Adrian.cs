@@ -73,7 +73,7 @@ public class Movement_Adrian : MonoBehaviour {
         // control and velocity handling is different when grounded and airborne:
         if (m_IsGrounded)
         {
-            //HandleGroundedMovement(crouch, jump);
+            HandleGroundedMovement(crouch, jump);
         }
         else
         {
@@ -90,14 +90,15 @@ public class Movement_Adrian : MonoBehaviour {
     {
         if (crouch && m_IsGrounded)
         {
-            CharControler.center = new Vector3(0, 0.5f, 0);
-            CharControler.height = 1;
+            CharControler.center = new Vector3(0, 0.6f, 0);
+            CharControler.height = 1f;
             m_Crouching = true;
+
         }
         else
         {
-            CharControler.center = new Vector3(0, 1, 0);
-            CharControler.height = 2;
+            CharControler.center = m_CapsuleCenter;
+            CharControler.height = m_CapsuleHeight;
             m_Crouching = false;
         }
     }
@@ -187,19 +188,24 @@ public class Movement_Adrian : MonoBehaviour {
         if (jump && !crouch && animator.GetCurrentAnimatorStateInfo(0).IsName("Grounded"))
         {
             // jump!
+            CharControler.transform.Translate(new Vector3(0, 1, 0));
             
         }
     }
 
     void CheckGroundStatus()
     {
-        if (CharControler.isGrounded)
+        RaycastHit raycastHit;
+        
+        if (Physics.Raycast(transform.position + (Vector3.up * 0.2f), Vector3.down, out raycastHit))
         {
+            Debug.Log("Grounded");
             m_IsGrounded = true;
             animator.applyRootMotion = true;
         }
         else
         {
+            Debug.Log("Not Grounded");
             m_IsGrounded = false;
             animator.applyRootMotion = false;
         }
