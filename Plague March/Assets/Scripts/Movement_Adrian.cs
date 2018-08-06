@@ -9,12 +9,13 @@ using UnityEngine;
 
 public class Movement_Adrian : MonoBehaviour {
 
-    [SerializeField] float m_StationaryTurnSpeed = 180;
-    [SerializeField] float m_MovingTurnSpeed = 360;
-    [SerializeField] float m_RunCycleLegOffset = 0.2f; //specific to the character in sample assets, will need to be modified to work with others
-    [SerializeField] float m_AnimSpeedMultiplier = 1f;
-    [SerializeField] float m_JumpPower = 12f;
+    private float m_StationaryTurnSpeed = 180;
+    private float m_MovingTurnSpeed = 360;
+    private float m_RunCycleLegOffset = 0.2f; //specific to the character in sample assets, will need to be modified to work with others
     [Range(1f, 4f)] [SerializeField] float m_GravityMultiplier = 2f;
+    [Range(0.1f, 4f)] [SerializeField] float m_WalkSpeed = .8f;
+    [Range(0.1f, 4f)] [SerializeField] float m_SprintSpeed = 1.2f;
+    [SerializeField] float m_AnimSpeedMultiplier = 1f;
 
     //Gets Animator
     Animator animator;
@@ -33,7 +34,7 @@ public class Movement_Adrian : MonoBehaviour {
     //Turning amount
     float m_TurnAmount;
     //Check If Grounded
-     public bool m_IsGrounded;
+    bool m_IsGrounded;
  
     const float k_Half = 0.5f;
     //Cap Height
@@ -42,6 +43,7 @@ public class Movement_Adrian : MonoBehaviour {
     Vector3 m_CapsuleCenter;
     //Crouching
     bool m_Crouching;
+    
     
 
 
@@ -54,19 +56,26 @@ public class Movement_Adrian : MonoBehaviour {
         CharControler = GetComponent<CharacterController>();
         m_CapsuleHeight = CharControler.height;
         m_CapsuleCenter = CharControler.center;   
-        m_JumpPower = 10;
         m_Crouching = false;
     }
 
   
 
-    public void Move(Vector3 move, bool crouch, bool jump)
+    public void Move(Vector3 move, bool crouch, bool jump, bool sprinting)
     {
         if (move.magnitude > 1f) move.Normalize();
         move = transform.InverseTransformDirection(move);
         CheckGroundStatus();
         m_TurnAmount = Mathf.Atan2(move.x, move.z);
-        m_ForwardAmount = move.z;
+        
+        if (sprinting)
+        {
+            m_ForwardAmount = move.z * m_SprintSpeed;
+        }
+        else
+        {
+            m_ForwardAmount = move.z * m_WalkSpeed;
+        }
 
         ApplyExtraTurnRotation();
 
@@ -196,7 +205,7 @@ public class Movement_Adrian : MonoBehaviour {
     void CheckGroundStatus()
     {
         RaycastHit raycastHit;
-        
+        Debug.DrawRay(transform.position + (Vector3.up * 0.2f), Vector3.down);
         if (Physics.Raycast(transform.position + (Vector3.up * 0.2f), Vector3.down, out raycastHit))
         {
             Debug.Log("Grounded");
