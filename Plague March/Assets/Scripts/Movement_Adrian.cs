@@ -61,22 +61,15 @@ public class Movement_Adrian : MonoBehaviour {
 
   
 
-    public void Move(Vector3 move, bool crouch, bool jump, bool sprinting)
+    public void Move(Vector3 move, bool crouch, bool jump)
     {
         if (move.magnitude > 1f) move.Normalize();
         move = transform.InverseTransformDirection(move);
         CheckGroundStatus();
         m_TurnAmount = Mathf.Atan2(move.x, move.z);
+   
+        m_ForwardAmount = move.z * m_WalkSpeed;
         
-        if (sprinting)
-        {
-            m_ForwardAmount = move.z * m_SprintSpeed;
-        }
-        else
-        {
-            m_ForwardAmount = move.z * m_WalkSpeed;
-        }
-
         ApplyExtraTurnRotation();
 
         // control and velocity handling is different when grounded and airborne:
@@ -186,8 +179,6 @@ public class Movement_Adrian : MonoBehaviour {
         velocity = CharControler.velocity;
         velocity.y -= 9.8f * Time.deltaTime;
         CharControler.Move(velocity * Time.deltaTime);
-
-        
     }
 
 

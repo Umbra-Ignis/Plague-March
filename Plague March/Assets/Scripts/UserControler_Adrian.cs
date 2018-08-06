@@ -61,7 +61,11 @@ public class UserControler_Adrian : MonoBehaviour {
         }
 
         // walk speed multiplier
-        if (Input.GetKey(KeyCode.LeftShift)) m_Move *= .5f;
+        if (Input.GetKey(KeyCode.LeftShift))
+        {
+            Debug.Log("SPRINTING");
+            m_Move /= 0.5f;
+        }
 
         // pass all parameters to the Movement control script
         m_Character.Move(m_Move, crouch, m_Jump);
