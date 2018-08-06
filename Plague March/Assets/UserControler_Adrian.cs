@@ -13,7 +13,7 @@ public class UserControler_Adrian : MonoBehaviour {
     //Forward direction of camera
     private Vector3 m_CamForward;
     //Movement
-    private Vector3 m_Move;
+    public Vector3 m_Move;
     //Jumping
     private bool m_Jump;
 
@@ -47,7 +47,7 @@ public class UserControler_Adrian : MonoBehaviour {
         float v = Input.GetAxis("Vertical");
 
         //Sets Crouch Bool
-        bool crouch = Input.GetKeyDown(KeyCode.LeftControl);
+        bool crouch = Input.GetKey(KeyCode.LeftControl);
 
         if (m_Cam != null)
         {

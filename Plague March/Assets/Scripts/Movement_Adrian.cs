@@ -11,9 +11,7 @@ public class Movement_Adrian : MonoBehaviour {
 
     [SerializeField] float m_StationaryTurnSpeed = 180;
     [SerializeField] float m_MovingTurnSpeed = 360;
-    [SerializeField] float m_GroundCheckDistance = 0.1f;
     [SerializeField] float m_RunCycleLegOffset = 0.2f; //specific to the character in sample assets, will need to be modified to work with others
-    [SerializeField] float m_MoveSpeedMultiplier = 1f;
     [SerializeField] float m_AnimSpeedMultiplier = 1f;
     [SerializeField] float m_JumpPower = 12f;
     [Range(1f, 4f)] [SerializeField] float m_GravityMultiplier = 2f;
@@ -36,12 +34,8 @@ public class Movement_Adrian : MonoBehaviour {
     float m_TurnAmount;
     //Check If Grounded
      public bool m_IsGrounded;
-    //Ground Check Distance
-    float m_OrigGroundCheckDistance;
-    
+ 
     const float k_Half = 0.5f;
-   //Normal
-    Vector3 m_GroundNormal;
     //Cap Height
     float m_CapsuleHeight;
     //Cap Center
@@ -59,9 +53,9 @@ public class Movement_Adrian : MonoBehaviour {
         //Gets character controller Component
         CharControler = GetComponent<CharacterController>();
         m_CapsuleHeight = CharControler.height;
-        m_CapsuleCenter = CharControler.center;
-        m_OrigGroundCheckDistance = m_GroundCheckDistance;
+        m_CapsuleCenter = CharControler.center;   
         m_JumpPower = 10;
+        m_Crouching = false;
     }
 
   
@@ -71,7 +65,6 @@ public class Movement_Adrian : MonoBehaviour {
         if (move.magnitude > 1f) move.Normalize();
         move = transform.InverseTransformDirection(move);
         CheckGroundStatus();
-        move = Vector3.ProjectOnPlane(move, m_GroundNormal);
         m_TurnAmount = Mathf.Atan2(move.x, move.z);
         m_ForwardAmount = move.z;
 
@@ -80,97 +73,31 @@ public class Movement_Adrian : MonoBehaviour {
         // control and velocity handling is different when grounded and airborne:
         if (m_IsGrounded)
         {
-            HandleGroundedMovement(crouch, jump);
+            //HandleGroundedMovement(crouch, jump);
         }
         else
         {
             HandleAirborneMovement();
         }
 
-        //Gravity Math
-        m_JumpPower -= 9.8f * Time.deltaTime;
-
-        if (CharControler.isGrounded)
-        {
-            m_JumpPower = 0;
-        }
-
         ScaleCapsuleForCrouching(crouch);
-        PreventStandingInLowHeadroom();
 
         // send input and other state parameters to the animator
         UpdateAnimator(move);
      }
-	
-    //OLD UPDATE CODE
-
-	//// Update is called once per frame
-	//void Update () {
-
- //       //Sets the cursor locked and cannot not be seen
- //       Cursor.lockState = CursorLockMode.Locked;
- //       Cursor.lockState = CursorLockMode.None;
- //       Cursor.visible = false;
-
- //       if (CharControler.isGrounded)
- //       {
- //           moveDirection = new Vector3(0, 0, Input.GetAxis("Vertical"));
- //           moveDirection = transform.TransformDirection(moveDirection);
- //           moveDirection *= m_speed;
-
- //       }
- //       moveDirection.y -= m_Gravity * Time.deltaTime;
- //       CharControler.Move(moveDirection * Time.deltaTime);
-
- //       transform.Rotate(0, Input.GetAxis("Horizontal"), 0);
-
-
- //       //Forward movement Animation
- //       if (Input.GetKeyDown(KeyCode.W))
- //       {
- //           animator.SetBool("IsMovingForward", true);
- //       }
- //       else if (Input.GetKeyUp(KeyCode.W))
- //       {
- //           animator.SetBool("IsMovingForward", false);
- //       }
-
-
- //       //Grounded checks
- //       if (CharControler.isGrounded)
- //       {
- //           Debug.Log("Grounded");
- //           m_speed = 10;
- //       }
- //       else
- //       {
- //           Debug.Log("Not Grounded");
- //           m_speed = 0;
- //       }
-
- //   }
-
 
     void ScaleCapsuleForCrouching(bool crouch)
     {
-        if (m_IsGrounded && crouch)
+        if (crouch && m_IsGrounded)
         {
-            if (m_Crouching) return;
-            CharControler.height = CharControler.height / 2f;
-            CharControler.center = CharControler.center / 2f;
+            CharControler.center = new Vector3(0, 0.5f, 0);
+            CharControler.height = 1;
             m_Crouching = true;
         }
         else
         {
-            Ray crouchRay = new Ray(CharControler.transform.position + Vector3.up * CharControler.radius * k_Half, Vector3.up);
-            float crouchRayLength = m_CapsuleHeight - CharControler.radius * k_Half;
-            if (Physics.SphereCast(crouchRay, CharControler.radius * k_Half, crouchRayLength, Physics.AllLayers, QueryTriggerInteraction.Ignore))
-            {
-                m_Crouching = true;
-                return;
-            }
-            CharControler.height = m_CapsuleHeight;
-            CharControler.center = m_CapsuleCenter;
+            CharControler.center = new Vector3(0, 1, 0);
+            CharControler.height = 2;
             m_Crouching = false;
         }
     }
@@ -217,20 +144,6 @@ public class Movement_Adrian : MonoBehaviour {
             animator.speed = 1;
         }
     }
-
-    void PreventStandingInLowHeadroom()
-    {
-        // prevent standing up in crouch-only zones
-        if (!m_Crouching)
-        {
-            Ray crouchRay = new Ray(CharControler.transform.position + Vector3.up * CharControler.radius * k_Half, Vector3.up);
-            float crouchRayLength = m_CapsuleHeight - CharControler.radius * k_Half;
-            if (Physics.SphereCast(crouchRay, CharControler.radius * k_Half, crouchRayLength, Physics.AllLayers, QueryTriggerInteraction.Ignore))
-            {
-                m_Crouching = true;
-            }
-        }
-    }
     
 
     //Getters and Setters For Rock Count
@@ -258,8 +171,13 @@ public class Movement_Adrian : MonoBehaviour {
     void HandleAirborneMovement()
     {
         // apply extra gravity from multiplier:
-        Vector3 extraGravityForce = (Physics.gravity * m_GravityMultiplier) - Physics.gravity;
-        CharControler.SimpleMove(extraGravityForce); 
+
+        Vector3 velocity;
+        velocity = CharControler.velocity;
+        velocity.y -= 9.8f * Time.deltaTime;
+        CharControler.Move(velocity * Time.deltaTime);
+
+        
     }
 
 
@@ -269,10 +187,7 @@ public class Movement_Adrian : MonoBehaviour {
         if (jump && !crouch && animator.GetCurrentAnimatorStateInfo(0).IsName("Grounded"))
         {
             // jump!
-            m_JumpPower += 100 * Time.deltaTime;
-            transform.Translate(new Vector3(0, m_JumpPower, 0));
-            m_IsGrounded = false;
-            animator.applyRootMotion = false;
+            
         }
     }
 
@@ -285,7 +200,7 @@ public class Movement_Adrian : MonoBehaviour {
         }
         else
         {
-            m_IsGrounded = false;  
+            m_IsGrounded = false;
             animator.applyRootMotion = false;
         }
     }
