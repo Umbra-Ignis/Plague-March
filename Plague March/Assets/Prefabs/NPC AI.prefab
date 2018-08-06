@@ -690,7 +690,7 @@ GameObject:
   - component: {fileID: 4472251426763228}
   m_Layer: 0
   m_Name: NPC AI
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1136,7 +1136,7 @@ GameObject:
   - component: {fileID: 114703247818406758}
   m_Layer: 0
   m_Name: WorldWar_zombie
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1550,7 +1550,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1669349320643072}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 42.65, y: -0.862038, z: -16.08}
+  m_LocalPosition: {x: -22, y: -0.862038, z: -16.08}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4506390967839628}
@@ -1611,7 +1611,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1594024744968910}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.8994918, y: 0.862038, z: 1.4070863}
+  m_LocalPosition: {x: 17.057308, y: 1.362038, z: 19.725742}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4506390967839628}
@@ -1863,7 +1863,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1997081528530340}
   m_LocalRotation: {x: -0, y: 0.99929315, z: -0, w: -0.037594378}
-  m_LocalPosition: {x: 37.891766, y: 0.57796204, z: 30.17916}
+  m_LocalPosition: {x: 27.3, y: 0.57796204, z: 24.2}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4892452311903636}
@@ -2004,7 +2004,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1903111762295818}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -20.46, y: 4.44, z: -16.55}
+  m_LocalPosition: {x: -20.46, y: -0.8, z: 21.3}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4506390967839628}
@@ -2073,7 +2073,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1240657319780992}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 17.31, y: -0.862038, z: -16.42}
+  m_LocalPosition: {x: 6.6, y: -0.862038, z: 22.7}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4506390967839628}
@@ -2157,7 +2157,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1407111526484470}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 33.02, y: -0.862038, z: -16.08}
+  m_LocalPosition: {x: 5.4, y: -0.862038, z: -16.08}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4506390967839628}
@@ -2401,9 +2401,13 @@ MonoBehaviour:
   - {fileID: 4424109941896010}
   - {fileID: 4981865927175094}
   - {fileID: 4840647170343634}
+  m_Speed: 1
+  DistanceFromWaypoint: 1
   WaypointWaitTime: 3
+  DistanceToWaypoint: 0
   player: {fileID: 0}
   TESTPOS: {fileID: 0}
+  currentTarg: {fileID: 0}
 --- !u!135 &135575493937415864
 SphereCollider:
   m_ObjectHideFlags: 1

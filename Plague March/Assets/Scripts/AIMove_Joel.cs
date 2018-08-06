@@ -9,7 +9,19 @@ public class AIMove_Joel : MonoBehaviour
     //Takes in an array of waypoints for the AI to patrol between
     public Transform[] targets;
     //Determines the amount of time the AI spends at each of the waypoints
+
+    //Determines Speed
+    [Range(1f, 50f)] public float m_Speed = 1f;
+
+    //Distance agent Will stop Relative to waypoint
+    [Range(1f, 50f)] public float DistanceFromWaypoint = 4f;
+
+    //Used to time how long is spent at the current waypoint, once arrived
     public float WaypointWaitTime;
+
+    //Current Distance From Waypoint
+    public float DistanceToWaypoint;
+    
 
     [HideInInspector]
     public GameObject player; //DO NOT SET, JUST FOR VIEWING IN INSPECTOR
@@ -19,8 +31,6 @@ public class AIMove_Joel : MonoBehaviour
 
     //Used to iterate randomly through the waypoints
     private int i;
-    //Used to time how long is spent at the current waypoint, once arrived
-    private float timer = 0;
 
     //Stores whether the AI is patrolling
     private bool patrolling;
@@ -29,8 +39,14 @@ public class AIMove_Joel : MonoBehaviour
     //Stores whether the AI is chasing
     private bool chasing;
     private bool rock;
+    //Wait Timer Patrol
+    private float timerPatrol;
+    //Wait Timer Alert
+    private float timerAlert;
+    //Rock wait timer
+    public float m_rockWaitTimer;
 
-    public Transform TESTPOS;
+    public Transform TESTPOS = null;
 
     public Transform currentTarg;
 
@@ -48,11 +64,20 @@ public class AIMove_Joel : MonoBehaviour
         rock = false;
 
         anim = GetComponent<Animator>();
+        anim.SetFloat("Blend", 0.0f);
+
+        //Sets Timer Patrol
+        timerPatrol = 0f;
+
+        //Sets Rock Wait Timer
+        m_rockWaitTimer = 1f;
     }
 	
 	// Update is called once per frame
 	void Update ()
     {
+        DistanceToWaypoint = Vector3.Distance(targets[i].position, agent.transform.position);
+
         //DEBUG FOR ROCK THROW
         //=====================================================================
         if (Input.GetKeyDown(KeyCode.L))
@@ -102,17 +127,14 @@ public class AIMove_Joel : MonoBehaviour
 
     void Patrol()
     {
-        anim.SetFloat("Blend", 0.0f);
-        agent.speed = 1.0f;
-
-        timer = 0.0f;
-
+        agent.speed = m_Speed;
         //Ensures the agent can move, to avoid any conflicts when moving from other behaviours
         agent.isStopped = false;
 
         //Checks how far the agent is from its current waypoint
-        if (Vector3.Distance(targets[i].position, agent.transform.position) >= 2.0f)
+        if (DistanceToWaypoint >= DistanceFromWaypoint)
         {
+            Debug.Log("Stopped");
             //Checks that the current selected target actually exists
             if (targets[i] != null)
             {
@@ -121,16 +143,24 @@ public class AIMove_Joel : MonoBehaviour
                 currentTarg = targets[i];
             }
         }
-
-        //Once the agent reached the waypoint
-        else
+        else //Once the agent reached the waypoint
         {
+            //Stops Agent From Moving
+            agent.isStopped = true;
+
+            anim.SetFloat("Blend", 0.5f);
+
             //Timer begins to increase to store how long the agent has spent at the location
-            timer += Time.deltaTime;
+            timerPatrol += Time.deltaTime;
 
             //Once the agent has spent the desired amount of time there
-            if (timer >= WaypointWaitTime)
+            if (timerPatrol >= WaypointWaitTime)
             {
+                //Starts Agent Moving Again
+                agent.isStopped = false;
+
+                anim.SetFloat("Blend", 0.0f);
+
                 //Used to store the current waypoint, to ensure that the current waypoint is not set to the new waypoint
                 int tempi = i;
                 //Randomly assigns a new waypoint
@@ -144,7 +174,7 @@ public class AIMove_Joel : MonoBehaviour
                 }
 
                 //Resets the timer back to 0 for the next waypoint delay
-                timer = 0;
+                timerPatrol = 0;
             }
         }
     }
@@ -157,21 +187,25 @@ public class AIMove_Joel : MonoBehaviour
         anim.SetFloat("Blend", 0.5f);
 
         //Begins a timer to count how long the agent has been alert for
-        timer += Time.deltaTime;
+        timerAlert += Time.deltaTime;
 
         //Checks if the timer has reached a certain amount of time
-        if(timer >= 3.0f)
+        if(timerAlert >= 3.0f)
         {
             //If it has, the NPC will be switched to a chase state to chase the player
             SetChase();
         }
     }
 
+    void ReturnToPatrol()
+    {
+
+    }
+
     void Chase()
     {
         Debug.Log("CHASE");
 
-        timer = 0;
         anim.SetFloat("Blend", 1.0f);
         agent.speed = 2.0f;
 
@@ -263,7 +297,7 @@ public class AIMove_Joel : MonoBehaviour
         currentTarg = pos;
     }
 
-    void OnCollisionEnter(Collision collision)
+    void OnCollisionStay(Collision collision)
     {
         float tempTime = 0;
 
@@ -271,10 +305,22 @@ public class AIMove_Joel : MonoBehaviour
         {
             tempTime += Time.deltaTime;
             collision.collider.tag.Replace("Rock", "Untagged");
-            if (tempTime >= 1.5f)
+            if (tempTime >= m_rockWaitTimer)
                 SetPatrol();
             else
-                SetAlert();
+            {
+                if (tempTime <= m_rockWaitTimer)
+                {
+                    agent.isStopped = true;
+                    anim.SetFloat("Blend", 0.5f);
+                }
+                else
+                {
+                    agent.isStopped = false;
+                    anim.SetFloat("Blend", 0.0f);
+                    SetPatrol();
+                }
+            }
         }
     }
 }
