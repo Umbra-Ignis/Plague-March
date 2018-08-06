@@ -32,7 +32,7 @@ public class AIMove_Joel : MonoBehaviour
 
     public Transform TESTPOS;
 
-    private Transform currentTarg;
+    public Transform currentTarg;
 
     private Animator anim;
 
@@ -55,27 +55,41 @@ public class AIMove_Joel : MonoBehaviour
     {
         //DEBUG FOR ROCK THROW
         //=====================================================================
-        if(Input.GetKeyDown(KeyCode.L))
+        if (Input.GetKeyDown(KeyCode.L))
         {
-            rock = true;
-            patrolling = false;
+            RockThrowBools();
         }
 
-        if(rock)
+        if (rock)
             SetPatrolPoint(TESTPOS);
         //=====================================================================
 
         //Checks if the AI is patrolling, if it is, it will set its behavior to patrol between waypoints
         if (patrolling)
+        {
+            Debug.Log("PATROL BOOL");
             Patrol();
+        }
 
         //Checks if the AI is alerted, if it is, it will set its behavior to stop and check if the player stays within the vision cone for a certain amount of time
-        else if (alerted)
+        if (alerted)
+        {
+            Debug.Log("ALERT BOOL");
             Alert();
+        }
 
         //Checks if the AI is chasing, if it is, it will set its behavior to chase the player until they escape the vision cone
-        else if (chasing)
+        if (chasing)
+        {
+            Debug.Log("CHASING BOOL");
             Chase();
+        }
+
+        //if (rock)
+        //{
+        //    Debug.Log("ROCK BOOL");
+        //    ApproachRock(currentTarg);
+        //}
     }
 
     private void OnDrawGizmos()
@@ -173,11 +187,35 @@ public class AIMove_Joel : MonoBehaviour
         currentTarg = player.transform;
     }
 
+    public void SetPatrolPoint(Transform pos)
+    {
+        agent.SetDestination(pos.position);
+        currentTarg = pos;
+
+        if (Vector3.Distance(pos.position, agent.transform.position) <= 5.0f)
+        {
+            //Used to store the current waypoint, to ensure that the current waypoint is not set to the new waypoint
+            int tempi = i;
+            //Randomly assigns a new waypoint
+            i = Random.Range(0, targets.Length - 1);
+
+            //Loops every time the new waypoint is reset to the same as the current waypoint, until a different one is selected
+            while (i == tempi)
+            {
+                //Randomly assigns a new waypoint
+                i = Random.Range(0, targets.Length - 1);
+            }
+            rock = false;
+            SetPatrol();
+        }
+    }
+
     public void SetPatrol()
     {
         patrolling = true;
         alerted = false;
         chasing = false;
+        rock = false;
     }
 
     public void SetAlert()
@@ -185,6 +223,7 @@ public class AIMove_Joel : MonoBehaviour
         patrolling = false;
         alerted = true;
         chasing = false;
+        rock = false;
     }
 
     public void SetChase()
@@ -192,6 +231,14 @@ public class AIMove_Joel : MonoBehaviour
         patrolling = false;
         alerted = false;
         chasing = true;
+        rock = false;
+    }
+    public void RockThrowBools()
+    {
+        patrolling = false;
+        alerted = false;
+        chasing = false;
+        rock = true;
     }
 
     public bool GetPatrolBool()
@@ -209,26 +256,25 @@ public class AIMove_Joel : MonoBehaviour
         return chasing;
     }
 
-    public void SetPatrolPoint(Transform pos)
+
+    public void ApproachRock(Transform pos)
     {
         agent.SetDestination(pos.position);
         currentTarg = pos;
+    }
 
-        if (Vector3.Distance(pos.position, agent.transform.position) <= 2.0f)
+    void OnCollisionEnter(Collision collision)
+    {
+        float tempTime = 0;
+
+        if(collision.gameObject.CompareTag("Rock"))
         {
-            //Used to store the current waypoint, to ensure that the current waypoint is not set to the new waypoint
-            int tempi = i;
-            //Randomly assigns a new waypoint
-            i = Random.Range(0, targets.Length - 1);
-
-            //Loops every time the new waypoint is reset to the same as the current waypoint, until a different one is selected
-            while (i == tempi)
-            {
-                //Randomly assigns a new waypoint
-                i = Random.Range(0, targets.Length - 1);
-            }
-            rock = false;
-            SetPatrol();
+            tempTime += Time.deltaTime;
+            collision.collider.tag.Replace("Rock", "Untagged");
+            if (tempTime >= 1.5f)
+                SetPatrol();
+            else
+                SetAlert();
         }
     }
 }

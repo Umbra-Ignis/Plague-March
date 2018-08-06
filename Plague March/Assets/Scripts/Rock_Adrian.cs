@@ -5,16 +5,10 @@ using UnityEngine;
 public class Rock_Adrian : MonoBehaviour
 {
     public float AlertRadius;
-
     public GameObject HitFloorEffect;
 
-    public Movement_Adrian moveScript;
-
 	// Use this for initialization
-	void Start () 
-    {
-        moveScript = GetComponent<Movement_Adrian>();
-    }
+	void Start () {}
 	
 	// Update is called once per frame
 	void Update (){}
@@ -23,7 +17,6 @@ public class Rock_Adrian : MonoBehaviour
     {
         if (collision.collider.CompareTag("Ground"))
         {
-            Debug.Log("COLLISION!!!!!");
             Alert();
         }
     }
@@ -36,17 +29,12 @@ public class Rock_Adrian : MonoBehaviour
 
         for (int i = 0; i < collider.Length; i++)
         {
-            Debug.Log("FOR LOOP");
-
             if (collider[i].gameObject.CompareTag("Enemy"))
             {
-                Debug.Log("COLLIDER IF");
                 DebugExtension.DebugWireSphere(collider[i].transform.position, 10, 10);
-                collider[i].gameObject.GetComponent<AIMove_Joel>().SetPatrolPoint(transform);
+                collider[i].gameObject.GetComponent<AIMove_Joel>().ApproachRock(transform);
+                collider[i].gameObject.GetComponent<AIMove_Joel>().RockThrowBools();
             }
         }
-        
-        //Alert Enemy
-        //Destroy(gameObject);
     }
 }
