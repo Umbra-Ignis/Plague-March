@@ -17,7 +17,7 @@ public class RockThrower_Adrian : MonoBehaviour
     // Update is called once per frame
     void Update ()
     {
-        if (Input.GetMouseButtonDown(0) && moveScript.GetRockCount() >= 0)
+        if (Input.GetMouseButtonDown(0) && moveScript.GetRockCount() >= -0)
         {
             ThrowRock();
         }
