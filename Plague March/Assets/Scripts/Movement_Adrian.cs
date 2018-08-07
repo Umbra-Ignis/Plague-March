@@ -13,7 +13,6 @@ public class Movement_Adrian : MonoBehaviour
     private float m_StationaryTurnSpeed = 180;
     private float m_MovingTurnSpeed = 360;
     private float m_RunCycleLegOffset = 0.2f; //specific to the character in sample assets, will need to be modified to work with others
-    [Range(1f, 4f)] [SerializeField] float m_GravityMultiplier = 2f;
     [Range(0.1f, 4f)] [SerializeField] float m_WalkSpeed = .8f;
     [Range(0.1f, 4f)] [SerializeField] float m_SprintSpeed = 1.2f;
     [SerializeField] float m_AnimSpeedMultiplier = 1f;

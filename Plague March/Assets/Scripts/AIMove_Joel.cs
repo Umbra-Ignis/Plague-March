@@ -43,8 +43,10 @@ public class AIMove_Joel : MonoBehaviour
     private float timerPatrol;
     //Wait Timer Alert
     private float timerAlert;
+    //Rock wait time
+    public float m_rockWaitTime;
     //Rock wait timer
-    public float m_rockWaitTimer;
+    private float m_rockWaitTimer;
 
     public Transform TESTPOS = null;
 
@@ -68,9 +70,8 @@ public class AIMove_Joel : MonoBehaviour
 
         //Sets Timer Patrol
         timerPatrol = 0f;
-
-        //Sets Rock Wait Timer
-        m_rockWaitTimer = 1f;
+        //Sets Rock wait timer
+        m_rockWaitTimer = 0f;
     }
 	
 	// Update is called once per frame
@@ -80,13 +81,32 @@ public class AIMove_Joel : MonoBehaviour
 
         //DEBUG FOR ROCK THROW
         //=====================================================================
-        if (Input.GetKeyDown(KeyCode.L))
-        {
-            RockThrowBools();
-        }
+        //if (Input.GetKeyDown(KeyCode.L))
+        //{
+        //    RockThrowBools();
+        //}
 
         if (rock)
-            SetPatrolPoint(TESTPOS);
+        {
+            agent.isStopped = false;
+            anim.SetFloat("Blend", 0.0f);
+
+            agent.SetDestination(currentTarg.position);
+            if (Vector3.Distance(agent.transform.position, currentTarg.position) <= 1)
+            {
+                m_rockWaitTimer += Time.deltaTime;
+                agent.isStopped = true;
+                anim.SetFloat("Blend", 0.5f);
+
+            }
+            if (m_rockWaitTimer >= m_rockWaitTime)
+            {
+                agent.isStopped = false;
+                anim.SetFloat("Blend", 0.0f);
+                m_rockWaitTimer = 0;
+                SetPatrol();
+            }
+        }
         //=====================================================================
 
         //Checks if the AI is patrolling, if it is, it will set its behavior to patrol between waypoints
@@ -299,31 +319,36 @@ public class AIMove_Joel : MonoBehaviour
         agent.SetDestination(pos.position);
         currentTarg = pos;
     }
+    //private void OnTriggerStay(Collider other)
+    //{
 
-    void OnCollisionStay(Collision collision)
-    {
-        float tempTime = 0;
 
-        if(collision.gameObject.CompareTag("Rock"))
-        {
-            tempTime += Time.deltaTime;
-            collision.collider.tag.Replace("Rock", "Untagged");
-            if (tempTime >= m_rockWaitTimer)
-                SetPatrol();
-            else
-            {
-                if (tempTime <= m_rockWaitTimer)
-                {
-                    agent.isStopped = true;
-                    anim.SetFloat("Blend", 0.5f);
-                }
-                else
-                {
-                    agent.isStopped = false;
-                    anim.SetFloat("Blend", 0.0f);
-                    SetPatrol();
-                }
-            }
-        }
-    }
+    //    if (other.gameObject.CompareTag("Rock"))
+    //    {
+            
+    //        //collision.collider.tag.Replace("Rock", "Untagged");
+    //        if (TestTimer >= m_rockWaitTimer)
+    //            SetPatrol();
+    //        else
+    //        {
+    //            if (TestTimer <= m_rockWaitTimer)
+    //            {
+    //                agent.isStopped = true;
+    //                anim.SetFloat("Blend", 0.5f);
+    //            }
+    //            else
+    //            {
+    //                agent.isStopped = false;
+    //                anim.SetFloat("Blend", 0.0f);
+    //                TestTimer = 0;
+    //                SetPatrol();
+    //            }
+    //        }
+    //    }
+    //}
+
+    
+
 }
+
+

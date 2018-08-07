@@ -17,7 +17,7 @@ public class RockThrower_Adrian : MonoBehaviour
     // Update is called once per frame
     void Update ()
     {
-        if (Input.GetMouseButtonDown(0))
+        if (Input.GetMouseButtonDown(0) && moveScript.GetRockCount() >= 0)
         {
             ThrowRock();
         }
@@ -27,6 +27,7 @@ public class RockThrower_Adrian : MonoBehaviour
     {
         if (moveScript.GetRockCount() >= 1)
         {
+
             GameObject rock = Instantiate(RockPrefab, spawnPoint.position, Camera.main.transform.localRotation);
             Rigidbody rb = rock.GetComponent<Rigidbody>();
             rb.AddForce((Camera.main.transform.forward + transform.up) * throwForce, ForceMode.VelocityChange);
