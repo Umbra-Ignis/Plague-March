@@ -16,6 +16,8 @@ public class UserControler_Adrian : MonoBehaviour {
     public Vector3 m_Move;
     //Jumping
     private bool m_Jump;
+    //Sprinting
+    private bool m_Sprinting;
 
 
     // Use this for initialization
@@ -61,14 +63,19 @@ public class UserControler_Adrian : MonoBehaviour {
         }
 
         // walk speed multiplier
+<<<<<<< HEAD
         if (Input.GetKey(KeyCode.LeftShift))
         {
             Debug.Log("SPRINTING");
             m_Move /= 0.5f;
         }
+=======
+        m_Sprinting = Input.GetKey(KeyCode.LeftShift);
+        
+>>>>>>> parent of 20d72ef... Added new test house, materials and UI elements
 
         // pass all parameters to the Movement control script
-        m_Character.Move(m_Move, crouch, m_Jump);
+        m_Character.Move(m_Move, crouch, m_Jump, m_Sprinting);
         m_Jump = false;
     }
 }
