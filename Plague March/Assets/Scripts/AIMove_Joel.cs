@@ -167,10 +167,13 @@ public class AIMove_Joel : MonoBehaviour
                 i = Random.Range(0, targets.Length - 1);
 
                 //Loops every time the new waypoint is reset to the same as the current waypoint, until a different one is selected
-                while(i == tempi)
+                if (targets.Length > 1)
                 {
-                    //Randomly assigns a new waypoint
-                    i = Random.Range(0, targets.Length - 1);
+                    while (i == tempi)
+                    {
+                        //Randomly assigns a new waypoint
+                        i = Random.Range(0, targets.Length - 1);
+                    }
                 }
 
                 //Resets the timer back to 0 for the next waypoint delay

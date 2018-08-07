@@ -4,7 +4,8 @@ using UnityEngine;
 
 [RequireComponent(typeof(Movement_Adrian))]
 
-public class UserControler_Adrian : MonoBehaviour {
+public class UserControler_Adrian : MonoBehaviour
+{
 
     //Main Char Reference
     private Movement_Adrian m_Character;
@@ -16,21 +17,23 @@ public class UserControler_Adrian : MonoBehaviour {
     public Vector3 m_Move;
     //Jumping
     private bool m_Jump;
+    //Sprinting
+    private bool m_Sprinting;
 
 
     // Use this for initialization
-    void Start ()
+    void Start()
     {
         // get the transform of the main camera
-            if (Camera.main != null)
+        if (Camera.main != null)
             m_Cam = Camera.main.transform;
 
         // get the third person character ( this should never be null due to require component )
         m_Character = GetComponent<Movement_Adrian>();
     }
-	
-	// Update is called once per frame
-	void Update ()
+
+    // Update is called once per frame
+    void Update()
     {
         //locks Cursor in Center of Screen and makes Non visable
         Cursor.lockState = CursorLockMode.Locked;
@@ -61,23 +64,11 @@ public class UserControler_Adrian : MonoBehaviour {
         }
 
         // walk speed multiplier
-<<<<<<< HEAD:Plague March/Assets/Scripts/UserControler_Adrian.cs
-<<<<<<< HEAD
-        if (Input.GetKey(KeyCode.LeftShift))
-        {
-            Debug.Log("SPRINTING");
-            m_Move /= 0.5f;
-        }
-=======
         m_Sprinting = Input.GetKey(KeyCode.LeftShift);
-        
->>>>>>> parent of 20d72ef... Added new test house, materials and UI elements
-=======
-        if (Input.GetKey(KeyCode.LeftShift)) m_Move *= .5f;
->>>>>>> parent of 47ffb93... Movement Polish and camera polish:Plague March/Assets/UserControler_Adrian.cs
+
 
         // pass all parameters to the Movement control script
-        m_Character.Move(m_Move, crouch, m_Jump);
+        m_Character.Move(m_Move, crouch, m_Jump, m_Sprinting);
         m_Jump = false;
     }
 }
