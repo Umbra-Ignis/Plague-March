@@ -16,8 +16,6 @@ public class UserControler_Adrian : MonoBehaviour {
     public Vector3 m_Move;
     //Jumping
     private bool m_Jump;
-    //Sprinting
-    private bool m_Sprinting;
 
 
     // Use this for initialization
@@ -63,6 +61,7 @@ public class UserControler_Adrian : MonoBehaviour {
         }
 
         // walk speed multiplier
+<<<<<<< HEAD:Plague March/Assets/Scripts/UserControler_Adrian.cs
 <<<<<<< HEAD
         if (Input.GetKey(KeyCode.LeftShift))
         {
@@ -73,9 +72,12 @@ public class UserControler_Adrian : MonoBehaviour {
         m_Sprinting = Input.GetKey(KeyCode.LeftShift);
         
 >>>>>>> parent of 20d72ef... Added new test house, materials and UI elements
+=======
+        if (Input.GetKey(KeyCode.LeftShift)) m_Move *= .5f;
+>>>>>>> parent of 47ffb93... Movement Polish and camera polish:Plague March/Assets/UserControler_Adrian.cs
 
         // pass all parameters to the Movement control script
-        m_Character.Move(m_Move, crouch, m_Jump, m_Sprinting);
+        m_Character.Move(m_Move, crouch, m_Jump);
         m_Jump = false;
     }
 }
