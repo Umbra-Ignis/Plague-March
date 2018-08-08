@@ -17,7 +17,12 @@ public class RockThrower_Adrian : MonoBehaviour
     // Update is called once per frame
     void Update ()
     {
-        if (Input.GetMouseButtonDown(0) && moveScript.GetRockCount() >= -0)
+        if (Input.GetMouseButtonDown(0) && moveScript.GetRockCount() >= 0)
+        {
+            AimRock();
+        }
+
+        if(Input.GetMouseButtonUp(0) && moveScript.GetRockCount() >= 0)
         {
             ThrowRock();
         }
@@ -32,6 +37,16 @@ public class RockThrower_Adrian : MonoBehaviour
             Rigidbody rb = rock.GetComponent<Rigidbody>();
             rb.AddForce((Camera.main.transform.forward + (transform.up+ transform.forward)) * throwForce, ForceMode.VelocityChange);
             moveScript.SubtractRockCount();
+            moveScript.rockThrown();
+        }
+    }
+
+    void AimRock()
+    {
+        if (moveScript.GetRockCount() > 0)
+        {
+            Debug.Log("!!!!!");
+            moveScript.stopCharacter();
         }
     }
 }

@@ -45,12 +45,14 @@ public class Movement_Adrian : MonoBehaviour
     bool m_Crouching;
 
 
+    private bool aiming;
+
+
 
 
     // Use this for initialization
     void Start()
     {
-
         //Gets Animator
         animator = GetComponent<Animator>();
         //Gets character controller Component
@@ -58,42 +60,57 @@ public class Movement_Adrian : MonoBehaviour
         m_CapsuleHeight = CharControler.height;
         m_CapsuleCenter = CharControler.center;
         m_Crouching = false;
+        aiming = false;
     }
 
 
 
     public void Move(Vector3 move, bool crouch, bool jump, bool sprinting)
     {
-        if (move.magnitude > 1f) move.Normalize();
-        move = transform.InverseTransformDirection(move);
-        CheckGroundStatus();
-        m_TurnAmount = Mathf.Atan2(move.x, move.z);
-
-        if (sprinting)
+        if (!aiming)
         {
-            m_ForwardAmount = move.z * m_SprintSpeed;
+            if (move.magnitude > 1f)
+                move.Normalize();
+
+            move = transform.InverseTransformDirection(move);
+            CheckGroundStatus();
+            m_TurnAmount = Mathf.Atan2(move.x, move.z);
+
+            if (sprinting)
+            {
+                //Adds Sprinting Speed
+                m_ForwardAmount = move.z * m_SprintSpeed;
+            }
+            else
+            {
+                //Adds Walking Speed
+                m_ForwardAmount = move.z * m_WalkSpeed;
+            }
+
+            ApplyExtraTurnRotation();
+
+            // control and velocity handling is different when grounded and airborne:
+            if (m_IsGrounded)
+            {
+                HandleGroundedMovement(crouch, jump);
+            }
+            else
+            {
+                HandleAirborneMovement();
+            }
+
+            //Crouching Capsuale adjustments
+            ScaleCapsuleForCrouching(crouch);
+
+            // send input and other state parameters to the animator
+            UpdateAnimator(move);
         }
         else
         {
-            m_ForwardAmount = move.z * m_WalkSpeed;
+            move = Vector3.zero;
+            m_ForwardAmount = 0;
+            Debug.Log("Stopped moving");
         }
-
-        ApplyExtraTurnRotation();
-
-        // control and velocity handling is different when grounded and airborne:
-        if (m_IsGrounded)
-        {
-            HandleGroundedMovement(crouch, jump);
-        }
-        else
-        {
-            HandleAirborneMovement();
-        }
-
-        ScaleCapsuleForCrouching(crouch);
-
-        // send input and other state parameters to the animator
-        UpdateAnimator(move);
     }
 
     void ScaleCapsuleForCrouching(bool crouch)
@@ -181,14 +198,10 @@ public class Movement_Adrian : MonoBehaviour
 
     void HandleAirborneMovement()
     {
-        // apply extra gravity from multiplier:
-
         Vector3 velocity;
         velocity = CharControler.velocity;
         velocity.y -= 9.8f * Time.deltaTime;
         CharControler.Move(velocity * Time.deltaTime);
-
-
     }
 
 
@@ -197,8 +210,7 @@ public class Movement_Adrian : MonoBehaviour
         // check whether conditions are right to allow a jump:
         if (jump && !crouch && animator.GetCurrentAnimatorStateInfo(0).IsName("Grounded"))
         {
-            // jump!
-            CharControler.transform.Translate(new Vector3(0, 1, 0));
+            CharControler.transform.Translate(new Vector3( 0, 1, 0));
 
         }
     }
@@ -207,7 +219,7 @@ public class Movement_Adrian : MonoBehaviour
     {
         RaycastHit raycastHit;
         Debug.DrawRay(transform.position + (Vector3.up * 0.2f), Vector3.down);
-        if (Physics.Raycast(transform.position, Vector3.down, out raycastHit, 0.1f))
+        if (Physics.Raycast(transform.position, Vector3.down, out raycastHit, 0.3f))
         {
             Debug.Log("Grounded");
             m_IsGrounded = true;
@@ -219,5 +231,15 @@ public class Movement_Adrian : MonoBehaviour
             m_IsGrounded = false;
             animator.applyRootMotion = false;
         }
+    }
+
+    public void stopCharacter()
+    {
+        aiming = true;
+    }
+
+    public void rockThrown()
+    {
+        aiming = false;
     }
 }
