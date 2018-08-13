@@ -8,7 +8,6 @@ public class AIMove_Joel : MonoBehaviour
 {
     //Takes in an array of waypoints for the AI to patrol between
     public Transform[] targets;
-    //Determines the amount of time the AI spends at each of the waypoints
 
     //Determines Speed
     [Range(1f, 50f)] public float m_Speed = 1f;
@@ -21,10 +20,10 @@ public class AIMove_Joel : MonoBehaviour
 
     //Current Distance From Waypoint
     public float DistanceToWaypoint;
-    
 
+    //Stores a reference to the player, making their position easily obtainable
     [HideInInspector]
-    public GameObject player; //DO NOT SET, JUST FOR VIEWING IN INSPECTOR
+    public GameObject player;
 
     //Obtains reference to the agent to set its targets etc
     private NavMeshAgent agent;
@@ -38,6 +37,7 @@ public class AIMove_Joel : MonoBehaviour
     private bool alerted;
     //Stores whether the AI is chasing
     private bool chasing;
+    //Stores whether the AI is approaching a thrown rock
     private bool rock;
     //Wait Timer Patrol
     private float timerPatrol;
@@ -48,10 +48,10 @@ public class AIMove_Joel : MonoBehaviour
     //Rock wait timer
     private float m_rockWaitTimer;
 
-    public Transform TESTPOS = null;
-
+    //Stores a reference to the current target of the AI
     public Transform currentTarg;
 
+    //Stores the animator of the actor in which needs to be altered
     private Animator anim;
 
     // Use this for initialization
@@ -59,13 +59,16 @@ public class AIMove_Joel : MonoBehaviour
     {
         //Gets the NavMesh agent component from the AI to set waypoints and such
         agent = GetComponent<NavMeshAgent>();
+        //Gets the Animator component from the AI to alter the animations
+        anim = GetComponent<Animator>();
+
         //Sets the AI's default behaviour to patrol
         SetPatrol();
+
         //Randomly sets the first waypoint for the AI to walk towards
         i = Random.Range(0, targets.Length - 1);
-        rock = false;
 
-        anim = GetComponent<Animator>();
+        //Sets the default animation to walking
         anim.SetFloat("Blend", 0.0f);
 
         //Sets Timer Patrol
@@ -77,6 +80,7 @@ public class AIMove_Joel : MonoBehaviour
 	// Update is called once per frame
 	void Update ()
     {
+        //Calculates how far the AI is from its current target
         DistanceToWaypoint = Vector3.Distance(targets[i].position, agent.transform.position);
 
         //DEBUG FOR ROCK THROW
@@ -147,6 +151,8 @@ public class AIMove_Joel : MonoBehaviour
 
     void Patrol()
     {
+        anim.SetFloat("Blend", 0.0f);
+
         agent.speed = m_Speed;
         //Ensures the agent can move, to avoid any conflicts when moving from other behaviours
         agent.isStopped = false;
