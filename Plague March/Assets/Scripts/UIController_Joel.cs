@@ -10,16 +10,15 @@ public class UIController_Joel : MonoBehaviour
 	// Use this for initialization
 	void Start ()
     {
+        //Turns off the image so that it is not always visible
         img.enabled = false;
     }
 	
 	// Update is called once per frame
 	void Update ()
     {
-        Debug.Log("UPDATE");
         if (Input.GetKeyDown(KeyCode.U))
         {
-            Debug.Log("Enabled");
             if (img.enabled == true)
                 img.enabled = false;
             else

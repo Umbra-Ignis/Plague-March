@@ -28,7 +28,8 @@ namespace Cinemachine
     public class CinemachineBrain : MonoBehaviour
     {
         /// <summary>
-        /// When enabled, the current camera and blend will be indicated in the game window, for debugging.
+        /// When enabled, the current camera and blend will be indicated in the game window, for 
+        /// ging.
         /// </summary>
         [Tooltip("When enabled, the current camera and blend will be indicated in the game window, for debugging")]
         public bool m_ShowDebugText = false;

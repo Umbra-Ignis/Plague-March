@@ -36,7 +36,8 @@ namespace Cinemachine
         [NoSaveDuringPlay]
         public Transform m_Follow = null;
 
-        /// <summary>When enabled, the current camera and blend will be indicated in the game window, for debugging</summary>
+        /// <summary>When enabled, the current camera and blend will be indicated in the game window, for 
+        /// ging</summary>
         [Tooltip("When enabled, the current child camera and blend will be indicated in the game window, for debugging")]
         [NoSaveDuringPlay]
         public bool m_ShowDebugText = false;

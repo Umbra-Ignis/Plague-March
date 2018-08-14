@@ -83,62 +83,59 @@ public class AIMove_Joel : MonoBehaviour
         //Calculates how far the AI is from its current target
         DistanceToWaypoint = Vector3.Distance(targets[i].position, agent.transform.position);
 
-        //DEBUG FOR ROCK THROW
-        //=====================================================================
-        //if (Input.GetKeyDown(KeyCode.L))
-        //{
-        //    RockThrowBools();
-        //}
-
         if (rock)
         {
+            //Ensures the AI is able to move to its new waypoint
             agent.isStopped = false;
+            //Ensures the AI's animation is set to walk
             anim.SetFloat("Blend", 0.0f);
 
+            //Sets the new destination to the currently stored destination
             agent.SetDestination(currentTarg.position);
+
+            //Checks how far away the AI is from the rocks position
             if (Vector3.Distance(agent.transform.position, currentTarg.position) <= 1)
             {
+                //Begins a timer to keep the AI at the rocks location for a given amount of time
                 m_rockWaitTimer += Time.deltaTime;
+                //Stops the agent from moving
                 agent.isStopped = true;
+                //Sets the animation of the agent so they look around
                 anim.SetFloat("Blend", 0.5f);
 
             }
+
+            //If the wait timer becomes greater than the given wait time
             if (m_rockWaitTimer >= m_rockWaitTime)
             {
+                //The agent is able to move
                 agent.isStopped = false;
+                //The animation is set back to walking
                 anim.SetFloat("Blend", 0.0f);
+                //The wait timer is set back to 0 so that if it is hit again, it will begin from the start
                 m_rockWaitTimer = 0;
+                //The agent is set back to the patrol state
                 SetPatrol();
             }
         }
-        //=====================================================================
 
         //Checks if the AI is patrolling, if it is, it will set its behavior to patrol between waypoints
         if (patrolling)
         {
-            Debug.Log("PATROL BOOL");
             Patrol();
         }
 
         //Checks if the AI is alerted, if it is, it will set its behavior to stop and check if the player stays within the vision cone for a certain amount of time
         if (alerted)
         {
-            Debug.Log("ALERT BOOL");
             Alert();
         }
 
         //Checks if the AI is chasing, if it is, it will set its behavior to chase the player until they escape the vision cone
         if (chasing)
         {
-            Debug.Log("CHASING BOOL");
             Chase();
         }
-
-        //if (rock)
-        //{
-        //    Debug.Log("ROCK BOOL");
-        //    ApproachRock(currentTarg);
-        //}
     }
 
     private void OnDrawGizmos()
@@ -151,8 +148,10 @@ public class AIMove_Joel : MonoBehaviour
 
     void Patrol()
     {
+        //Sets the animation of the agent to walking
         anim.SetFloat("Blend", 0.0f);
 
+        //Sets the agents speed to the speed passed in through the inspector
         agent.speed = m_Speed;
         //Ensures the agent can move, to avoid any conflicts when moving from other behaviours
         agent.isStopped = false;
@@ -160,20 +159,23 @@ public class AIMove_Joel : MonoBehaviour
         //Checks how far the agent is from its current waypoint
         if (DistanceToWaypoint >= DistanceFromWaypoint)
         {
-            Debug.Log("Stopped");
             //Checks that the current selected target actually exists
             if (targets[i] != null)
             {
                 //If it does exist, the position of the target becomes the new target of the agent
                 agent.SetDestination(targets[i].position);
+                //Stores the current target
                 currentTarg = targets[i];
             }
         }
-        else //Once the agent reached the waypoint
+
+        //Once the agent reached the waypoint
+        else
         {
             //Stops Agent From Moving
             agent.isStopped = true;
 
+            //Sets the agents animation to looking around
             anim.SetFloat("Blend", 0.5f);
 
             //Timer begins to increase to store how long the agent has spent at the location
@@ -185,6 +187,7 @@ public class AIMove_Joel : MonoBehaviour
                 //Starts Agent Moving Again
                 agent.isStopped = false;
 
+                //Ensures the agent animation is set back to walking
                 anim.SetFloat("Blend", 0.0f);
 
                 //Used to store the current waypoint, to ensure that the current waypoint is not set to the new waypoint
@@ -213,6 +216,7 @@ public class AIMove_Joel : MonoBehaviour
         //Stops the agent to look "alert"
         agent.isStopped = true;
 
+        //Sets the agents animation to looking around
         anim.SetFloat("Blend", 0.5f);
 
         //Begins a timer to count how long the agent has been alert for
@@ -226,17 +230,12 @@ public class AIMove_Joel : MonoBehaviour
         }
     }
 
-    void ReturnToPatrol()
-    {
-
-    }
-
     void Chase()
     {
-        Debug.Log("CHASE");
-
+        //Sets the agents animation to running
         anim.SetFloat("Blend", 1.0f);
-        agent.speed = 2.0f;
+        //Speeds up the agent to run after the player at a higher speedS
+        agent.speed = m_Speed * 2;
 
         //Ensures the agent can move, only getting to this state from the alert state which has stopped the NPC
         agent.isStopped = false;
@@ -252,7 +251,9 @@ public class AIMove_Joel : MonoBehaviour
 
     public void SetPatrolPoint(Transform pos)
     {
+        //Sets the agents current destination to the passed in position
         agent.SetDestination(pos.position);
+        //Stores the current target of the agent
         currentTarg = pos;
 
         if (Vector3.Distance(pos.position, agent.transform.position) <= 5.0f)
@@ -319,42 +320,11 @@ public class AIMove_Joel : MonoBehaviour
         return chasing;
     }
 
-
     public void ApproachRock(Transform pos)
     {
         agent.SetDestination(pos.position);
         currentTarg = pos;
     }
-    //private void OnTriggerStay(Collider other)
-    //{
-
-
-    //    if (other.gameObject.CompareTag("Rock"))
-    //    {
-            
-    //        //collision.collider.tag.Replace("Rock", "Untagged");
-    //        if (TestTimer >= m_rockWaitTimer)
-    //            SetPatrol();
-    //        else
-    //        {
-    //            if (TestTimer <= m_rockWaitTimer)
-    //            {
-    //                agent.isStopped = true;
-    //                anim.SetFloat("Blend", 0.5f);
-    //            }
-    //            else
-    //            {
-    //                agent.isStopped = false;
-    //                anim.SetFloat("Blend", 0.0f);
-    //                TestTimer = 0;
-    //                SetPatrol();
-    //            }
-    //        }
-    //    }
-    //}
-
-    
-
 }
 
 
