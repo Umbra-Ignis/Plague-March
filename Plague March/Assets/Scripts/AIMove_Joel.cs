@@ -8,25 +8,21 @@ public class AIMove_Joel : MonoBehaviour
 
     //Determines Speed
     [Range(1f, 50f)] public float m_Speed = 1f;
-
     //Distance agent Will stop Relative to waypoint
-    [Range(1f, 50f)] public float DistanceFromWaypoint = 4f;
+    [Range(1f, 50f)] public float stoppingDistance = 4f;
+    //Sets how much faster the chasing state will be, 1 being the same speed as patrol
+    [Range(1f, 20f)]public float chaseSpeedMultiplier;
 
     //Used to time how long is spent at the current waypoint, once arrived
-    public float WaypointWaitTime;
-
-    //Current Distance From Waypoint
-    public float DistanceToWaypoint;
+    public float waypointWaitTime;
+    //Current Distance the agent is away from the Waypoint
+    private float distanceToWaypoint;
 
     //Stores a reference to the player, making their position easily obtainable
-    [HideInInspector]
-    public GameObject player;
-
+    [HideInInspector] public GameObject player;
     //Obtains reference to the agent to set its targets etc
     private NavMeshAgent agent;
 
-    //Used to iterate randomly through the waypoints
-    private int i;
 
     //Stores whether the AI is patrolling
     private bool patrolling;
@@ -46,10 +42,13 @@ public class AIMove_Joel : MonoBehaviour
     private float m_rockWaitTimer;
 
     //Stores a reference to the current target of the AI
-    public Transform currentTarg;
+    private Transform currentTarg;
 
     //Stores the animator of the actor in which needs to be altered
     private Animator anim;
+
+    //Used to iterate randomly through the waypoints
+    private int i;
 
     // Use this for initialization
     void Start ()
@@ -65,9 +64,6 @@ public class AIMove_Joel : MonoBehaviour
         //Randomly sets the first waypoint for the AI to walk towards
         i = Random.Range(0, targets.Length - 1);
 
-        //Sets the default animation to walking
-        anim.SetFloat("Blend", 0.0f);
-
         //Sets Timer Patrol
         timerPatrol = 0f;
         //Sets Rock wait timer
@@ -78,7 +74,7 @@ public class AIMove_Joel : MonoBehaviour
 	void Update ()
     {
         //Calculates how far the AI is from its current target
-        DistanceToWaypoint = Vector3.Distance(targets[i].position, agent.transform.position);
+        distanceToWaypoint = Vector3.Distance(targets[i].position, agent.transform.position);
 
         if (rock)
         {
@@ -154,7 +150,7 @@ public class AIMove_Joel : MonoBehaviour
         agent.isStopped = false;
 
         //Checks how far the agent is from its current waypoint
-        if (DistanceToWaypoint >= DistanceFromWaypoint)
+        if (distanceToWaypoint >= stoppingDistance)
         {
             //Checks that the current selected target actually exists
             if (targets[i] != null)
@@ -179,7 +175,7 @@ public class AIMove_Joel : MonoBehaviour
             timerPatrol += Time.deltaTime;
 
             //Once the agent has spent the desired amount of time there
-            if (timerPatrol >= WaypointWaitTime)
+            if (timerPatrol >= waypointWaitTime)
             {
                 //Starts Agent Moving Again
                 agent.isStopped = false;
@@ -232,7 +228,7 @@ public class AIMove_Joel : MonoBehaviour
         //Sets the agents animation to running
         anim.SetFloat("Blend", 1.0f);
         //Speeds up the agent to run after the player at a higher speedS
-        agent.speed = m_Speed * 2;
+        agent.speed = m_Speed * chaseSpeedMultiplier;
 
         //Ensures the agent can move, only getting to this state from the alert state which has stopped the NPC
         agent.isStopped = false;
@@ -266,6 +262,7 @@ public class AIMove_Joel : MonoBehaviour
                 //Randomly assigns a new waypoint
                 i = Random.Range(0, targets.Length - 1);
             }
+
             rock = false;
             SetPatrol();
         }
@@ -300,21 +297,6 @@ public class AIMove_Joel : MonoBehaviour
         alerted = false;
         chasing = false;
         rock = true;
-    }
-
-    public bool GetPatrolBool()
-    {
-        return patrolling;
-    }
-
-    public bool GetAlertlBool()
-    {
-        return alerted;
-    }
-
-    public bool GetChaseBool()
-    {
-        return chasing;
     }
 
     public void ApproachRock(Transform pos)
