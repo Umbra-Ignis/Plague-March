@@ -107,9 +107,11 @@ public class Movement_Adrian : MonoBehaviour
         }
         else
         {
-            move = Vector3.zero;
+            ApplyExtraTurnRotation();
+            //move = Vector3.zero;
             m_ForwardAmount = 0;
             Debug.Log("Stopped moving");
+            UpdateAnimator(move);
         }
     }
 

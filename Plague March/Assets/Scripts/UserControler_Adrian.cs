@@ -52,6 +52,8 @@ public class UserControler_Adrian : MonoBehaviour
         //Sets Crouch Bool
         bool crouch = Input.GetKey(KeyCode.LeftControl);
 
+        
+
         if (m_Cam != null)
         {
             m_CamForward = Vector3.Scale(m_Cam.forward, new Vector3(1, 0, 1)).normalized;

@@ -62,12 +62,12 @@ public class AIMove_Joel : MonoBehaviour
         SetPatrol();
 
         //Randomly sets the first waypoint for the AI to walk towards
-        i = Random.Range(0, targets.Length - 1);
+        i = Random.Range(0, targets.Length);
 
         //Sets Timer Patrol
         timerPatrol = 0f;
         //Sets Rock wait timer
-        m_rockWaitTimer = 0f;
+        m_rockWaitTimer = 1f;
     }
 	
 	// Update is called once per frame
@@ -186,7 +186,7 @@ public class AIMove_Joel : MonoBehaviour
                 //Used to store the current waypoint, to ensure that the current waypoint is not set to the new waypoint
                 int tempi = i;
                 //Randomly assigns a new waypoint
-                i = Random.Range(0, targets.Length - 1);
+                i = Random.Range(0, targets.Length);
 
                 //Loops every time the new waypoint is reset to the same as the current waypoint, until a different one is selected
                 if (targets.Length > 1)
@@ -194,7 +194,7 @@ public class AIMove_Joel : MonoBehaviour
                     while (i == tempi)
                     {
                         //Randomly assigns a new waypoint
-                        i = Random.Range(0, targets.Length - 1);
+                        i = Random.Range(0, targets.Length);
                     }
                 }
 
@@ -240,6 +240,8 @@ public class AIMove_Joel : MonoBehaviour
         agent.SetDestination(player.transform.position);
         //Sets the current target to the players position to ensure the arrow is drawn towards them
         currentTarg = player.transform;
+
+        timerAlert = 0;
     }
 
     public void SetPatrolPoint(Transform pos)
@@ -254,13 +256,13 @@ public class AIMove_Joel : MonoBehaviour
             //Used to store the current waypoint, to ensure that the current waypoint is not set to the new waypoint
             int tempi = i;
             //Randomly assigns a new waypoint
-            i = Random.Range(0, targets.Length - 1);
+            i = Random.Range(0, targets.Length);
 
             //Loops every time the new waypoint is reset to the same as the current waypoint, until a different one is selected
             while (i == tempi)
             {
                 //Randomly assigns a new waypoint
-                i = Random.Range(0, targets.Length - 1);
+                i = Random.Range(0, targets.Length);
             }
 
             rock = false;

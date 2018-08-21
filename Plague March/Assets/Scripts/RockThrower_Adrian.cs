@@ -35,7 +35,7 @@ public class RockThrower_Adrian : MonoBehaviour
 
             GameObject rock = Instantiate(RockPrefab, spawnPoint.position, Camera.main.transform.localRotation);
             Rigidbody rb = rock.GetComponent<Rigidbody>();
-            rb.AddForce((Camera.main.transform.forward + (transform.up+ transform.forward)) * throwForce, ForceMode.VelocityChange);
+            rb.AddForce(Camera.main.transform.forward * throwForce, ForceMode.VelocityChange);
             moveScript.SubtractRockCount();
             moveScript.rockThrown();
         }
@@ -48,5 +48,15 @@ public class RockThrower_Adrian : MonoBehaviour
             Debug.Log("!!!!!");
             moveScript.stopCharacter();
         }
+    }
+
+    public float GetAngle()
+    {
+        return Mathf.Acos(Vector3.Dot(Camera.main.transform.forward , transform.forward));
+    }
+
+    public float GetVelocity()
+    {
+        return throwForce;
     }
 }
