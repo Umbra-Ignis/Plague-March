@@ -1648,7 +1648,7 @@ Transform:
     type: 2}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 898511829}
-  m_LocalRotation: {x: -0.0708869, y: 0.00020612635, z: -0.000014192448, w: -0.9974844}
+  m_LocalRotation: {x: -0.07088677, y: 0.00020612635, z: -0.000014192356, w: -0.9974844}
   m_LocalPosition: {x: 1.05879106e-22, y: -0.00000047683716, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -2691,11 +2691,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0899615dd74a47c439fe5bb2157b5759, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mouseSensitivity: 100
-  clampAngleMax: 20
-  clampAngleMin: 10
-  rotX: 0
-  turnSmoothing: 15
 --- !u!81 &1276337419
 AudioListener:
   m_ObjectHideFlags: 0
