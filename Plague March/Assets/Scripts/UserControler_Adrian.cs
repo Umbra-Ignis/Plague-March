@@ -52,7 +52,7 @@ public class UserControler_Adrian : MonoBehaviour
         //Sets Crouch Bool
         bool crouch = Input.GetKey(KeyCode.LeftControl);
 
-        
+
 
         if (m_Cam != null)
         {
