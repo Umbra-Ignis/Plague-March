@@ -21,6 +21,7 @@ GameObject:
   - component: {fileID: 4381195469260930}
   - component: {fileID: 33825951347381926}
   - component: {fileID: 23202835159979144}
+  - component: {fileID: 64292193007420012}
   - component: {fileID: 95350653234625458}
   m_Layer: 0
   m_Name: Fence_Hole_M
@@ -36,7 +37,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1917379440333108}
   m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -80, y: 0, z: 3.2}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -82,6 +83,20 @@ MeshFilter:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1917379440333108}
+  m_Mesh: {fileID: 4300000, guid: c2181ffc8abbb0b4bbb3dfa9b282076c, type: 3}
+--- !u!64 &64292193007420012
+MeshCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1917379440333108}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Convex: 0
+  m_CookingOptions: 14
+  m_SkinWidth: 0.01
   m_Mesh: {fileID: 4300000, guid: c2181ffc8abbb0b4bbb3dfa9b282076c, type: 3}
 --- !u!95 &95350653234625458
 Animator:
