@@ -50,7 +50,8 @@ public class Trajectory_Simulation : MonoBehaviour
 
         // The initial velocity
         segVelocity = (Camera.main.transform.forward + Camera.main.transform.up) * playerFire.fireStrength * Time.deltaTime;
-
+        Debug.Log(Camera.main.transform.forward + Camera.main.transform.up * Time.deltaTime);
+        Debug.DrawRay(this.transform.position, Camera.main.transform.forward + Camera.main.transform.up, Color.blue);
         for (int i = 1; i < segmentCount; i++)
         {
             // Time it takes to traverse one segment of length segScale (careful if velocity is zero)
