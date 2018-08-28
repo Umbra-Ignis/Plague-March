@@ -167,6 +167,11 @@ Prefab:
       propertyPath: waypointWaitTime
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 114462479039183592, guid: c3ec856aa4b757642921f6e3f99295be,
+        type: 2}
+      propertyPath: stoppingDistance
+      value: 2
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: c3ec856aa4b757642921f6e3f99295be, type: 2}
   m_IsPrefabParent: 0
@@ -738,7 +743,7 @@ GameObject:
   - component: {fileID: 995668802}
   - component: {fileID: 995668801}
   m_Layer: 5
-  m_Name: Text (2)
+  m_Name: PickUp
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -768,7 +773,7 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 995668799}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 708705254, guid: f70555f144d8491a825f0804e09c671c, type: 3}
   m_Name: 
@@ -945,56 +950,55 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 114484902956032626, guid: ec7294a10a561c343af1a93d7de9fc4b,
         type: 2}
-      propertyPath: rockTooltip
+      propertyPath: RockPickUpUi
       value: 
       objectReference: {fileID: 995668801}
-    - target: {fileID: 4191230374914144, guid: ec7294a10a561c343af1a93d7de9fc4b, type: 2}
-      propertyPath: m_LocalRotation.x
-      value: 0.08945663
-      objectReference: {fileID: 0}
-    - target: {fileID: 4191230374914144, guid: ec7294a10a561c343af1a93d7de9fc4b, type: 2}
-      propertyPath: m_LocalRotation.y
-      value: -0.00025512616
-      objectReference: {fileID: 0}
-    - target: {fileID: 4191230374914144, guid: ec7294a10a561c343af1a93d7de9fc4b, type: 2}
-      propertyPath: m_LocalRotation.z
-      value: 0.000022914595
-      objectReference: {fileID: 0}
-    - target: {fileID: 4191230374914144, guid: ec7294a10a561c343af1a93d7de9fc4b, type: 2}
-      propertyPath: m_LocalRotation.w
-      value: 0.9959907
-      objectReference: {fileID: 0}
-    - target: {fileID: 4782387677401198, guid: ec7294a10a561c343af1a93d7de9fc4b, type: 2}
-      propertyPath: m_LocalRotation.x
-      value: -0.089455925
-      objectReference: {fileID: 0}
-    - target: {fileID: 4782387677401198, guid: ec7294a10a561c343af1a93d7de9fc4b, type: 2}
-      propertyPath: m_LocalRotation.y
-      value: 0.00025203856
-      objectReference: {fileID: 0}
-    - target: {fileID: 4782387677401198, guid: ec7294a10a561c343af1a93d7de9fc4b, type: 2}
-      propertyPath: m_LocalRotation.z
-      value: -0.000022170952
-      objectReference: {fileID: 0}
-    - target: {fileID: 4782387677401198, guid: ec7294a10a561c343af1a93d7de9fc4b, type: 2}
-      propertyPath: m_LocalRotation.w
-      value: -0.99599075
-      objectReference: {fileID: 0}
-    - target: {fileID: 4211449762397206, guid: ec7294a10a561c343af1a93d7de9fc4b, type: 2}
-      propertyPath: m_LocalRotation.x
-      value: -0.0708869
-      objectReference: {fileID: 0}
-    - target: {fileID: 4211449762397206, guid: ec7294a10a561c343af1a93d7de9fc4b, type: 2}
-      propertyPath: m_LocalRotation.z
-      value: -0.000014192026
-      objectReference: {fileID: 0}
     - target: {fileID: 114484902956032626, guid: ec7294a10a561c343af1a93d7de9fc4b,
         type: 2}
-      propertyPath: rockUiImg
+      propertyPath: HoldingRockUi
       value: 
       objectReference: {fileID: 1975323669}
-    m_RemovedComponents:
-    - {fileID: 114806186434936810, guid: ec7294a10a561c343af1a93d7de9fc4b, type: 2}
+    - target: {fileID: 4191230374914144, guid: ec7294a10a561c343af1a93d7de9fc4b, type: 2}
+      propertyPath: m_LocalRotation.x
+      value: 0.08945579
+      objectReference: {fileID: 0}
+    - target: {fileID: 4191230374914144, guid: ec7294a10a561c343af1a93d7de9fc4b, type: 2}
+      propertyPath: m_LocalRotation.y
+      value: -0.0002551262
+      objectReference: {fileID: 0}
+    - target: {fileID: 4191230374914144, guid: ec7294a10a561c343af1a93d7de9fc4b, type: 2}
+      propertyPath: m_LocalRotation.z
+      value: 0.00002291438
+      objectReference: {fileID: 0}
+    - target: {fileID: 4191230374914144, guid: ec7294a10a561c343af1a93d7de9fc4b, type: 2}
+      propertyPath: m_LocalRotation.w
+      value: 0.9959908
+      objectReference: {fileID: 0}
+    - target: {fileID: 4782387677401198, guid: ec7294a10a561c343af1a93d7de9fc4b, type: 2}
+      propertyPath: m_LocalRotation.x
+      value: -0.08945551
+      objectReference: {fileID: 0}
+    - target: {fileID: 4782387677401198, guid: ec7294a10a561c343af1a93d7de9fc4b, type: 2}
+      propertyPath: m_LocalRotation.y
+      value: 0.00019109373
+      objectReference: {fileID: 0}
+    - target: {fileID: 4782387677401198, guid: ec7294a10a561c343af1a93d7de9fc4b, type: 2}
+      propertyPath: m_LocalRotation.z
+      value: -0.000016697351
+      objectReference: {fileID: 0}
+    - target: {fileID: 4782387677401198, guid: ec7294a10a561c343af1a93d7de9fc4b, type: 2}
+      propertyPath: m_LocalRotation.w
+      value: -0.9959908
+      objectReference: {fileID: 0}
+    - target: {fileID: 4211449762397206, guid: ec7294a10a561c343af1a93d7de9fc4b, type: 2}
+      propertyPath: m_LocalRotation.x
+      value: -0.070886634
+      objectReference: {fileID: 0}
+    - target: {fileID: 4211449762397206, guid: ec7294a10a561c343af1a93d7de9fc4b, type: 2}
+      propertyPath: m_LocalRotation.z
+      value: -0.000014191862
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: ec7294a10a561c343af1a93d7de9fc4b, type: 2}
   m_IsPrefabParent: 0
 --- !u!1 &1268551189
@@ -1097,7 +1101,7 @@ GameObject:
   - component: {fileID: 1416150898}
   - component: {fileID: 1416150899}
   m_Layer: 5
-  m_Name: Text (1)
+  m_Name: Inspect
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1380,7 +1384,7 @@ GameObject:
   - component: {fileID: 1758251927}
   - component: {fileID: 1758251926}
   m_Layer: 5
-  m_Name: Text
+  m_Name: Enter
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1538,7 +1542,7 @@ GameObject:
   - component: {fileID: 1832886167}
   - component: {fileID: 1832886166}
   m_Layer: 5
-  m_Name: Image
+  m_Name: Inspect Image
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1717,7 +1721,7 @@ GameObject:
   - component: {fileID: 1975323670}
   - component: {fileID: 1975323669}
   m_Layer: 5
-  m_Name: Text (3)
+  m_Name: Holding Rocks
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

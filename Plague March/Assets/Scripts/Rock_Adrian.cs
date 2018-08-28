@@ -6,18 +6,24 @@ public class Rock_Adrian : MonoBehaviour
 {
     public float AlertRadius;
     public GameObject HitFloorEffect;
+    private Rigidbody rb;
 
-	// Use this for initialization
-	void Start () {}
-	
-	// Update is called once per frame
-	void Update (){}
+    // Use this for initialization
+    void Start()
+    {
+        rb = GetComponent<Rigidbody>();
+    }
+
+    // Update is called once per frame
+    void Update() { }
 
     private void OnCollisionEnter(Collision collision)
     {
         if (collision.collider.CompareTag("Ground"))
         {
             Alert();
+            rb.velocity = Vector3.zero;
+            rb.isKinematic = true;
         }
     }
 

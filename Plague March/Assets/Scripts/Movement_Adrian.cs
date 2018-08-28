@@ -48,9 +48,11 @@ public class Movement_Adrian : MonoBehaviour
 
     private bool aiming;
 
-    public Text rockTooltip;
+    public Text RockPickUpUi = null;
 
-    public Text rockUiImg;
+    public Text HoldingRockUi = null;
+
+    public GameObject spawnpoint = null;
 
     // Use this for initialization
     void Start()
@@ -63,20 +65,20 @@ public class Movement_Adrian : MonoBehaviour
         m_CapsuleCenter = CharControler.center;
         m_Crouching = false;
         aiming = false;
-        rockTooltip.enabled = false;
-        rockUiImg.enabled = false;
+        //rockTooltip.enabled = false;
+        //rockUiImg.enabled = false;
     }
 
     public void Move(Vector3 move, bool crouch, bool jump, bool sprinting)
     {
-        if(rockCount > 0)
+        if (rockCount > 0)
         {
-            rockUiImg.enabled = true;
+            HoldingRockUi.enabled = true;
         }
 
         else
         {
-            rockUiImg.enabled = false;
+            HoldingRockUi.enabled = false;
         }
 
         if (!aiming)
@@ -116,11 +118,22 @@ public class Movement_Adrian : MonoBehaviour
 
             // send input and other state parameters to the animator
             UpdateAnimator(move);
+            if (spawnpoint != null)
+            {
+                spawnpoint.GetComponent<Trajectory_Simulation>().enabled = false;
+                spawnpoint.GetComponent<LineRenderer>().enabled = false;
+            }
         }
         else
         {
             ApplyExtraTurnRotation();
-            //move = Vector3.zero;
+            //ADD ARC HERE
+            if (spawnpoint != null)
+            {
+                spawnpoint.GetComponent<Trajectory_Simulation>().enabled = true;
+                spawnpoint.GetComponent<LineRenderer>().enabled = true;
+            }
+
             m_ForwardAmount = 0;
             Debug.Log("Stopped moving");
             UpdateAnimator(move);
@@ -134,6 +147,7 @@ public class Movement_Adrian : MonoBehaviour
             CharControler.center = new Vector3(0, 0.5f, 0);
             CharControler.height = 1.0f;
             m_Crouching = true;
+            m_WalkSpeed = 1.2f;
 
         }
         else
@@ -141,6 +155,7 @@ public class Movement_Adrian : MonoBehaviour
             CharControler.center = m_CapsuleCenter;
             CharControler.height = m_CapsuleHeight;
             m_Crouching = false;
+            m_WalkSpeed = 0.6f;
         }
     }
 
@@ -199,8 +214,6 @@ public class Movement_Adrian : MonoBehaviour
         {
             Debug.Log("Rock");
 
-            rockTooltip.enabled = true;
-
             if (Input.GetKey(KeyCode.E))
             {
                 Debug.Log("E");
@@ -208,16 +221,27 @@ public class Movement_Adrian : MonoBehaviour
                 other.gameObject.SetActive(false);
                 Destroy(other.gameObject);
                 rockCount++;
-                rockTooltip.enabled = false;
+                if (RockPickUpUi != null)
+                {
+                    RockPickUpUi.enabled = false;
+                }
             }
+        }
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (RockPickUpUi != null)
+        {
+            RockPickUpUi.enabled = true;
         }
     }
 
     private void OnTriggerExit(Collider other)
     {
-        if (other.gameObject.CompareTag("Rock"))
+        if (other.gameObject.CompareTag("Rock") && RockPickUpUi != null)
         {
-            rockTooltip.enabled = false;
+            RockPickUpUi.enabled = false;
         }
     }
 
