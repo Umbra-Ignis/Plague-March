@@ -19,18 +19,12 @@ public class Trajectory_Simulation : MonoBehaviour
     // Length scale for each segment
     public float segmentScale = 1;
 
-    //Rock Thrower Script
-    RockThrower_Adrian RThrow;
-
     //Segment velocity
     public Vector3 segVelocity;
 
     private Vector3 velBeforeGrav;
 
-    private void Start()
-    {
-        RThrow = GetComponent<RockThrower_Adrian>();
-    }
+    private void Start(){}
 
     void Update()
     {
@@ -53,8 +47,8 @@ public class Trajectory_Simulation : MonoBehaviour
         // The initial velocity
         segVelocity = (Camera.main.transform.forward + Camera.main.transform.up) * playerFire.fireStrength * Time.deltaTime;
         velBeforeGrav = segVelocity;
-        Debug.Log(Camera.main.transform.forward + Camera.main.transform.up * Time.deltaTime);
-        Debug.DrawRay(this.transform.position, Camera.main.transform.forward + Camera.main.transform.up, Color.blue);
+        //Debug.Log(Camera.main.transform.forward + Camera.main.transform.up * Time.deltaTime);
+        //Debug.DrawRay(this.transform.position, Camera.main.transform.forward + Camera.main.transform.up, Color.blue);
         for (int i = 1; i < segmentCount; i++)
         {
             // Time it takes to traverse one segment of length segScale (careful if velocity is zero)
@@ -65,12 +59,12 @@ public class Trajectory_Simulation : MonoBehaviour
 
             segments[i] = segments[i - 1] + segVelocity * segTime;
         }
-        
+
         // At the end, apply our simulations to the LineRenderer
 
-       
 
-        sightLine.SetVertexCount(segmentCount);
+
+        sightLine.positionCount = segmentCount;
         for (int i = 0; i < segmentCount; i++)
             sightLine.SetPosition(i, segments[i]);
     }

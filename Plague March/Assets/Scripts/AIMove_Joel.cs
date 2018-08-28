@@ -89,7 +89,7 @@ public class AIMove_Joel : MonoBehaviour
             agent.SetDestination(currentTarg.position);
 
             //Checks how far away the AI is from the rocks position
-            if (Vector3.Distance(agent.transform.position, currentTarg.position) <= 1)
+            if (Vector3.Distance(agent.transform.position, currentTarg.position) <= 2)
             {
                 //Begins a timer to keep the AI at the rocks location for a given amount of time
                 m_rockWaitTimer += Time.deltaTime;

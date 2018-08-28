@@ -236,7 +236,7 @@ public class Movement_Adrian : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (RockPickUpUi != null)
+        if (other.gameObject.CompareTag("Rock") && RockPickUpUi != null)
         {
             RockPickUpUi.enabled = true;
         }
