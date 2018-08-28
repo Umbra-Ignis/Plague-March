@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 //Must Have a CharacterController
 [RequireComponent(typeof(CharacterController))]
@@ -47,8 +48,7 @@ public class Movement_Adrian : MonoBehaviour
 
     private bool aiming;
 
-
-
+    public Text rockTooltip;
 
     // Use this for initialization
     void Start()
@@ -61,6 +61,7 @@ public class Movement_Adrian : MonoBehaviour
         m_CapsuleCenter = CharControler.center;
         m_Crouching = false;
         aiming = false;
+        rockTooltip.enabled = false;
     }
 
 
@@ -187,6 +188,8 @@ public class Movement_Adrian : MonoBehaviour
         {
             Debug.Log("Rock");
 
+            rockTooltip.enabled = true;
+
             if (Input.GetKey(KeyCode.E))
             {
                 Debug.Log("E");
@@ -194,9 +197,19 @@ public class Movement_Adrian : MonoBehaviour
                 other.gameObject.SetActive(false);
                 Destroy(other.gameObject);
                 rockCount++;
+                rockTooltip.enabled = false;
             }
         }
     }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.gameObject.CompareTag("Rock"))
+        {
+            rockTooltip.enabled = false;
+        }
+    }
+
 
     void HandleAirborneMovement()
     {

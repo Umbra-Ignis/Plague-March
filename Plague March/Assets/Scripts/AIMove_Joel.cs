@@ -64,6 +64,8 @@ public class AIMove_Joel : MonoBehaviour
         //Randomly sets the first waypoint for the AI to walk towards
         i = Random.Range(0, targets.Length);
 
+        currentTarg = targets[i];
+
         //Sets Timer Patrol
         timerPatrol = 0f;
         //Sets Rock wait timer
@@ -156,9 +158,7 @@ public class AIMove_Joel : MonoBehaviour
             if (targets[i] != null)
             {
                 //If it does exist, the position of the target becomes the new target of the agent
-                agent.SetDestination(targets[i].position);
-                //Stores the current target
-                currentTarg = targets[i];
+                agent.SetDestination(currentTarg.position);
             }
         }
 
@@ -196,6 +196,7 @@ public class AIMove_Joel : MonoBehaviour
                         //Randomly assigns a new waypoint
                         i = Random.Range(0, targets.Length);
                     }
+                    currentTarg = targets[i];
                 }
 
                 //Resets the timer back to 0 for the next waypoint delay
@@ -305,6 +306,11 @@ public class AIMove_Joel : MonoBehaviour
     {
         agent.SetDestination(pos.position);
         currentTarg = pos;
+    }
+
+    public void ApproachLastPos(Vector3 pos)
+    {
+        agent.SetDestination(pos);
     }
 }
 
