@@ -73,12 +73,17 @@ public class Movement_Adrian : MonoBehaviour
     {
         if (rockCount > 0)
         {
-            HoldingRockUi.enabled = true;
+            if (HoldingRockUi != null)
+            {
+                HoldingRockUi.enabled = true;
+            }
         }
-
         else
         {
-            HoldingRockUi.enabled = false;
+            if (HoldingRockUi != null)
+            {
+                HoldingRockUi.enabled = false;
+            }
         }
 
         if (!aiming)
