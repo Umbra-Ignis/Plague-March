@@ -50,6 +50,8 @@ public class Movement_Adrian : MonoBehaviour
 
     public Text rockTooltip;
 
+    public Text rockUiImg;
+
     // Use this for initialization
     void Start()
     {
@@ -62,12 +64,21 @@ public class Movement_Adrian : MonoBehaviour
         m_Crouching = false;
         aiming = false;
         rockTooltip.enabled = false;
+        rockUiImg.enabled = false;
     }
-
-
 
     public void Move(Vector3 move, bool crouch, bool jump, bool sprinting)
     {
+        if(rockCount > 0)
+        {
+            rockUiImg.enabled = true;
+        }
+
+        else
+        {
+            rockUiImg.enabled = false;
+        }
+
         if (!aiming)
         {
             if (move.magnitude > 1f)
@@ -226,7 +237,6 @@ public class Movement_Adrian : MonoBehaviour
         if (jump && !crouch && animator.GetCurrentAnimatorStateInfo(0).IsName("Grounded"))
         {
             CharControler.transform.Translate(new Vector3(0, 1, 0));
-
         }
     }
 
