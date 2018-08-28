@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class RockThrower_Adrian : MonoBehaviour
 {
@@ -10,6 +11,8 @@ public class RockThrower_Adrian : MonoBehaviour
     private Movement_Adrian moveScript;
     private Trajectory_Simulation sim;
     private Vector3 velocity;
+
+    public Text RockAimText;
 
     private void Start()
     {

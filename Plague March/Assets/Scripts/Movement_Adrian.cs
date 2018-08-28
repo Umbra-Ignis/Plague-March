@@ -50,7 +50,9 @@ public class Movement_Adrian : MonoBehaviour
 
     public Text RockPickUpUi = null;
 
-    public Text HoldingRockUi = null;
+    public Text AimRockUI = null;
+
+    public Text ThrowRockUI = null;
 
     public GameObject spawnpoint = null;
 
@@ -73,16 +75,28 @@ public class Movement_Adrian : MonoBehaviour
     {
         if (rockCount > 0)
         {
-            if (HoldingRockUi != null)
+            if (AimRockUI != null && ThrowRockUI != null)
             {
-                HoldingRockUi.enabled = true;
+                if (Input.GetMouseButton(0))
+                {
+                    ThrowRockUI.enabled = true;
+                    AimRockUI.enabled = false;
+                }
+
+                else
+                {
+                    ThrowRockUI.enabled = false;
+                    AimRockUI.enabled = true;
+                }
             }
         }
+
         else
         {
-            if (HoldingRockUi != null)
+            if (AimRockUI != null)
             {
-                HoldingRockUi.enabled = false;
+                ThrowRockUI.enabled = false;
+                AimRockUI.enabled = false;
             }
         }
 
@@ -140,6 +154,7 @@ public class Movement_Adrian : MonoBehaviour
             }
 
             m_ForwardAmount = 0;
+            m_rotationSpeed = 0;
             Debug.Log("Stopped moving");
             UpdateAnimator(move);
         }
