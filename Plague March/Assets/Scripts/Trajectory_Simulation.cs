@@ -25,12 +25,14 @@ public class Trajectory_Simulation : MonoBehaviour
     //Segment velocity
     public Vector3 segVelocity;
 
+    private Vector3 velBeforeGrav;
+
     private void Start()
     {
         RThrow = GetComponent<RockThrower_Adrian>();
     }
 
-    void FixedUpdate()
+    void Update()
     {
         simulatePath();
     }
@@ -50,6 +52,7 @@ public class Trajectory_Simulation : MonoBehaviour
 
         // The initial velocity
         segVelocity = (Camera.main.transform.forward + Camera.main.transform.up) * playerFire.fireStrength * Time.deltaTime;
+        velBeforeGrav = segVelocity;
         Debug.Log(Camera.main.transform.forward + Camera.main.transform.up * Time.deltaTime);
         Debug.DrawRay(this.transform.position, Camera.main.transform.forward + Camera.main.transform.up, Color.blue);
         for (int i = 1; i < segmentCount; i++)
@@ -74,6 +77,6 @@ public class Trajectory_Simulation : MonoBehaviour
 
     public Vector3 getVelocity()
     {
-        return segVelocity;
+        return velBeforeGrav;
     }
 }

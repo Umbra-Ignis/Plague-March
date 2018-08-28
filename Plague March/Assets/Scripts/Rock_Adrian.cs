@@ -31,7 +31,7 @@ public class Rock_Adrian : MonoBehaviour
         {
             if (collider[i].gameObject.CompareTag("Enemy"))
             {
-                DebugExtension.DebugWireSphere(collider[i].transform.position, 10, 10);
+                DebugExtension.DebugWireSphere(collider[i].transform.position, AlertRadius, 10);
                 collider[i].gameObject.GetComponent<AIMove_Joel>().ApproachRock(transform);
                 collider[i].gameObject.GetComponent<AIMove_Joel>().RockThrowBools();
             }
