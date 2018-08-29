@@ -12,7 +12,12 @@ ModelImporter:
     3300000: //RootNode
     4300000: GateFrameMesh
     9500000: //RootNode
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: GateFrameTex
+    second: {fileID: 2100000, guid: d441508c06edfe34c95e5c94433c456e, type: 2}
   materials:
     importMaterials: 1
     materialName: 0

@@ -12,7 +12,12 @@ ModelImporter:
     3300000: //RootNode
     4300000: OuterTownWallMesh
     9500000: //RootNode
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: OuterWallTex
+    second: {fileID: 2100000, guid: bf987a159c6792840819f750ae65c6f1, type: 2}
   materials:
     importMaterials: 1
     materialName: 0
