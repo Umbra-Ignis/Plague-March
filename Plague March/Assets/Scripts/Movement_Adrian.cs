@@ -278,17 +278,17 @@ public class Movement_Adrian : MonoBehaviour
     void HandleGroundedMovement(bool crouch, bool jump)
     {
         // check whether conditions are right to allow a jump:
-        if (jump && !crouch && animator.GetCurrentAnimatorStateInfo(0).IsName("Grounded"))
-        {
-            CharControler.transform.Translate(new Vector3(0, 1, 0));
-        }
+        //if (jump && !crouch && animator.GetCurrentAnimatorStateInfo(0).IsName("Grounded"))
+       // {
+         //   CharControler.transform.Translate(new Vector3(0, 1, 0));
+       // }
     }
 
     void CheckGroundStatus()
     {
         RaycastHit raycastHit;
         Debug.DrawRay(transform.position + (Vector3.up * 0.2f), Vector3.down);
-        if (Physics.Raycast(transform.position, Vector3.down, out raycastHit, 0.3f))
+        if (Physics.Raycast(transform.position, Vector3.down, out raycastHit, 0.6f))
         {
             Debug.Log("Grounded");
             m_IsGrounded = true;

@@ -1356,7 +1356,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1128971647715120}
   m_LocalRotation: {x: -0, y: -0, z: -1.1102229e-16, w: 1}
-  m_LocalPosition: {x: 0, y: 2.47, z: -3.96}
+  m_LocalPosition: {x: 0, y: 2.47, z: -2.83}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4335558276020632}
@@ -1453,8 +1453,8 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1902614205471578}
-  m_LocalRotation: {x: 0.08945663, y: -0.00025512616, z: 0.000022914595, w: 0.9959907}
-  m_LocalPosition: {x: 0, y: 2.47, z: -3.96}
+  m_LocalRotation: {x: 0.13035019, y: -0.00035654122, z: 0.00004687515, w: 0.99146795}
+  m_LocalPosition: {x: 0, y: 2.47, z: -2.83}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4613230603245608}
@@ -1508,7 +1508,7 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1938177483752478}
-  m_LocalRotation: {x: -0.070788294, y: 0.0037368564, z: -0.049658448, w: -0.99624753}
+  m_LocalRotation: {x: -0.111857764, y: 0.0003249646, z: 0.00021639292, w: -0.9937242}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -1621,7 +1621,7 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1397651107634780}
-  m_LocalRotation: {x: -0.10703528, y: 0.00020476239, z: -0.000021605581, w: -0.99425524}
+  m_LocalRotation: {x: -0.14783351, y: 0.0003549191, z: -0.000052611806, w: -0.98901224}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -1745,7 +1745,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1161085389233400}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -19.655487, y: -9.0609265e-18, z: 4.0806785}
+  m_LocalPosition: {x: 8.848979, y: 0.7386277, z: 2.41}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4349900735965994}
@@ -2109,7 +2109,7 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1800025744778346}
-  m_LocalRotation: {x: -0.08945592, y: 0.00017085008, z: -0.000014876556, w: -0.9959908}
+  m_LocalRotation: {x: -0.13034992, y: 0.00024827893, z: -0.000032172116, w: -0.9914681}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -2409,7 +2409,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_BindingMode: 4
-  m_FollowOffset: {x: 0, y: 2.47, z: -3.96}
+  m_FollowOffset: {x: 0, y: 2.47, z: -2.83}
   m_XDamping: 1
   m_YDamping: 1
   m_ZDamping: 1
@@ -2450,7 +2450,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_BindingMode: 4
-  m_FollowOffset: {x: 0, y: 2.47, z: -3.96}
+  m_FollowOffset: {x: 0, y: 2.47, z: -2.83}
   m_XDamping: 1
   m_YDamping: 1
   m_ZDamping: 1
@@ -2567,7 +2567,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_BindingMode: 4
-  m_FollowOffset: {x: 0, y: 2.47, z: -3.96}
+  m_FollowOffset: {x: 0, y: 2.47, z: -2.83}
   m_XDamping: 1
   m_YDamping: 1
   m_ZDamping: 1
@@ -2651,11 +2651,11 @@ MonoBehaviour:
   m_SplineCurvature: 0.876
   m_Orbits:
   - m_Height: 4.57
-    m_Radius: 3.2
+    m_Radius: 2.06
   - m_Height: 2.47
-    m_Radius: 3.96
+    m_Radius: 2.83
   - m_Height: 0.68
-    m_Radius: 3.52
+    m_Radius: 2.67
   m_LegacyHeadingBias: 3.4028235e+38
   m_Rigs:
   - {fileID: 114980834143252804}
@@ -2680,7 +2680,7 @@ MonoBehaviour:
   m_AvoidObstacles: 1
   m_DistanceLimit: 0
   m_CameraRadius: 0.1
-  m_Strategy: 1
+  m_Strategy: 0
   m_MaximumEffort: 4
   m_Damping: 0.1
   m_OptimalTargetDistance: 0
@@ -3050,10 +3050,10 @@ CharacterController:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Height: 1.37
-  m_Radius: 0.18
-  m_SlopeLimit: 50
+  m_Height: 1.59
+  m_Radius: 0.21
+  m_SlopeLimit: 75
   m_StepOffset: 0.3
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
-  m_Center: {x: 0, y: 0.74, z: 0}
+  m_Center: {x: 0, y: 0.86, z: 0}
