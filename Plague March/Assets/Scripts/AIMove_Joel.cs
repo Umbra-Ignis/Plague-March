@@ -42,13 +42,21 @@ public class AIMove_Joel : MonoBehaviour
     private float m_rockWaitTimer;
 
     //Stores a reference to the current target of the AI
-    private Transform currentTarg;
+    public Vector3 currentTarg;
+
+    //Comment This
+    public Vector3 PreviousTarg;
 
     //Stores the animator of the actor in which needs to be altered
     private Animator anim;
 
     //Used to iterate randomly through the waypoints
     private int i;
+
+    //Gets Gameobject Vision Cone
+    public GameObject VisionCone;
+    //Gets Gameobject Sound Detection
+    public GameObject SoundDetection;
 
     // Use this for initialization
     void Start ()
@@ -64,7 +72,7 @@ public class AIMove_Joel : MonoBehaviour
         //Randomly sets the first waypoint for the AI to walk towards
         i = Random.Range(0, targets.Length);
 
-        currentTarg = targets[i];
+        currentTarg = targets[i].position;
 
         //Sets Timer Patrol
         timerPatrol = 0f;
@@ -76,7 +84,7 @@ public class AIMove_Joel : MonoBehaviour
 	void Update ()
     {
         //Calculates how far the AI is from its current target
-        distanceToWaypoint = Vector3.Distance(currentTarg.position, agent.transform.position);
+        distanceToWaypoint = Vector3.Distance(currentTarg, agent.transform.position);
 
         if (rock)
         {
@@ -86,10 +94,10 @@ public class AIMove_Joel : MonoBehaviour
             anim.SetFloat("Blend", 0.0f);
 
             //Sets the new destination to the currently stored destination
-            agent.SetDestination(currentTarg.position);
+            agent.SetDestination(currentTarg);
 
             //Checks how far away the AI is from the rocks position
-            if (Vector3.Distance(agent.transform.position, currentTarg.position) <= 3)
+            if (Vector3.Distance(agent.transform.position, currentTarg) <= 3)
             {
                 //Begins a timer to keep the AI at the rocks location for a given amount of time
                 m_rockWaitTimer += Time.deltaTime;
@@ -138,11 +146,15 @@ public class AIMove_Joel : MonoBehaviour
         //Draws an arrow for debug purposes to the current target of the NPC
         if(agent)
             //Starts at the current position of the NPC, and looks in the direction of the current target
-            DebugExtension.DrawArrow(agent.transform.position, currentTarg.position - agent.transform.position, Color.magenta);
+            DebugExtension.DrawArrow(agent.transform.position, currentTarg - agent.transform.position, Color.magenta);
     }
 
     void Patrol()
     {
+        //Comment This
+        //VisionCone.SetActive(true);
+        //SoundDetection.SetActive(true);
+
         //Sets the animation of the agent to walking
         anim.SetFloat("Blend", 0.0f);
 
@@ -158,7 +170,10 @@ public class AIMove_Joel : MonoBehaviour
             if (targets[i] != null)
             {
                 //If it does exist, the position of the target becomes the new target of the agent
-                agent.SetDestination(currentTarg.position);
+                agent.SetDestination(currentTarg);
+
+                //Gets Previous Target for chase return
+                PreviousTarg = currentTarg;
             }
         }
 
@@ -196,7 +211,7 @@ public class AIMove_Joel : MonoBehaviour
                         //Randomly assigns a new waypoint
                         i = Random.Range(0, targets.Length);
                     }
-                    currentTarg = targets[i];
+                    currentTarg = targets[i].position;
                 }
 
                 //Resets the timer back to 0 for the next waypoint delay
@@ -221,6 +236,9 @@ public class AIMove_Joel : MonoBehaviour
         {
             //If it has, the NPC will be switched to a chase state to chase the player
             SetChase();
+            //Comment this
+            //VisionCone.SetActive(false);
+            SoundDetection.SetActive(false);
         }
     }
 
@@ -240,7 +258,7 @@ public class AIMove_Joel : MonoBehaviour
         //Sets the destination of the players position to the target for the NPC
         agent.SetDestination(player.transform.position);
         //Sets the current target to the players position to ensure the arrow is drawn towards them
-        currentTarg = player.transform;
+        currentTarg = player.transform.position;
 
         timerAlert = 0;
     }
@@ -250,7 +268,7 @@ public class AIMove_Joel : MonoBehaviour
         //Sets the agents current destination to the passed in position
         agent.SetDestination(pos.position);
         //Stores the current target of the agent
-        currentTarg = pos;
+        currentTarg = pos.position;
 
         if (Vector3.Distance(pos.position, agent.transform.position) <= 5.0f)
         {
@@ -305,12 +323,12 @@ public class AIMove_Joel : MonoBehaviour
     public void ApproachRock(Transform pos)
     {
         agent.SetDestination(pos.position);
-        currentTarg = pos;
+        currentTarg = pos.position;
     }
 
-    public void ApproachLastPos(Vector3 pos)
+    public void ApproachLastPos(Vector3 LastPosititon)
     {
-        agent.SetDestination(pos);
+        currentTarg = LastPosititon;
     }
 }
 

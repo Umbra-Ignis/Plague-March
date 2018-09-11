@@ -5,6 +5,8 @@ using UnityEngine;
 public class VisionCone_Joel : MonoBehaviour
 {
     public AIMove_Joel AI;
+    Vector3 PlayersTransform;
+    GameObject player;
 
     // Use this for initialization
     void Start() { }
@@ -15,6 +17,7 @@ public class VisionCone_Joel : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         Debug.Log("Entered");
+        
         if (other.tag == ("Player"))
             AI.SetAlert();
     }
@@ -22,10 +25,12 @@ public class VisionCone_Joel : MonoBehaviour
     private void OnTriggerExit(Collider other)
     {
         Debug.Log("Exited");
-        GameObject player = GameObject.FindGameObjectWithTag("Player");
-        Transform t = player.transform;
-        Vector3 tv = player.transform.position;
-        AI.ApproachLastPos(tv);
-        AI.SetPatrol();
+        if(other.gameObject.tag == "Player")
+        {
+            player = GameObject.FindGameObjectWithTag("Player");
+            PlayersTransform = player.transform.position;
+            AI.ApproachLastPos(PlayersTransform);
+            AI.SetPatrol();
+        }
     }
 }

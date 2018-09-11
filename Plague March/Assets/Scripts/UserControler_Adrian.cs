@@ -30,15 +30,15 @@ public class UserControler_Adrian : MonoBehaviour
 
         // get the third person character ( this should never be null due to require component )
         m_Character = GetComponent<Movement_Adrian>();
+        //locks Cursor in Center of Screen and makes Non visable
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = false;
     }
 
     // Update is called once per frame
     void Update()
     {
-        //locks Cursor in Center of Screen and makes Non visable
-        Cursor.lockState = CursorLockMode.Locked;
-        Cursor.lockState = CursorLockMode.None;
-        Cursor.visible = false;
 
         if (!m_Jump)
         {

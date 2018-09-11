@@ -2,7 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Teleport_Adrian : MonoBehaviour {
+public class Teleport_Adrian : MonoBehaviour
+{
 
     [Header("Codes value must match corresponding teleporter")]
 
@@ -12,10 +13,14 @@ public class Teleport_Adrian : MonoBehaviour {
     public float timeBeforeNextTp = 0;
     //Stops players from constantly teleporting
     float disableTimer = 0;
+    //Loading Screen Timer
+    float LoadingScreenTimer = 0;
+    //Loading Screen Bool
+    bool LoadingScreen;
 
     private void Start()
     {
-        
+
     }
 
     private void Update()
@@ -23,27 +28,39 @@ public class Teleport_Adrian : MonoBehaviour {
         //sets timer back to 0
         if (disableTimer > 0)
             disableTimer -= Time.deltaTime;
+
+        if (LoadingScreen)
+        {
+            LoadingScreenTimer += Time.deltaTime;
+        }
     }
 
 
-    private void OnTriggerEnter(Collider other)
+    private void OnTriggerStay(Collider other)
     {
         // Add Feature && Input.GetKey(KeyCode.E)
-
-        //check if player and timer 0 before using teleporter pad
-        if (other.gameObject.tag == "Player" && disableTimer <= 0)
+        if (Input.GetKey(KeyCode.E))
         {
-            //finds each teleporter pad to make sure they match
-            foreach (Teleport_Adrian tp in FindObjectsOfType<Teleport_Adrian>())
+            LoadingScreen = true;
+            //check if player and timer 0 before using teleporter pad
+            if (other.gameObject.tag == "Player" && disableTimer <= 0 && LoadingScreenTimer >= 5)
             {
-                if (tp.code == code && tp != this)
-                {
-                    //Resets timer to 2 seconds
-                    tp.disableTimer = timeBeforeNextTp;
+                LoadingScreen = false;
+                
 
-                    //Moves player positions
-                    Vector3 Position = tp.gameObject.transform.position;
-                    other.gameObject.transform.position = Position;
+                //finds each teleporter pad to make sure they match
+                foreach (Teleport_Adrian tp in FindObjectsOfType<Teleport_Adrian>())
+                {
+                    if (tp.code == code && tp != this)
+                    {
+                        //Resets timer to 2 seconds
+                        tp.disableTimer = timeBeforeNextTp;
+                        //Moves player positions
+                        Vector3 Position = tp.gameObject.transform.position;
+                        other.gameObject.transform.position = Position;
+
+                        LoadingScreenTimer = 0;
+                    }
                 }
             }
         }

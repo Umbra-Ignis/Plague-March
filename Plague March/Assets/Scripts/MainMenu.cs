@@ -7,12 +7,14 @@ using UnityEngine.UI;
 
 public class MainMenu : MonoBehaviour
 {
-    public GameObject returnMenu;
-    public GameObject Player;
+    public GameObject returnMenu = null;
+    public GameObject Player = null;
 
     void Start()
     {
-        returnMenu.SetActive (false);
+        if (returnMenu != null)
+            returnMenu.SetActive (false);
+
         Time.timeScale = 1f;
     }
 
@@ -32,9 +34,10 @@ public class MainMenu : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        returnMenu.SetActive(true);
+        if (returnMenu != null)
+            returnMenu.SetActive(true);
+
         Cursor.visible = true;
-        Cursor.lockState = CursorLockMode.None;
         Time.timeScale = 0f;
 
     }

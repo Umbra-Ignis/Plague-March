@@ -438,7 +438,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!1 &1548840292667198
 GameObject:
   m_ObjectHideFlags: 1
@@ -1429,7 +1429,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1028869831621404}
   m_LocalRotation: {x: -0, y: -0.9914449, z: -0, w: 0.13052654}
-  m_LocalPosition: {x: 41.75, y: -36.372, z: 44.18}
+  m_LocalPosition: {x: -11.65, y: 9.864, z: 11}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4604924572111848}
@@ -1656,7 +1656,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1715992260806712}
   m_LocalRotation: {x: -0, y: -1, z: -0, w: 0}
-  m_LocalPosition: {x: -0, y: 1.6869988, z: 9.409004}
+  m_LocalPosition: {x: -0, y: 1.41, z: 9.409004}
   m_LocalScale: {x: 10.025295, y: 0.09336, z: 18.652508}
   m_Children: []
   m_Father: {fileID: 4604924572111848}
@@ -1994,9 +1994,13 @@ MonoBehaviour:
   m_Speed: 1
   stoppingDistance: 1
   chaseSpeedMultiplier: 2.11
-  waypointWaitTime: 10
+  waypointWaitTime: 2
   player: {fileID: 0}
   m_rockWaitTime: 5
+  currentTarg: {x: 0, y: 0, z: 0}
+  PreviousTarg: {x: 0, y: 0, z: 0}
+  VisionCone: {fileID: 1715992260806712}
+  SoundDetection: {fileID: 1548779826733110}
 --- !u!135 &135007136144765430
 SphereCollider:
   m_ObjectHideFlags: 1
