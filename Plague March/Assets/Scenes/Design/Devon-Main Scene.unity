@@ -14,7 +14,7 @@ OcclusionCullingSettings:
 RenderSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 8
-  m_Fog: 0
+  m_Fog: 1
   m_FogColor: {r: 0.25, g: 0.24325559, b: 0.21507353, a: 1}
   m_FogMode: 3
   m_FogDensity: 0.05
@@ -2879,6 +2879,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4fc6bedcb6860754495ff82ca83ba153, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  pauseMenuUI: {fileID: 613317527}
 --- !u!1 &331493179
 GameObject:
   m_ObjectHideFlags: 0
@@ -5624,7 +5625,7 @@ Transform:
     type: 2}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 620331161}
-  m_LocalRotation: {x: -0.050517913, y: 0.000106581494, z: -0.0000048766424, w: -0.9987232}
+  m_LocalRotation: {x: -0.05051741, y: 0.000106581494, z: -0.00000487611, w: -0.9987232}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -8572,7 +8573,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &861828030
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11717,7 +11718,7 @@ Transform:
     type: 2}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1118226835}
-  m_LocalRotation: {x: -0.06861623, y: 0.00006656869, z: -0.000004165765, w: -0.9976432}
+  m_LocalRotation: {x: -0.068616025, y: 0.00006656997, z: -0.0000041662347, w: -0.9976432}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -14581,8 +14582,8 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1436241737}
-  m_LocalRotation: {x: 0.14692277, y: -0.33489898, z: 0.0032739341, w: -0.93072325}
-  m_LocalPosition: {x: -721.49756, y: -752.56757, z: -1329.9275}
+  m_LocalRotation: {x: -0.042698495, y: 0.9565185, z: 0.18327272, w: 0.22284634}
+  m_LocalPosition: {x: 175.09982, y: -33.16812, z: 137.25018}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1386898759}
@@ -15460,6 +15461,7 @@ GameObject:
   - component: {fileID: 1519240690}
   - component: {fileID: 1519240689}
   - component: {fileID: 1519240688}
+  - component: {fileID: 1519240692}
   m_Layer: 5
   m_Name: ResumeButton
   m_TagString: Untagged
@@ -15574,6 +15576,36 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1519240686}
+--- !u!114 &1519240692
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1519240686}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -1862395651, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Delegates:
+  - eventID: 2
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 330467681}
+          m_MethodName: Resume
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+      m_TypeName: UnityEngine.EventSystems.EventTrigger+TriggerEvent, UnityEngine.UI,
+        Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+  delegates: []
 --- !u!1001 &1519962474
 Prefab:
   m_ObjectHideFlags: 0
@@ -17124,6 +17156,7 @@ GameObject:
   - component: {fileID: 1729773591}
   - component: {fileID: 1729773590}
   - component: {fileID: 1729773589}
+  - component: {fileID: 1729773593}
   m_Layer: 5
   m_Name: MenuButton
   m_TagString: Untagged
@@ -17238,6 +17271,36 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1729773587}
+--- !u!114 &1729773593
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1729773587}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -1862395651, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Delegates:
+  - eventID: 2
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 330467681}
+          m_MethodName: LoadMenu
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+      m_TypeName: UnityEngine.EventSystems.EventTrigger+TriggerEvent, UnityEngine.UI,
+        Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+  delegates: []
 --- !u!1 &1737571310
 GameObject:
   m_ObjectHideFlags: 0
@@ -17558,6 +17621,7 @@ GameObject:
   - component: {fileID: 1742494410}
   - component: {fileID: 1742494409}
   - component: {fileID: 1742494408}
+  - component: {fileID: 1742494412}
   m_Layer: 5
   m_Name: QuitButton
   m_TagString: Untagged
@@ -17672,6 +17736,36 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1742494406}
+--- !u!114 &1742494412
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1742494406}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -1862395651, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Delegates:
+  - eventID: 2
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 330467681}
+          m_MethodName: QuitGame
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+      m_TypeName: UnityEngine.EventSystems.EventTrigger+TriggerEvent, UnityEngine.UI,
+        Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+  delegates: []
 --- !u!1001 &1758613375
 Prefab:
   m_ObjectHideFlags: 0
@@ -21241,7 +21335,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!81 &2098777314
 AudioListener:
   m_ObjectHideFlags: 0

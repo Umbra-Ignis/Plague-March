@@ -39,9 +39,6 @@ public class MainMenu : MonoBehaviour
         if (returnMenu != null)
             returnMenu.SetActive(true);
 
-        Cursor.visible = true;
-        Time.timeScale = 0f;
-
     }
 }
 
