@@ -12,6 +12,7 @@ public class MainMenu : MonoBehaviour
 
     void Start()
     {
+        //Check if returnMenu Object is empty
         if (returnMenu != null)
             returnMenu.SetActive (false);
 
@@ -34,6 +35,7 @@ public class MainMenu : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
+        //Check if returnMenu Object is empty
         if (returnMenu != null)
             returnMenu.SetActive(true);
 

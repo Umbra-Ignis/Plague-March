@@ -27,6 +27,7 @@ public class VisionCone_Joel : MonoBehaviour
         Debug.Log("Exited");
         if(other.gameObject.tag == "Player")
         {
+            AI.SetAlertTimer(0);
             player = GameObject.FindGameObjectWithTag("Player");
             PlayersTransform = player.transform.position;
             AI.ApproachLastPos(PlayersTransform);

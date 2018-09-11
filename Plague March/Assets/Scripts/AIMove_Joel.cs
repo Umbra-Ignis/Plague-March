@@ -44,9 +44,6 @@ public class AIMove_Joel : MonoBehaviour
     //Stores a reference to the current target of the AI
     public Vector3 currentTarg;
 
-    //Comment This
-    public Vector3 PreviousTarg;
-
     //Stores the animator of the actor in which needs to be altered
     private Animator anim;
 
@@ -172,8 +169,6 @@ public class AIMove_Joel : MonoBehaviour
                 //If it does exist, the position of the target becomes the new target of the agent
                 agent.SetDestination(currentTarg);
 
-                //Gets Previous Target for chase return
-                PreviousTarg = currentTarg;
             }
         }
 
@@ -328,7 +323,14 @@ public class AIMove_Joel : MonoBehaviour
 
     public void ApproachLastPos(Vector3 LastPosititon)
     {
+        //Last position player exit detection cone
         currentTarg = LastPosititon;
+    }
+    
+    //Setter for timer alert 
+    public void SetAlertTimer(float alertTimer)
+    {
+        timerAlert = alertTimer;
     }
 }
 
