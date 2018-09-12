@@ -12,7 +12,7 @@ public class RockThrower_Adrian : MonoBehaviour
     private Trajectory_Simulation sim;
     private Vector3 velocity;
 
-    public Text RockAimText;
+
 
     private void Start()
     {
