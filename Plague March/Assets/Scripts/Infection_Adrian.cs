@@ -49,22 +49,25 @@ public class Infection_Adrian : MonoBehaviour {
 	void Update ()
     {
         //Finds distance to closest enemy
-        m_fDistanceToNearestEnemy = Vector3.Distance(GetClosestEnemy(m_lEnemies, this.transform).position, this.transform.position);
-
-        //If Distance is close
-        if (m_fDistanceToNearestEnemy <= m_fDistanceUntilInfection)
+        if (m_lEnemies != null)
         {
-            //Accumulate Infection over time using the multiplyer
-            m_fInfection += m_fInfectionMultiplyer * Time.deltaTime;
-            
-            //Increasing infection amount
-            //InfectionBar.fillAmount = m_fInfection / 100;
-        }
+            m_fDistanceToNearestEnemy = Vector3.Distance(GetClosestEnemy(m_lEnemies, this.transform).position, this.transform.position);
 
-        if (m_fInfection >= 100)
-        {
-            Time.timeScale = 0f;
-            //END GAME
+            //If Distance is close
+            if (m_fDistanceToNearestEnemy <= m_fDistanceUntilInfection)
+            {
+                //Accumulate Infection over time using the multiplyer
+                m_fInfection += m_fInfectionMultiplyer * Time.deltaTime;
+
+                //Increasing infection amount
+                //InfectionBar.fillAmount = m_fInfection / 100;
+            }
+
+            if (m_fInfection >= 100)
+            {
+                Time.timeScale = 0f;
+                //END GAME
+            }
         }
 	}
 

@@ -25,11 +25,13 @@ public class MainMenu : MonoBehaviour
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     }
+
     public void QuitGame()
     {
         Debug.Log ("QUIT");
         Application.Quit();
     }
+
     public void Menu()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex - 1);
@@ -54,8 +56,12 @@ public class MainMenu : MonoBehaviour
     {
         //Check if returnMenu Object is empty
         if (returnMenu != null)
+        {
             returnMenu.SetActive(true);
-
+            Time.timeScale = 0;
+            Cursor.lockState = CursorLockMode.None;
+            Cursor.visible = true;
+        }
     }
 }
 
