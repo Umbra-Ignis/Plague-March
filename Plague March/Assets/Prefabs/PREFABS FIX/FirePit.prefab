@@ -22,6 +22,7 @@ GameObject:
   - component: {fileID: 33481388107032684}
   - component: {fileID: 23290186317010604}
   - component: {fileID: 95846194992093996}
+  - component: {fileID: 65492411784883810}
   m_Layer: 0
   m_Name: FirePit
   m_TagString: Untagged
@@ -36,7 +37,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1281243777652916}
   m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -5.6026416, y: 0.47928324, z: -6.519846}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -83,6 +84,18 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1281243777652916}
   m_Mesh: {fileID: 4300000, guid: 4960502360b03b2468498d54b255a720, type: 3}
+--- !u!65 &65492411784883810
+BoxCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1281243777652916}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.8748984, y: 0.95856655, z: 0.8748983}
+  m_Center: {x: 0, y: 0.000000014901161, z: -0.000000044703484}
 --- !u!95 &95846194992093996
 Animator:
   serializedVersion: 3

@@ -22,6 +22,7 @@ GameObject:
   - component: {fileID: 33620509809726240}
   - component: {fileID: 23476182331756734}
   - component: {fileID: 95874642088432602}
+  - component: {fileID: 65162880434184734}
   m_Layer: 0
   m_Name: LogFence1
   m_TagString: Untagged
@@ -36,7 +37,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1651387556862518}
   m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -3.3474953, y: 0.50624686, z: 0.060631063}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -56,7 +57,7 @@ MeshRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_Materials:
-  - {fileID: 2100000, guid: b080c0973ada4ac40a2d4f311654891e, type: 3}
+  - {fileID: 2100000, guid: cda78398c48146847a007dea6dc46df2, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -83,6 +84,18 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1651387556862518}
   m_Mesh: {fileID: 4300000, guid: b080c0973ada4ac40a2d4f311654891e, type: 3}
+--- !u!65 &65162880434184734
+BoxCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1651387556862518}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.5614132, y: 1.3556862, z: 4.1394396}
+  m_Center: {x: 0.0010905266, y: 0, z: 0.013780713}
 --- !u!95 &95874642088432602
 Animator:
   serializedVersion: 3

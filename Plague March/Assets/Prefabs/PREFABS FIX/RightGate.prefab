@@ -22,6 +22,7 @@ GameObject:
   - component: {fileID: 33952690701506180}
   - component: {fileID: 23532878195074590}
   - component: {fileID: 95893297251986058}
+  - component: {fileID: 65509084234651956}
   m_Layer: 0
   m_Name: RightGate
   m_TagString: Untagged
@@ -36,7 +37,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1986180521848590}
   m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 1.6730047, y: 0.518553, z: -0.06675607}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -83,6 +84,18 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1986180521848590}
   m_Mesh: {fileID: 4300000, guid: e30e24224d7cd0e458330d366aa293ee, type: 3}
+--- !u!65 &65509084234651956
+BoxCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1986180521848590}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1.7063, y: 3.0007029, z: 0.29927346}
+  m_Center: {x: -0.82252026, y: -0.7352832, z: 0}
 --- !u!95 &95893297251986058
 Animator:
   serializedVersion: 3

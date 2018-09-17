@@ -21,8 +21,8 @@ GameObject:
   - component: {fileID: 4566893731660704}
   - component: {fileID: 33471380443737562}
   - component: {fileID: 23549919096032616}
-  - component: {fileID: 64856869098696330}
   - component: {fileID: 95304100211334574}
+  - component: {fileID: 65498855671468316}
   m_Layer: 0
   m_Name: House_Rich
   m_TagString: Untagged
@@ -37,7 +37,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1174934633450196}
   m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 13.2, y: 0, z: -24}
+  m_LocalPosition: {x: 0, y: 0, z: -21}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -88,8 +88,8 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1174934633450196}
   m_Mesh: {fileID: 4300000, guid: 7d9c2172a58eeb64eb203b1abd152811, type: 3}
---- !u!64 &64856869098696330
-MeshCollider:
+--- !u!65 &65498855671468316
+BoxCollider:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
@@ -97,11 +97,9 @@ MeshCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  serializedVersion: 3
-  m_Convex: 0
-  m_CookingOptions: 14
-  m_SkinWidth: 0.01
-  m_Mesh: {fileID: 4300000, guid: 7d9c2172a58eeb64eb203b1abd152811, type: 3}
+  serializedVersion: 2
+  m_Size: {x: 5.814991, y: 7.9892445, z: 8.123783}
+  m_Center: {x: -0.00000035762787, y: 3.7784467, z: 0}
 --- !u!95 &95304100211334574
 Animator:
   serializedVersion: 3

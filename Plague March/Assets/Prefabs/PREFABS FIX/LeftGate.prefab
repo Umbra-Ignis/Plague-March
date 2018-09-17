@@ -22,6 +22,7 @@ GameObject:
   - component: {fileID: 33371857458898368}
   - component: {fileID: 23897509139839520}
   - component: {fileID: 95697507555578286}
+  - component: {fileID: 65868448604429126}
   m_Layer: 0
   m_Name: LeftGate
   m_TagString: Untagged
@@ -36,7 +37,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1957405582074132}
   m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -1.703331, y: 0.51734006, z: -0.06588984}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -83,6 +84,18 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1957405582074132}
   m_Mesh: {fileID: 4300000, guid: 57ace7e4017aa484c8ab437d1e6209e8, type: 3}
+--- !u!65 &65868448604429126
+BoxCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1957405582074132}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1.7089865, y: 3.0007029, z: 0.29927343}
+  m_Center: {x: 0.8288357, y: -0.73468274, z: 0.000000007450581}
 --- !u!95 &95697507555578286
 Animator:
   serializedVersion: 3
