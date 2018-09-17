@@ -22,6 +22,7 @@ GameObject:
   - component: {fileID: 33506350834581726}
   - component: {fileID: 23368033618863778}
   - component: {fileID: 95937205991577126}
+  - component: {fileID: 65898759196865550}
   m_Layer: 0
   m_Name: MarketStall1
   m_TagString: Untagged
@@ -36,7 +37,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1697603524355444}
   m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.024690645, y: 0.101913325, z: 0.044381738}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -83,6 +84,18 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1697603524355444}
   m_Mesh: {fileID: 4300000, guid: 0b383a7d4cdd31546ab4226f187d44e7, type: 3}
+--- !u!65 &65898759196865550
+BoxCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1697603524355444}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 5.3245325, y: 4.653294, z: 3.632131}
+  m_Center: {x: 0.00000011920929, y: -0.022576094, z: 0.039282918}
 --- !u!95 &95937205991577126
 Animator:
   serializedVersion: 3

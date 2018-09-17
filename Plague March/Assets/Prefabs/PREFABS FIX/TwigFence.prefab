@@ -22,6 +22,7 @@ GameObject:
   - component: {fileID: 33040296148737896}
   - component: {fileID: 23111018279359942}
   - component: {fileID: 95416491833491786}
+  - component: {fileID: 65825790723009980}
   m_Layer: 0
   m_Name: TwigFence
   m_TagString: Untagged
@@ -36,7 +37,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1031584433366752}
   m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -3.0281405, y: 0.41003507, z: -0.77766335}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -56,7 +57,7 @@ MeshRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_Materials:
-  - {fileID: 2100000, guid: dc2e6e965aa11d44297d0b36e061fbb3, type: 3}
+  - {fileID: 2100000, guid: b9461db1143a5334a8631672f860c9c1, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -83,6 +84,18 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1031584433366752}
   m_Mesh: {fileID: 4300000, guid: dc2e6e965aa11d44297d0b36e061fbb3, type: 3}
+--- !u!65 &65825790723009980
+BoxCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1031584433366752}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.1952301, y: 1.1816566, z: 2.3468995}
+  m_Center: {x: 0.00000010430813, y: 0, z: 0.00000011920929}
 --- !u!95 &95416491833491786
 Animator:
   serializedVersion: 3

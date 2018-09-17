@@ -37,6 +37,7 @@ GameObject:
   - component: {fileID: 4928159227962548}
   - component: {fileID: 33773446191480916}
   - component: {fileID: 23461720772049206}
+  - component: {fileID: 65326941404383488}
   m_Layer: 0
   m_Name: Frame
   m_TagString: Untagged
@@ -54,6 +55,7 @@ GameObject:
   - component: {fileID: 4752461004961406}
   - component: {fileID: 33732036031377210}
   - component: {fileID: 23635249634591550}
+  - component: {fileID: 65060472157645546}
   m_Layer: 0
   m_Name: Mattress
   m_TagString: Untagged
@@ -71,6 +73,7 @@ GameObject:
   - component: {fileID: 4899981901405280}
   - component: {fileID: 33167683537667822}
   - component: {fileID: 23861710006742078}
+  - component: {fileID: 65915681890314136}
   m_Layer: 0
   m_Name: Cover3
   m_TagString: Untagged
@@ -256,6 +259,42 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1378999960478832}
   m_Mesh: {fileID: 4300000, guid: 21a1ebff5e1107c4b9a148c93551bd28, type: 3}
+--- !u!65 &65060472157645546
+BoxCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1772879918685700}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1.5149585, y: 0.33592677, z: 2.3639386}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!65 &65326941404383488
+BoxCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1378999960478832}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1.173645, y: 1.5353699, z: 1.8765174}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!65 &65915681890314136
+BoxCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1875259034036546}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1.2631533, y: 1.5325884, z: 1.7663286}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!95 &95693703666887474
 Animator:
   serializedVersion: 3

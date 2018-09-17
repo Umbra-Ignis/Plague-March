@@ -22,6 +22,7 @@ GameObject:
   - component: {fileID: 33061158055571272}
   - component: {fileID: 23143267167830292}
   - component: {fileID: 95613852515604760}
+  - component: {fileID: 65209827021739428}
   m_Layer: 0
   m_Name: FancyChair
   m_TagString: Untagged
@@ -36,7 +37,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1462912744631226}
   m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.058899358, y: -0.0013732217, z: -0.060109776}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -83,6 +84,18 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1462912744631226}
   m_Mesh: {fileID: 4300000, guid: 07f12249843737d4fabcbee62a1d61da, type: 3}
+--- !u!65 &65209827021739428
+BoxCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1462912744631226}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.6198362, y: 0.63817096, z: 0.44890904}
+  m_Center: {x: -0.03441377, y: 0.061830357, z: -0.000000022351742}
 --- !u!95 &95613852515604760
 Animator:
   serializedVersion: 3

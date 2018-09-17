@@ -22,6 +22,7 @@ GameObject:
   - component: {fileID: 33555756669463784}
   - component: {fileID: 23528075885177330}
   - component: {fileID: 95598781235695222}
+  - component: {fileID: 65538041834715990}
   m_Layer: 0
   m_Name: Candle 1
   m_TagString: Untagged
@@ -36,7 +37,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1929065040095426}
   m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.036954574, y: 0.3954058, z: -0.91971457}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -83,6 +84,18 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1929065040095426}
   m_Mesh: {fileID: 4300000, guid: ebe10e98b0c8a3f4bb4fffc93ab33ca0, type: 3}
+--- !u!65 &65538041834715990
+BoxCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1929065040095426}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.10950121, y: 0.15589991, z: 0.113497846}
+  m_Center: {x: 0.000000007450581, y: 0.00028982386, z: 0.000000014901161}
 --- !u!95 &95598781235695222
 Animator:
   serializedVersion: 3

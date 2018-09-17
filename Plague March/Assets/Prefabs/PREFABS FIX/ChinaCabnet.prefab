@@ -22,6 +22,7 @@ GameObject:
   - component: {fileID: 33677924317940494}
   - component: {fileID: 23225307233273070}
   - component: {fileID: 95517933082782738}
+  - component: {fileID: 65922023161893674}
   m_Layer: 0
   m_Name: ChinaCabnet
   m_TagString: Untagged
@@ -36,7 +37,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1048917780258376}
   m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.10272657, y: 0.016918687, z: -0.08757412}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -83,6 +84,18 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1048917780258376}
   m_Mesh: {fileID: 4300000, guid: 5f486c3237da9b340a2a0f66be4bc765, type: 3}
+--- !u!65 &65922023161893674
+BoxCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1048917780258376}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1.0414478, y: 1.6512313, z: 0.4323154}
+  m_Center: {x: 0, y: -0.00000008940697, z: 0}
 --- !u!95 &95517933082782738
 Animator:
   serializedVersion: 3

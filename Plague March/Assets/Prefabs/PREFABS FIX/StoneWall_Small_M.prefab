@@ -22,6 +22,7 @@ GameObject:
   - component: {fileID: 33517111482491116}
   - component: {fileID: 23967993404194662}
   - component: {fileID: 95839389267881020}
+  - component: {fileID: 65391145532421804}
   m_Layer: 0
   m_Name: StoneWall_Small_M
   m_TagString: Untagged
@@ -36,7 +37,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1669944087792308}
   m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 17, y: 0, z: -23}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -83,6 +84,18 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1669944087792308}
   m_Mesh: {fileID: 4300000, guid: 348f2987423cce14ba6bc950c51d2731, type: 3}
+--- !u!65 &65391145532421804
+BoxCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1669944087792308}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.34827635, y: 0.94821525, z: 2.5063183}
+  m_Center: {x: 0, y: 0.47410762, z: -0.00000011920929}
 --- !u!95 &95839389267881020
 Animator:
   serializedVersion: 3

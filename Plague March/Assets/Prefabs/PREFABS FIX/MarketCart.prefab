@@ -21,8 +21,8 @@ GameObject:
   - component: {fileID: 4721342626513526}
   - component: {fileID: 33394003407607472}
   - component: {fileID: 23387289770921860}
-  - component: {fileID: 64091639967680178}
   - component: {fileID: 95038854757074640}
+  - component: {fileID: 65852283553749142}
   m_Layer: 0
   m_Name: MarketCart
   m_TagString: Untagged
@@ -37,7 +37,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1686527626403644}
   m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.7751775, y: 0.1967949, z: -1.4061093}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -84,8 +84,8 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1686527626403644}
   m_Mesh: {fileID: 4300000, guid: b466dcfc2f0461f49aa1e209b65ecaea, type: 3}
---- !u!64 &64091639967680178
-MeshCollider:
+--- !u!65 &65852283553749142
+BoxCollider:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
@@ -93,11 +93,9 @@ MeshCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  serializedVersion: 3
-  m_Convex: 0
-  m_CookingOptions: 14
-  m_SkinWidth: 0.01
-  m_Mesh: {fileID: 4300000, guid: b466dcfc2f0461f49aa1e209b65ecaea, type: 3}
+  serializedVersion: 2
+  m_Size: {x: 2.2422028, y: 1.6553872, z: 1.0939572}
+  m_Center: {x: 0, y: 0, z: 0.000000029802322}
 --- !u!95 &95038854757074640
 Animator:
   serializedVersion: 3
