@@ -10,11 +10,15 @@ public class PauseMenu : MonoBehaviour
 
     public GameObject pauseMenuUI;
 
+    public 
+
 	// Update is called once per frame
 	void Update ()
     {
 	    if (Input.GetKeyDown(KeyCode.Escape))
         {
+            Cursor.lockState = CursorLockMode.None;
+            Cursor.visible = true;
             if (GameIsPaused)
             {
                 Resume();

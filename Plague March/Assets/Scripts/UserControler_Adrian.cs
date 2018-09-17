@@ -32,13 +32,13 @@ public class UserControler_Adrian : MonoBehaviour
         m_Character = GetComponent<Movement_Adrian>();
         //locks Cursor in Center of Screen and makes Non visable
         Cursor.visible = false;
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.lockState = CursorLockMode.None;
     }
 
     // Update is called once per frame
     void Update()
     {
-        Cursor.lockState = CursorLockMode.Locked;
-        Cursor.lockState = CursorLockMode.None;
 
         if (!m_Jump)
         {

@@ -7,7 +7,7 @@ using UnityEngine.UI;
 public class Infection_Adrian : MonoBehaviour {
 
     //Infection Level
-    [Range(0f, 100.0f)] [SerializeField] float m_fInfection = 0f;
+    [Range(0f, 100.0f)] [SerializeField] public float m_fInfection = 0f;
 
     //Distance till infection starts
     [Range(0f, 100.0f)] [SerializeField] float m_fDistanceUntilInfection = 0f;
@@ -56,12 +56,13 @@ public class Infection_Adrian : MonoBehaviour {
         {
             //Accumulate Infection over time using the multiplyer
             m_fInfection += m_fInfectionMultiplyer * Time.deltaTime;
-            InfectionBar.fillAmount = m_fInfection / 100;
+            
+            //Increasing infection amount
+            //InfectionBar.fillAmount = m_fInfection / 100;
         }
 
         if (m_fInfection >= 100)
         {
-            YouDead.enabled = true;
             Time.timeScale = 0f;
             //END GAME
         }
