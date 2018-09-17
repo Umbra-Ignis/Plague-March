@@ -47,8 +47,11 @@ public class AIMove_Joel : MonoBehaviour
     //Stores the animator of the actor in which needs to be altered
     private Animator anim;
 
-    //Used to iterate randomly through the waypoints
-    private int i;
+    //Used to store the int of the current target
+    private int targVal;
+
+    //Used to store whether the AI is progressing forward or backward through the waypoints
+    private bool forward;
 
     //Gets Gameobject Vision Cone
     public GameObject VisionCone;
@@ -66,15 +69,20 @@ public class AIMove_Joel : MonoBehaviour
         //Sets the AI's default behaviour to patrol
         SetPatrol();
 
-        //Randomly sets the first waypoint for the AI to walk towards
-        i = Random.Range(0, targets.Length);
+        //Ensures the AI starts at the first waypoint
+        targVal = 0;
 
-        currentTarg = targets[i].position;
+        //Ensures the AI begins by progressing forward through the waypoints
+        forward = true;
+
+        //Sets the current target for the AI to approach
+        currentTarg = targets[targVal].position;
 
         //Sets Timer Patrol
         timerPatrol = 0f;
         //Sets Rock wait timer
         m_rockWaitTimer = 1f;
+
     }
 	
 	// Update is called once per frame
@@ -164,11 +172,10 @@ public class AIMove_Joel : MonoBehaviour
         if (distanceToWaypoint >= stoppingDistance)
         {
             //Checks that the current selected target actually exists
-            if (targets[i] != null)
+            if (targets[targVal] != null)
             {
                 //If it does exist, the position of the target becomes the new target of the agent
                 agent.SetDestination(currentTarg);
-
             }
         }
 
@@ -193,21 +200,34 @@ public class AIMove_Joel : MonoBehaviour
                 //Ensures the agent animation is set back to walking
                 anim.SetFloat("Blend", 0.0f);
 
-                //Used to store the current waypoint, to ensure that the current waypoint is not set to the new waypoint
-                int tempi = i;
-                //Randomly assigns a new waypoint
-                i = Random.Range(0, targets.Length);
-
-                //Loops every time the new waypoint is reset to the same as the current waypoint, until a different one is selected
-                if (targets.Length > 1)
+                //Checks if the AI has reached the end of the array of waypoints
+                if(targVal == targets.Length - 1)
                 {
-                    while (i == tempi)
-                    {
-                        //Randomly assigns a new waypoint
-                        i = Random.Range(0, targets.Length);
-                    }
-                    currentTarg = targets[i].position;
+                    //Sets forward to false so the AI progresses backwards through the array of waypoints
+                    forward = false;
                 }
+
+                //If the AI was progressing backwards, this checks whether the AI has reached the end of the list
+                if(targVal == 0)
+                {
+                    //And sets it to go back through the array progressing forwards
+                    forward = true;
+                }
+
+                //If the AI is progressing forward, the next waypoint is the one after the current
+                if(forward)
+                {
+                    targVal++;
+                }
+
+                //If the AI is progressing forward, the next waypoint is the one before the current
+                else
+                {
+                    targVal--;
+                }
+
+                //Sets the current target to the newly determined waypoint
+                currentTarg = targets[targVal].position;
 
                 //Resets the timer back to 0 for the next waypoint delay
                 timerPatrol = 0;
@@ -267,17 +287,34 @@ public class AIMove_Joel : MonoBehaviour
 
         if (Vector3.Distance(pos.position, agent.transform.position) <= 5.0f)
         {
-            //Used to store the current waypoint, to ensure that the current waypoint is not set to the new waypoint
-            int tempi = i;
-            //Randomly assigns a new waypoint
-            i = Random.Range(0, targets.Length);
-
-            //Loops every time the new waypoint is reset to the same as the current waypoint, until a different one is selected
-            while (i == tempi)
+            //Checks if the AI has reached the end of the array of waypoints
+            if (targVal == targets.Length - 1)
             {
-                //Randomly assigns a new waypoint
-                i = Random.Range(0, targets.Length);
+                //Sets forward to false so the AI progresses backwards through the array of waypoints
+                forward = false;
             }
+
+            //If the AI was progressing backwards, this checks whether the AI has reached the end of the list
+            if (targVal == 0)
+            {
+                //And sets it to go back through the array progressing forwards
+                forward = true;
+            }
+
+            //If the AI is progressing forward, the next waypoint is the one after the current
+            if (forward)
+            {
+                targVal++;
+            }
+
+            //If the AI is progressing forward, the next waypoint is the one before the current
+            else
+            {
+                targVal--;
+            }
+
+            //Sets the current target to the newly determined waypoint
+            //currentTarg = targets[targVal].position;
 
             rock = false;
             SetPatrol();
