@@ -8,7 +8,6 @@ using UnityEngine.UI;
 public class MainMenu : MonoBehaviour
 {
     public GameObject returnMenu = null;
-    public GameObject Player = null;
 
     void Start()
     {

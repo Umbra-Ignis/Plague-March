@@ -29,7 +29,7 @@ public class ItemInspect : MonoBehaviour
                 tooltipText.enabled = false;
         }
 
-        if (Input.GetKeyDown(KeyCode.Escape))
+        if (Input.GetKeyDown(KeyCode.E))
         {
             if (inspectTarget != null)
                 inspectTarget.enabled = false;

@@ -16,7 +16,7 @@ public class Infection_Adrian : MonoBehaviour {
     public float m_fInfectionMultiplyer = 0;
 
     //How close the ai is before infection takes effect
-    float m_fInfectionDistance = 0;
+    //float m_fInfectionDistance = 0;
 
     //List of enemies
     public List<Transform> m_lEnemies;
@@ -24,8 +24,8 @@ public class Infection_Adrian : MonoBehaviour {
     //Distance to closest enemy
     float m_fDistanceToNearestEnemy;
 
-    public Image YouDead;
-    public Image InfectionBar;
+    public Image YouDead = null;
+    public Image InfectionBar = null;
 
     
 
