@@ -39,12 +39,6 @@ public class Infection_Adrian : MonoBehaviour {
         }
     }
 
-    // Use this for initialization
-    void Start ()
-    {
-		
-	}
-	
 	// Update is called once per frame
 	void Update ()
     {
@@ -73,7 +67,7 @@ public class Infection_Adrian : MonoBehaviour {
 
     //Where i found this code
     //https://answers.unity.com/questions/1236558/finding-nearest-game-object.html
-    Transform GetClosestEnemy(List<Transform> ListOfEnemies, Transform fromThis)
+    public Transform GetClosestEnemy(List<Transform> ListOfEnemies, Transform fromThis)
     {
         //Best Target
         Transform bestTarget = null;

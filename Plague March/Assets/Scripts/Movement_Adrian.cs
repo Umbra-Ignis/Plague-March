@@ -44,6 +44,8 @@ public class Movement_Adrian : MonoBehaviour
     Vector3 m_CapsuleCenter;
     //Crouching
     bool m_Crouching;
+    // QTevent started
+    bool m_bQuicktime;
 
 
     private bool aiming;
@@ -67,8 +69,7 @@ public class Movement_Adrian : MonoBehaviour
         m_CapsuleCenter = CharControler.center;
         m_Crouching = false;
         aiming = false;
-        //rockTooltip.enabled = false;
-        //rockUiImg.enabled = false;
+        m_bQuicktime = false;
     }
 
     public void Move(Vector3 move, bool crouch, bool jump, bool sprinting)
@@ -100,7 +101,8 @@ public class Movement_Adrian : MonoBehaviour
             }
         }
 
-        if (!aiming)
+        //If not aiming and not in a quicktime event
+        if (!aiming && !m_bQuicktime)
         {
             if (move.magnitude > 1f)
                 move.Normalize();
@@ -146,17 +148,19 @@ public class Movement_Adrian : MonoBehaviour
         else
         {
             ApplyExtraTurnRotation();
-            //ADD ARC HERE
-            if (spawnpoint != null)
-            {
-                spawnpoint.GetComponent<Trajectory_Simulation>().enabled = true;
-                spawnpoint.GetComponent<LineRenderer>().enabled = true;
-            }
 
             m_ForwardAmount = 0;
             m_rotationSpeed = 0;
             Debug.Log("Stopped moving");
             UpdateAnimator(move);
+
+            //ADD ARC HERE
+            if (spawnpoint != null && aiming)
+            {
+                spawnpoint.GetComponent<Trajectory_Simulation>().enabled = true;
+                spawnpoint.GetComponent<LineRenderer>().enabled = true;
+            }
+
         }
     }
 
@@ -310,5 +314,15 @@ public class Movement_Adrian : MonoBehaviour
     public void rockThrown()
     {
         aiming = false;
+    }
+
+    public void SetQuicktime(bool IsStopped)
+    {
+        m_bQuicktime = IsStopped;
+    }
+
+    public void SetForwardAmount(float amount)
+    {
+        m_ForwardAmount = amount;
     }
 }

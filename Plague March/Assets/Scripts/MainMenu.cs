@@ -40,14 +40,17 @@ public class MainMenu : MonoBehaviour
 
     private void Update()
     {
-        if (infect.m_fInfection >= 100)
+        if (infect != null)
         {
-            if (returnMenu != null)
+            if (infect.m_fInfection >= 100)
             {
-                returnMenu.SetActive(true);
-                Time.timeScale = 0;
-                Cursor.lockState = CursorLockMode.None;
-                Cursor.visible = true;
+                if (returnMenu != null)
+                {
+                    returnMenu.SetActive(true);
+                    Time.timeScale = 0;
+                    Cursor.lockState = CursorLockMode.None;
+                    Cursor.visible = true;
+                }
             }
         }
     }
