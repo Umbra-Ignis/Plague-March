@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.UI;
 
 public class AIMove_Joel : MonoBehaviour
 {
@@ -53,10 +54,10 @@ public class AIMove_Joel : MonoBehaviour
     //Used to store whether the AI is progressing forward or backward through the waypoints
     private bool forward;
 
-    //Gets Gameobject Vision Cone
-    public GameObject VisionCone;
-    //Gets Gameobject Sound Detection
-    public GameObject SoundDetection;
+    public Image Open = null;
+    public Image Half = null;
+    public Image Red = null;
+
 
     // Use this for initialization
     void Start ()
@@ -156,10 +157,6 @@ public class AIMove_Joel : MonoBehaviour
 
     void Patrol()
     {
-        //Comment This
-        //VisionCone.SetActive(true);
-        //SoundDetection.SetActive(true);
-
         //Sets the animation of the agent to walking
         anim.SetFloat("Blend", 0.0f);
 
@@ -251,9 +248,6 @@ public class AIMove_Joel : MonoBehaviour
         {
             //If it has, the NPC will be switched to a chase state to chase the player
             SetChase();
-            //Comment this
-            //VisionCone.SetActive(false);
-            //SoundDetection.SetActive(false);
         }
     }
 
@@ -323,6 +317,12 @@ public class AIMove_Joel : MonoBehaviour
 
     public void SetPatrol()
     {
+        if (Half != null)
+        {
+            Half.enabled = true;
+            Open.enabled = false;
+            Red.enabled = false;
+        }
         patrolling = true;
         alerted = false;
         chasing = false;
@@ -331,6 +331,12 @@ public class AIMove_Joel : MonoBehaviour
 
     public void SetAlert()
     {
+        if (Open != null)
+        {
+            Half.enabled = false;
+            Open.enabled = true;
+            Red.enabled = false;
+        }
         patrolling = false;
         alerted = true;
         chasing = false;
@@ -339,6 +345,12 @@ public class AIMove_Joel : MonoBehaviour
 
     public void SetChase()
     {
+        if (Red != null)
+        {
+            Half.enabled = false;
+            Open.enabled = false;
+            Red.enabled = true;
+        }
         patrolling = false;
         alerted = false;
         chasing = true;
