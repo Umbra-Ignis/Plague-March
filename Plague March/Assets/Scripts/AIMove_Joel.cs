@@ -149,9 +149,9 @@ public class AIMove_Joel : MonoBehaviour
     private void OnDrawGizmos()
     {
         //Draws an arrow for debug purposes to the current target of the NPC
-        if(agent)
+        //if(agent)
             //Starts at the current position of the NPC, and looks in the direction of the current target
-            DebugExtension.DrawArrow(agent.transform.position, currentTarg - agent.transform.position, Color.magenta);
+            //DebugExtension.DrawArrow(agent.transform.position, currentTarg - agent.transform.position, Color.magenta);
     }
 
     void Patrol()
@@ -253,7 +253,7 @@ public class AIMove_Joel : MonoBehaviour
             SetChase();
             //Comment this
             //VisionCone.SetActive(false);
-            SoundDetection.SetActive(false);
+            //SoundDetection.SetActive(false);
         }
     }
 
