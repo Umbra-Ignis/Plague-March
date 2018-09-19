@@ -10,10 +10,11 @@ public class MainMenu : MonoBehaviour
     public GameObject returnMenu = null;
 
     //Gets Infection
-    public Infection_Adrian infect = null;
+    public GameObject infect = null;
 
     void Start()
     {
+        infect = GameObject.FindGameObjectWithTag("Player");
         //Check if returnMenu Object is empty
         if (returnMenu != null)
             returnMenu.SetActive (false);
@@ -42,7 +43,7 @@ public class MainMenu : MonoBehaviour
     {
         if (infect != null)
         {
-            if (infect.m_fInfection >= 100)
+            if (infect.GetComponent<Infection_Adrian>().m_fInfection >= 100)
             {
                 if (returnMenu != null)
                 {

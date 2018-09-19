@@ -151,6 +151,9 @@ public class Movement_Adrian : MonoBehaviour
 
             m_ForwardAmount = 0;
             m_rotationSpeed = 0;
+            m_TurnAmount = 0;
+
+
             Debug.Log("Stopped moving");
             UpdateAnimator(move);
 

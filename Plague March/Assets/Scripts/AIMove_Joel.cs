@@ -22,7 +22,7 @@ public class AIMove_Joel : MonoBehaviour
     //Stores a reference to the player, making their position easily obtainable
     [HideInInspector] public GameObject player;
     //Obtains reference to the agent to set its targets etc
-    private NavMeshAgent agent;
+    public NavMeshAgent agent;
 
 
     //Stores whether the AI is patrolling
@@ -46,7 +46,7 @@ public class AIMove_Joel : MonoBehaviour
     public Vector3 currentTarg;
 
     //Stores the animator of the actor in which needs to be altered
-    private Animator anim;
+    public Animator anim;
 
     //Used to store the int of the current target
     private int targVal;

@@ -74,7 +74,6 @@ public class DetectionOverlap : MonoBehaviour
                 moveScript.SetPatrol();
                 moveScript.SetAlertTimer(0);
             }
-
             else
             {
                 if (!alerted)

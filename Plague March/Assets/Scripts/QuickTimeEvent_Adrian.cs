@@ -1,10 +1,12 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 
 
-public class QuickTimeEvent_Adrian : MonoBehaviour {
+public class QuickTimeEvent_Adrian : MonoBehaviour
+{
 
     //Players movement script
     Movement_Adrian m_maMoveScript;
@@ -28,7 +30,7 @@ public class QuickTimeEvent_Adrian : MonoBehaviour {
     float m_fDistanceToClosestEnemy;
 
     //Is in event
-    bool m_bInEvent =  false;
+    bool m_bInEvent = false;
 
     //Times Pressed
     float m_fTimesPressed = 0;
@@ -39,12 +41,18 @@ public class QuickTimeEvent_Adrian : MonoBehaviour {
     //Joels Ai Script
     AIMove_Joel Ai;
 
+    //Timer Until Attack Again
+    float m_fAttackAgain;
+
+    public Image Bar = null;
+    public Image Border = null;
+
 
 
 
 
     // Use this for initialization
-    void Start ()
+    void Start()
     {
         m_iaInfectionScript = GetComponent<Infection_Adrian>();
         m_maMoveScript = GetComponent<Movement_Adrian>();
@@ -60,26 +68,46 @@ public class QuickTimeEvent_Adrian : MonoBehaviour {
     }
 
     // Update is called once per frame
-    void Update ()
+    void Update()
     {
         if (m_lEnemies != null)
         {
+
             //gets closest enemy
             m_fDistanceToClosestEnemy = Vector3.Distance(m_iaInfectionScript.GetClosestEnemy(m_lEnemies, transform).position, transform.position);
+
+
+            if (m_fDistanceToClosestEnemy >= m_fStartQuickTimeDistance)
+            {
+                m_fAttackAgain = 0;
+                m_fTimesPressed = 0;
+            }
 
             //if distance to the closest enemy is less than or equal to distance set in inspector
             if (m_fDistanceToClosestEnemy <= m_fStartQuickTimeDistance)
             {
+                Border.enabled = true;
+                Bar.enabled = true;
+                Bar.fillAmount = m_fTimesPressed / 100;
 
-                Closestenemy = m_iaInfectionScript.GetClosestEnemy(m_lEnemies , transform);
+                Closestenemy = m_iaInfectionScript.GetClosestEnemy(m_lEnemies, transform);
 
                 Ai = Closestenemy.GetComponentInParent<AIMove_Joel>();
 
-                Ai.SetChase();
+                if (m_fAttackAgain <= 0)
+                {
+                    Ai.SetChase();
 
-                Debug.Log("QUICK");
-                //Hold players Position
-                m_maMoveScript.SetQuicktime(true);
+                    // FIX THIS
+                    //transform.LookAt(Closestenemy);
+                    //transform.rotation = Quaternion.Euler(0, transform.rotation.y, 0);
+
+                    Debug.Log("QUICK");
+                    //Hold players Position
+                    m_maMoveScript.SetQuicktime(true);
+                }
+                Ai.agent.isStopped = true;
+                Ai.anim.SetFloat("Blend", 0.0f);
 
 
                 if (Input.GetKeyDown(KeyCode.Space))
@@ -97,14 +125,16 @@ public class QuickTimeEvent_Adrian : MonoBehaviour {
                     m_fTimesPressed = 0;
                 }
 
+                m_fAttackAgain += 1 * Time.deltaTime;
+
                 if (m_fTimesPressed >= 100)
                 {
-                    GetComponent<CharacterController>().SimpleMove(new Vector3(-100, 1, -100));
+                    Border.enabled = false;
+                    Bar.enabled = false;
                     m_maMoveScript.SetQuicktime(false);
-                    m_fTimesPressed = 0;
                     Ai.SetPatrol();
                 }
             }
         }
-	}
+    }
 }

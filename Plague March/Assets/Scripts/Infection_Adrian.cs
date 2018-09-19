@@ -54,12 +54,11 @@ public class Infection_Adrian : MonoBehaviour {
                 m_fInfection += m_fInfectionMultiplyer * Time.deltaTime;
 
                 //Increasing infection amount
-                //InfectionBar.fillAmount = m_fInfection / 100;
+                InfectionBar.fillAmount = m_fInfection / 100;
             }
 
             if (m_fInfection >= 100)
             {
-                Time.timeScale = 0f;
                 //END GAME
             }
         }
