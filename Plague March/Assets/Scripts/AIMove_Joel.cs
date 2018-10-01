@@ -16,6 +16,8 @@ public class AIMove_Joel : MonoBehaviour
 
     //Used to time how long is spent at the current waypoint, once arrived
     public float waypointWaitTime;
+    //Determines whether the AI loops around the list of waypoints, or cycles through one way, then back
+    public bool loop;
     //Current Distance the agent is away from the Waypoint
     private float distanceToWaypoint;
 
@@ -146,15 +148,18 @@ public class AIMove_Joel : MonoBehaviour
             Chase();
         }
     }
+    //====================================================================
+    //Uncomment for AI target debugging
+    //====================================================================
+    //private void OnDrawGizmos()
+    //{
+    //    //Draws an arrow for debug purposes to the current target of the NPC
+    //    //if(agent)
+    //        //Starts at the current position of the NPC, and looks in the direction of the current target
+    //        //DebugExtension.DrawArrow(agent.transform.position, currentTarg - agent.transform.position, Color.magenta);
+    //}
 
-    private void OnDrawGizmos()
-    {
-        //Draws an arrow for debug purposes to the current target of the NPC
-        //if(agent)
-            //Starts at the current position of the NPC, and looks in the direction of the current target
-            //DebugExtension.DrawArrow(agent.transform.position, currentTarg - agent.transform.position, Color.magenta);
-    }
-
+    //Behaviour for the AI to walk between waypoints assuming there are no interuptions from the player, or any other external factors
     void Patrol()
     {
         //Sets the animation of the agent to walking
@@ -197,30 +202,46 @@ public class AIMove_Joel : MonoBehaviour
                 //Ensures the agent animation is set back to walking
                 anim.SetFloat("Blend", 0.0f);
 
-                //Checks if the AI has reached the end of the array of waypoints
-                if(targVal == targets.Length - 1)
+                if (!loop)
                 {
-                    //Sets forward to false so the AI progresses backwards through the array of waypoints
-                    forward = false;
+                    //Checks if the AI has reached the end of the array of waypoints
+                    if (targVal == targets.Length - 1)
+                    {
+                        //Sets forward to false so the AI progresses backwards through the array of waypoints
+                        forward = false;
+                    }
+
+                    //If the AI was progressing backwards, this checks whether the AI has reached the end of the list
+                    if (targVal == 0)
+                    {
+                        //And sets it to go back through the array progressing forwards
+                        forward = true;
+                    }
+
+                    //If the AI is progressing forward, the next waypoint is the one after the current
+                    if (forward)
+                    {
+                        targVal++;
+                    }
+
+                    //If the AI is progressing forward, the next waypoint is the one before the current
+                    else
+                    {
+                        targVal--;
+                    }
                 }
 
-                //If the AI was progressing backwards, this checks whether the AI has reached the end of the list
-                if(targVal == 0)
-                {
-                    //And sets it to go back through the array progressing forwards
-                    forward = true;
-                }
-
-                //If the AI is progressing forward, the next waypoint is the one after the current
-                if(forward)
-                {
-                    targVal++;
-                }
-
-                //If the AI is progressing forward, the next waypoint is the one before the current
                 else
                 {
-                    targVal--;
+                    if(targVal == targets.Length - 1)
+                    {
+                        targVal = 0;
+                    }
+
+                    else
+                    {
+                        targVal++;
+                    }
                 }
 
                 //Sets the current target to the newly determined waypoint
@@ -232,6 +253,9 @@ public class AIMove_Joel : MonoBehaviour
         }
     }
 
+    //Behaviour for the AI to stop walking if they become aware of the player, or alerted to a certain situation.
+    //Stops and either moves to a chase state if it remains alerted for a certain amount of time, or goes back
+    //to patrol if it does not stay alerted
     void Alert()
     {
         //Stops the agent to look "alert"
@@ -246,20 +270,19 @@ public class AIMove_Joel : MonoBehaviour
         //Checks if the timer has reached a certain amount of time
         if(timerAlert >= 3.0f)
         {
+            agent.isStopped = false;
+            //Speeds up the agent to run after the player at a higher speedS
+            agent.speed = m_Speed * chaseSpeedMultiplier;
             //If it has, the NPC will be switched to a chase state to chase the player
             SetChase();
         }
     }
 
+    //Behaviour for the AI to chase the player until the player escapes the AI's line of sight
     void Chase()
     {
         //Sets the agents animation to running
         anim.SetFloat("Blend", 1.0f);
-        //Speeds up the agent to run after the player at a higher speedS
-        agent.speed = m_Speed * chaseSpeedMultiplier;
-
-        //Ensures the agent can move, only getting to this state from the alert state which has stopped the NPC
-        agent.isStopped = false;
         
         //Finds the object tagger with player
         player = GameObject.FindGameObjectWithTag("Player");
@@ -272,6 +295,7 @@ public class AIMove_Joel : MonoBehaviour
         timerAlert = 0;
     }
 
+    //Sets the new patrol point for the AI, generally used from other scripts to allow for situational patrol points to be added
     public void SetPatrolPoint(Transform pos)
     {
         //Sets the agents current destination to the passed in position
@@ -281,40 +305,56 @@ public class AIMove_Joel : MonoBehaviour
 
         if (Vector3.Distance(pos.position, agent.transform.position) <= 5.0f)
         {
-            //Checks if the AI has reached the end of the array of waypoints
-            if (targVal == targets.Length - 1)
+            if (!loop)
             {
-                //Sets forward to false so the AI progresses backwards through the array of waypoints
-                forward = false;
+                //Checks if the AI has reached the end of the array of waypoints
+                if (targVal == targets.Length - 1)
+                {
+                    //Sets forward to false so the AI progresses backwards through the array of waypoints
+                    forward = false;
+                }
+
+                //If the AI was progressing backwards, this checks whether the AI has reached the end of the list
+                if (targVal == 0)
+                {
+                    //And sets it to go back through the array progressing forwards
+                    forward = true;
+                }
+
+                //If the AI is progressing forward, the next waypoint is the one after the current
+                if (forward)
+                {
+                    targVal++;
+                }
+
+                //If the AI is progressing forward, the next waypoint is the one before the current
+                else
+                {
+                    targVal--;
+                }
             }
 
-            //If the AI was progressing backwards, this checks whether the AI has reached the end of the list
-            if (targVal == 0)
-            {
-                //And sets it to go back through the array progressing forwards
-                forward = true;
-            }
-
-            //If the AI is progressing forward, the next waypoint is the one after the current
-            if (forward)
-            {
-                targVal++;
-            }
-
-            //If the AI is progressing forward, the next waypoint is the one before the current
             else
             {
-                targVal--;
+                if (targVal == targets.Length - 1)
+                {
+                    targVal = 0;
+                }
+
+                else
+                {
+                    targVal++;
+                }
             }
 
             //Sets the current target to the newly determined waypoint
             //currentTarg = targets[targVal].position;
-
             rock = false;
             SetPatrol();
         }
     }
 
+    //Sets the AI's behaviour to patrol between its waypoints
     public void SetPatrol()
     {
         if (Half != null)
@@ -382,5 +422,3 @@ public class AIMove_Joel : MonoBehaviour
         timerAlert = alertTimer;
     }
 }
-
-

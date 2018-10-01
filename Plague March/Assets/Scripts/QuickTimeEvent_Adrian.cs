@@ -3,11 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-
-
 public class QuickTimeEvent_Adrian : MonoBehaviour
 {
-
     //Players movement script
     Movement_Adrian m_maMoveScript;
 
@@ -47,16 +44,11 @@ public class QuickTimeEvent_Adrian : MonoBehaviour
     public Image Bar = null;
     public Image Border = null;
 
-
-
-
-
     // Use this for initialization
     void Start()
     {
         m_iaInfectionScript = GetComponent<Infection_Adrian>();
         m_maMoveScript = GetComponent<Movement_Adrian>();
-
     }
 
     private void Awake()
@@ -93,6 +85,7 @@ public class QuickTimeEvent_Adrian : MonoBehaviour
                 Closestenemy = m_iaInfectionScript.GetClosestEnemy(m_lEnemies, transform);
 
                 Ai = Closestenemy.GetComponentInParent<AIMove_Joel>();
+                Ai.agent.isStopped = true;
 
                 if (m_fAttackAgain <= 0)
                 {
