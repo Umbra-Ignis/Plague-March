@@ -24,7 +24,7 @@ public class AIMove_Joel : MonoBehaviour
     //Stores a reference to the player, making their position easily obtainable
     [HideInInspector] public GameObject player;
     //Obtains reference to the agent to set its targets etc
-    public NavMeshAgent agent;
+    [HideInInspector] public NavMeshAgent agent;
 
 
     //Stores whether the AI is patrolling
