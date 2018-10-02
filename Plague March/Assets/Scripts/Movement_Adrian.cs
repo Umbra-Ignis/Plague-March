@@ -128,6 +128,7 @@ public class Movement_Adrian : MonoBehaviour
             if (m_IsGrounded)
             {
                 HandleGroundedMovement(crouch, jump);
+                HandleAirborneMovement();
             }
             else
             {
