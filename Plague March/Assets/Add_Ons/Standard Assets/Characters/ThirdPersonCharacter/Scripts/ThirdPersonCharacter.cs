@@ -80,7 +80,14 @@ namespace UnityStandardAssets.Characters.ThirdPerson
 		{
 			if (m_IsGrounded && crouch)
 			{
-				if (m_Crouching) return;
+                Ray crouchRay = new Ray(m_Rigidbody.position + Vector3.up * m_Capsule.radius * k_Half, Vector3.up);
+                float crouchRayLength = m_CapsuleHeight - m_Capsule.radius * k_Half;
+                if (Physics.SphereCast(crouchRay, m_Capsule.radius * k_Half, crouchRayLength, Physics.AllLayers, QueryTriggerInteraction.Ignore))
+                {
+                    m_Crouching = true;
+                    return;
+                }
+                if (m_Crouching) return;
 				m_Capsule.height = m_Capsule.height / 2f;
 				m_Capsule.center = m_Capsule.center / 2f;
 				m_Crouching = true;

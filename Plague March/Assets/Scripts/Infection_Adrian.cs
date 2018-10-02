@@ -59,7 +59,7 @@ public class Infection_Adrian : MonoBehaviour {
 
             if (m_fInfection >= 100)
             {
-                //END GAME
+                //end game
             }
         }
 	}
