@@ -20,6 +20,10 @@ public class UserControler_Adrian : MonoBehaviour
     //Sprinting
     private bool m_Sprinting;
 
+    private bool haveKey1;
+    private bool haveKey2;
+    private bool haveKey3;
+    private bool haveKey4;
 
     // Use this for initialization
     void Start()
@@ -34,6 +38,11 @@ public class UserControler_Adrian : MonoBehaviour
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.lockState = CursorLockMode.None;
+
+        haveKey1 = false;
+        haveKey2 = false;
+        haveKey3 = false;
+        haveKey4 = false;
     }
 
     // Update is called once per frame
@@ -72,5 +81,56 @@ public class UserControler_Adrian : MonoBehaviour
         // pass all parameters to the Movement control script
         m_Character.Move(m_Move, crouch, m_Jump, m_Sprinting);
         m_Jump = false;
+    }
+
+    public void obtainedKey(int keyNum)
+    {
+        if (keyNum == 1)
+        {
+            haveKey1 = true;
+        }
+
+        else if (keyNum == 2)
+        {
+            haveKey2 = true;
+        }
+
+        else if (keyNum == 3)
+        {
+            haveKey3 = true;
+        }
+
+        else if (keyNum == 4)
+        {
+            haveKey4 = true;
+        }
+    }
+
+    public bool haveKey(int keyNum)
+    {
+        if(keyNum == 1)
+        {
+            return haveKey1;
+        }
+
+        else if(keyNum == 2)
+        {
+            return haveKey2;
+        }
+
+        else if (keyNum == 3)
+        {
+            return haveKey3;
+        }
+
+        else if (keyNum == 4)
+        {
+            return haveKey4;
+        }
+
+        else
+        {
+            return false;
+        }
     }
 }
