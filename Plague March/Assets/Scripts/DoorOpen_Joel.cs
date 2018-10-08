@@ -16,17 +16,22 @@ public class DoorOpen_Joel : MonoBehaviour
     public keyR keyRequired;
     public Text noEntry;
     public Text entry;
+    public Text closeDoor;
     public GameObject Gerard;
     private UserControler_Adrian user;
     private bool opened;
 
     private bool open;
 
+    public GameObject doorRight;
+    public GameObject doorLeft;
+
     // Use this for initialization
     void Start()
     {
         noEntry.enabled = false;
         entry.enabled = false;
+        closeDoor.enabled = false;
         open = false;
         user = Gerard.GetComponent<UserControler_Adrian>();
         opened = false;
@@ -39,13 +44,37 @@ public class DoorOpen_Joel : MonoBehaviour
     {
         if(user.haveKey((int)keyRequired + 1))
         {
-            if(!opened)
+            if (!opened)
+            {
                 entry.enabled = true;
+                closeDoor.enabled = false;
+            }
+
+            if(opened)
+            {
+                entry.enabled = false;
+                closeDoor.enabled = true;
+            }
 
             if (Input.GetKeyDown(KeyCode.E))
             {
-                opened = true;
-                entry.enabled = false;
+                if (!opened)
+                {
+                    opened = true;
+                    entry.enabled = false;
+                    doorLeft.transform.Rotate(new Vector3(0, 1, 0), -96.0f);
+                    doorRight.transform.Rotate(new Vector3(0, 1, 0), 96.0f);
+                    closeDoor.enabled = true;
+                }
+
+                else
+                {
+                    opened = false;
+                    closeDoor.enabled = false;
+                    doorLeft.transform.Rotate(new Vector3(0, 1, 0), 96.0f);
+                    doorRight.transform.Rotate(new Vector3(0, 1, 0), -96.0f);
+                    entry.enabled = true;
+                }
             }
         }
 
@@ -61,6 +90,7 @@ public class DoorOpen_Joel : MonoBehaviour
         {
             noEntry.enabled = false;
             entry.enabled = false;
+            closeDoor.enabled = false;
         }
     }
 }
