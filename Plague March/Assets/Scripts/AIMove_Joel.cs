@@ -60,6 +60,8 @@ public class AIMove_Joel : MonoBehaviour
     public Image Half = null;
     public Image Red = null;
 
+    private bool oneWaypoint;
+
 
     // Use this for initialization
     void Start ()
@@ -85,6 +87,16 @@ public class AIMove_Joel : MonoBehaviour
         timerPatrol = 0f;
         //Sets Rock wait timer
         m_rockWaitTimer = 1f;
+
+        if(targets.Length == 1)
+        {
+            oneWaypoint = true;
+        }
+
+        else
+        {
+            oneWaypoint = false;
+        }
 
     }
 	
@@ -190,65 +202,68 @@ public class AIMove_Joel : MonoBehaviour
             //Sets the agents animation to looking around
             anim.SetFloat("Blend", 0.5f);
 
+            if(!oneWaypoint)
+            {
             //Timer begins to increase to store how long the agent has spent at the location
             timerPatrol += Time.deltaTime;
 
-            //Once the agent has spent the desired amount of time there
-            if (timerPatrol >= waypointWaitTime)
-            {
-                //Starts Agent Moving Again
-                agent.isStopped = false;
-
-                //Ensures the agent animation is set back to walking
-                anim.SetFloat("Blend", 0.0f);
-
-                if (!loop)
+                //Once the agent has spent the desired amount of time there
+                if (timerPatrol >= waypointWaitTime)
                 {
-                    //Checks if the AI has reached the end of the array of waypoints
-                    if (targVal == targets.Length - 1)
-                    {
-                        //Sets forward to false so the AI progresses backwards through the array of waypoints
-                        forward = false;
-                    }
+                    //Starts Agent Moving Again
+                    agent.isStopped = false;
 
-                    //If the AI was progressing backwards, this checks whether the AI has reached the end of the list
-                    if (targVal == 0)
-                    {
-                        //And sets it to go back through the array progressing forwards
-                        forward = true;
-                    }
+                    //Ensures the agent animation is set back to walking
+                    anim.SetFloat("Blend", 0.0f);
 
-                    //If the AI is progressing forward, the next waypoint is the one after the current
-                    if (forward)
+                    if (!loop)
                     {
-                        targVal++;
-                    }
+                        //Checks if the AI has reached the end of the array of waypoints
+                        if (targVal == targets.Length - 1)
+                        {
+                            //Sets forward to false so the AI progresses backwards through the array of waypoints
+                            forward = false;
+                        }
 
-                    //If the AI is progressing forward, the next waypoint is the one before the current
-                    else
-                    {
-                        targVal--;
-                    }
-                }
+                        //If the AI was progressing backwards, this checks whether the AI has reached the end of the list
+                        if (targVal == 0)
+                        {
+                            //And sets it to go back through the array progressing forwards
+                            forward = true;
+                        }
 
-                else
-                {
-                    if(targVal == targets.Length - 1)
-                    {
-                        targVal = 0;
+                        //If the AI is progressing forward, the next waypoint is the one after the current
+                        if (forward)
+                        {
+                            targVal++;
+                        }
+
+                        //If the AI is progressing forward, the next waypoint is the one before the current
+                        else
+                        {
+                            targVal--;
+                        }
                     }
 
                     else
                     {
-                        targVal++;
+                        if (targVal == targets.Length - 1)
+                        {
+                            targVal = 0;
+                        }
+
+                        else
+                        {
+                            targVal++;
+                        }
                     }
+
+                    //Sets the current target to the newly determined waypoint
+                    currentTarg = targets[targVal].position;
+
+                    //Resets the timer back to 0 for the next waypoint delay
+                    timerPatrol = 0;
                 }
-
-                //Sets the current target to the newly determined waypoint
-                currentTarg = targets[targVal].position;
-
-                //Resets the timer back to 0 for the next waypoint delay
-                timerPatrol = 0;
             }
         }
     }
