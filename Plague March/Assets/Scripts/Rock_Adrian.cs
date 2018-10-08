@@ -7,11 +7,13 @@ public class Rock_Adrian : MonoBehaviour
     public float AlertRadius;
     public GameObject HitFloorEffect;
     private Rigidbody rb;
+    public bool canPickup;
 
     // Use this for initialization
     void Start()
     {
         rb = GetComponent<Rigidbody>();
+        canPickup = false;
     }
 
     // Update is called once per frame
@@ -24,6 +26,7 @@ public class Rock_Adrian : MonoBehaviour
             Alert();
             rb.velocity = Vector3.zero;
             rb.isKinematic = true;
+            canPickup = true;
         }
     }
 

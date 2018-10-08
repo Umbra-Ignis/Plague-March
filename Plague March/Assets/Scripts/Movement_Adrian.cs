@@ -50,11 +50,9 @@ public class Movement_Adrian : MonoBehaviour
 
     private bool aiming;
 
-    public Text RockPickUpUi = null;
-
-    public Text AimRockUI = null;
-
-    public Text ThrowRockUI = null;
+    public Text RockPickUpUi;
+    public Text AimRockUI;
+    public Text ThrowRockUI;
 
     public GameObject spawnpoint = null;
 
@@ -70,6 +68,10 @@ public class Movement_Adrian : MonoBehaviour
         m_Crouching = false;
         aiming = false;
         m_bQuicktime = false;
+
+        RockPickUpUi.enabled = false;
+        AimRockUI.enabled = false;
+        ThrowRockUI.enabled = false;
     }
 
     public void Move(Vector3 move, bool crouch, bool jump, bool sprinting)
@@ -177,7 +179,7 @@ public class Movement_Adrian : MonoBehaviour
     {
         if (crouch && m_IsGrounded)
         {
-            CharControler.center = new Vector3(0, 0.5f, 0);
+            CharControler.center = new Vector3(0, 0.6f, 0);
             CharControler.height = 1.0f;
             m_Crouching = true;
             m_WalkSpeed = 1.2f;
@@ -247,7 +249,7 @@ public class Movement_Adrian : MonoBehaviour
         {
             Debug.Log("Rock");
 
-            if (Input.GetKey(KeyCode.E))
+            if (Input.GetKey(KeyCode.E) && other.GetComponent<Rock_Adrian>().canPickup)
             {
                 Debug.Log("E");
 
@@ -264,7 +266,7 @@ public class Movement_Adrian : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.CompareTag("Rock") && RockPickUpUi != null)
+        if (other.gameObject.CompareTag("Rock") && RockPickUpUi != null && other.GetComponent<Rock_Adrian>().canPickup)
         {
             RockPickUpUi.enabled = true;
         }
@@ -303,7 +305,7 @@ public class Movement_Adrian : MonoBehaviour
         Debug.DrawRay(transform.position + (Vector3.up * 0.2f), Vector3.down);
         if (m_Crouching)
         {
-            if (Physics.Raycast(transform.position + new Vector3(0, 0.3f, 0), Vector3.down, out raycastHit, 0.5f))
+            if (Physics.Raycast(transform.position + new Vector3(0, 0.5f, 0), Vector3.down, out raycastHit, 0.6f))
             {
                 Debug.Log("Grounded");
                 m_IsGrounded = true;
@@ -318,7 +320,7 @@ public class Movement_Adrian : MonoBehaviour
         }
         else
         {
-            if (Physics.Raycast(transform.position, Vector3.down, out raycastHit, 0.6f))
+            if (Physics.Raycast(transform.position + new Vector3(0, 0.5f, 0), Vector3.down, out raycastHit, 0.6f))
             {
                 Debug.Log("Grounded");
                 m_IsGrounded = true;

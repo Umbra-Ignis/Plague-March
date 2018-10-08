@@ -9,10 +9,19 @@ public class UIController_Joel : MonoBehaviour
 
     public Image[] items;
 
+    public Image rock;
+
     private bool setOff = true;
 
+    public GameObject Gerard;
+
+    private Movement_Adrian moveScript;
+
 	// Use this for initialization
-	void Start (){}
+	void Start ()
+    {
+        moveScript = Gerard.GetComponent<Movement_Adrian>();
+    }
 	
 	// Update is called once per frame
 	void Update ()
@@ -26,42 +35,57 @@ public class UIController_Joel : MonoBehaviour
             setOff = false;
         }
 
-        if (Input.GetKeyDown(KeyCode.Keypad0))
+        int rc = moveScript.GetRockCount();
+
+        if (rc > 0)
         {
-            TurnOnItem(0);
+            rock.enabled = true;
         }
-        if (Input.GetKeyDown(KeyCode.Keypad1))
+
+        else
         {
-            TurnOnItem(1);
+            rock.enabled = false;
         }
-        if (Input.GetKeyDown(KeyCode.Keypad2))
-        {
-            TurnOnItem(2);
-        }
-        if (Input.GetKeyDown(KeyCode.Keypad3))
-        {
-            TurnOnItem(3);
-        }
-        if (Input.GetKeyDown(KeyCode.Keypad4))
-        {
-            TurnOnItem(4);
-        }
-        if (Input.GetKeyDown(KeyCode.Keypad5))
-        {
-            TurnOnItem(5);
-        }
-        if (Input.GetKeyDown(KeyCode.Keypad6))
-        {
-            TurnOnItem(6);
-        }
-        if (Input.GetKeyDown(KeyCode.Keypad7))
-        {
-            TurnOnItem(7);
-        }
-        if (Input.GetKeyDown(KeyCode.Keypad8))
-        {
-            TurnOnItem(8);
-        }
+        //========================================================================
+        //UNCOMMENT TO DEBUG UI ELEMENTS
+        //========================================================================
+
+        //if (Input.GetKeyDown(KeyCode.Keypad0))
+        //{
+        //    TurnOnItem(0);
+        //}
+        //if (Input.GetKeyDown(KeyCode.Keypad1))
+        //{
+        //    TurnOnItem(1);
+        //}
+        //if (Input.GetKeyDown(KeyCode.Keypad2))
+        //{
+        //    TurnOnItem(2);
+        //}
+        //if (Input.GetKeyDown(KeyCode.Keypad3))
+        //{
+        //    TurnOnItem(3);
+        //}
+        //if (Input.GetKeyDown(KeyCode.Keypad4))
+        //{
+        //    TurnOnItem(4);
+        //}
+        //if (Input.GetKeyDown(KeyCode.Keypad5))
+        //{
+        //    TurnOnItem(5);
+        //}
+        //if (Input.GetKeyDown(KeyCode.Keypad6))
+        //{
+        //    TurnOnItem(6);
+        //}
+        //if (Input.GetKeyDown(KeyCode.Keypad7))
+        //{
+        //    TurnOnItem(7);
+        //}
+        //if (Input.GetKeyDown(KeyCode.Keypad8))
+        //{
+        //    TurnOnItem(8);
+        //}
     }
 
     public void TurnOnItem(int number)
@@ -72,5 +96,15 @@ public class UIController_Joel : MonoBehaviour
     public void TurnOffItem(int number)
     {
         items[number].enabled = false;
+    }
+
+    public void ShowRock()
+    {
+
+    }
+
+    public void HideRock()
+    {
+
     }
 }
