@@ -163,6 +163,11 @@ public class Movement_Adrian : MonoBehaviour
             {
                 spawnpoint.GetComponent<Trajectory_Simulation>().enabled = true;
                 spawnpoint.GetComponent<LineRenderer>().enabled = true;
+
+                Quaternion charRot = Camera.main.transform.rotation;
+                charRot.x = 0;
+                charRot.z = 0;
+                transform.rotation = charRot;
             }
 
         }
@@ -296,18 +301,37 @@ public class Movement_Adrian : MonoBehaviour
     {
         RaycastHit raycastHit;
         Debug.DrawRay(transform.position + (Vector3.up * 0.2f), Vector3.down);
-        if (Physics.Raycast(transform.position, Vector3.down, out raycastHit, 0.6f))
+        if (m_Crouching)
         {
-            Debug.Log("Grounded");
-            m_IsGrounded = true;
-            animator.applyRootMotion = true;
+            if (Physics.Raycast(transform.position + new Vector3(0, 0.4f, 0), Vector3.down, out raycastHit, 0.5f))
+            {
+                Debug.Log("Grounded");
+                m_IsGrounded = true;
+                animator.applyRootMotion = true;
+            }
+            else
+            {
+                Debug.Log("Not Grounded");
+                m_IsGrounded = false;
+                animator.applyRootMotion = false;
+            }
         }
         else
         {
-            Debug.Log("Not Grounded");
-            m_IsGrounded = false;
-            animator.applyRootMotion = false;
+            if (Physics.Raycast(transform.position, Vector3.down, out raycastHit, 0.6f))
+            {
+                Debug.Log("Grounded");
+                m_IsGrounded = true;
+                animator.applyRootMotion = true;
+            }
+            else
+            {
+                Debug.Log("Not Grounded");
+                m_IsGrounded = false;
+                animator.applyRootMotion = false;
+            }
         }
+
     }
 
     public void stopCharacter()
