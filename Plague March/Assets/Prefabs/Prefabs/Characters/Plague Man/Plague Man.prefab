@@ -313,23 +313,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!1 &1349007936482036
-GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  serializedVersion: 5
-  m_Component:
-  - component: {fileID: 4308605448683800}
-  - component: {fileID: 64505618203831388}
-  - component: {fileID: 114382143731811512}
-  m_Layer: 0
-  m_Name: Cone
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 0
 --- !u!1 &1379116262861936
 GameObject:
   m_ObjectHideFlags: 1
@@ -966,18 +949,17 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1989521164576456}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 4.2518477, y: 10.3935175, z: 3.408298}
+  m_LocalRotation: {x: -0, y: 0.5511217, z: -0, w: 0.8344249}
+  m_LocalPosition: {x: 142.21, y: 99.92018, z: 129.51}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4510669285398640}
   - {fileID: 4254820199773352}
-  - {fileID: 4308605448683800}
   - {fileID: 4842468307182852}
   - {fileID: 4431466341516130}
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 66.888, z: 0}
 --- !u!4 &4078071952415680
 Transform:
   m_ObjectHideFlags: 1
@@ -1230,19 +1212,6 @@ Transform:
   m_Father: {fileID: 4196360066886138}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!4 &4308605448683800
-Transform:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1349007936482036}
-  m_LocalRotation: {x: -0, y: -1, z: -0, w: 0}
-  m_LocalPosition: {x: -0, y: 1.41, z: 9.409004}
-  m_LocalScale: {x: 10.025295, y: 0.09336, z: 18.652508}
-  m_Children: []
-  m_Father: {fileID: 4072081339184490}
-  m_RootOrder: 2
-  m_LocalEulerAnglesHint: {x: 0, y: 180.00002, z: 0}
 --- !u!4 &4319978568972522
 Transform:
   m_ObjectHideFlags: 1
@@ -1324,7 +1293,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4072081339184490}
-  m_RootOrder: 4
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4437082696808760
 Transform:
@@ -1550,7 +1519,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4072081339184490}
-  m_RootOrder: 3
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4852492862219396
 Transform:
@@ -1673,20 +1642,6 @@ Transform:
   m_Father: {fileID: 4156310038920992}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!64 &64505618203831388
-MeshCollider:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1349007936482036}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Convex: 1
-  m_CookingOptions: 14
-  m_SkinWidth: 0.01
-  m_Mesh: {fileID: 4300000, guid: 251541025a615814d82ebd54bf51766d, type: 3}
 --- !u!95 &95103774487840236
 Animator:
   serializedVersion: 3
@@ -1704,18 +1659,6 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
---- !u!114 &114382143731811512
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1349007936482036}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b8be7a9e2b0d1e5429a2c1e9117e0ce4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  AI: {fileID: 114839525204427688}
 --- !u!114 &114400860594305980
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1738,16 +1681,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: be7ccc81d73ce424fae24ab469e97909, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  targets:
-  - {fileID: 0}
-  - {fileID: 0}
-  m_Speed: 1
+  targets: []
+  m_Speed: 2
   stoppingDistance: 1
   chaseSpeedMultiplier: 2.11
-  waypointWaitTime: 2
+  m_fChaseWaitTime: 1
+  waypointWaitTime: 0
+  loop: 1
   player: {fileID: 0}
-  m_rockWaitTime: 5
+  agent: {fileID: 0}
+  m_rockWaitTime: 3
   currentTarg: {x: 0, y: 0, z: 0}
+  anim: {fileID: 0}
   Open: {fileID: 0}
   Half: {fileID: 0}
   Red: {fileID: 0}

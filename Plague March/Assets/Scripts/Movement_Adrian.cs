@@ -303,7 +303,7 @@ public class Movement_Adrian : MonoBehaviour
         Debug.DrawRay(transform.position + (Vector3.up * 0.2f), Vector3.down);
         if (m_Crouching)
         {
-            if (Physics.Raycast(transform.position + new Vector3(0, 0.4f, 0), Vector3.down, out raycastHit, 0.5f))
+            if (Physics.Raycast(transform.position + new Vector3(0, 0.3f, 0), Vector3.down, out raycastHit, 0.5f))
             {
                 Debug.Log("Grounded");
                 m_IsGrounded = true;

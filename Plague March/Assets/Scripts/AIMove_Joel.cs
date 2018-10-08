@@ -13,6 +13,8 @@ public class AIMove_Joel : MonoBehaviour
     [Range(1f, 50f)] public float stoppingDistance = 4f;
     //Sets how much faster the chasing state will be, 1 being the same speed as patrol
     [Range(1f, 20f)]public float chaseSpeedMultiplier;
+    //Time Before Start Chasing
+    [Range(1f, 10f)] public float m_fChaseWaitTime;
 
     //Used to time how long is spent at the current waypoint, once arrived
     public float waypointWaitTime;
@@ -43,6 +45,7 @@ public class AIMove_Joel : MonoBehaviour
     public float m_rockWaitTime;
     //Rock wait timer
     private float m_rockWaitTimer;
+
 
     //Stores a reference to the current target of the AI
     public Vector3 currentTarg;
@@ -283,7 +286,7 @@ public class AIMove_Joel : MonoBehaviour
         timerAlert += Time.deltaTime;
 
         //Checks if the timer has reached a certain amount of time
-        if(timerAlert >= 3.0f)
+        if(timerAlert >= m_fChaseWaitTime)
         {
             agent.isStopped = false;
             //Speeds up the agent to run after the player at a higher speedS
