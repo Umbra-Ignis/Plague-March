@@ -573,7 +573,6 @@ GameObject:
   m_Component:
   - component: {fileID: 4366823303461650}
   - component: {fileID: 120750770452938384}
-  - component: {fileID: 114670005046272674}
   - component: {fileID: 114292360673420946}
   m_Layer: 0
   m_Name: Spawn Point
@@ -1359,7 +1358,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1128971647715120}
   m_LocalRotation: {x: -0, y: -0, z: -1.1102229e-16, w: 1}
-  m_LocalPosition: {x: -0.089603454, y: 2.4700012, z: -2.828583}
+  m_LocalPosition: {x: 0, y: 2.47, z: -2.83}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4335558276020632}
@@ -1456,8 +1455,8 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1902614205471578}
-  m_LocalRotation: {x: -0.13033544, y: -0.015522164, z: 0.002040748, w: -0.99134636}
-  m_LocalPosition: {x: -0.089603454, y: 2.4700012, z: -2.828583}
+  m_LocalRotation: {x: 0.13034937, y: -0.00035658348, z: 0.000046880406, w: 0.9914681}
+  m_LocalPosition: {x: 0, y: 2.47, z: -2.83}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4613230603245608}
@@ -1511,7 +1510,7 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1938177483752478}
-  m_LocalRotation: {x: 0.11186189, y: 0.015445296, z: -0.0007395102, w: 0.99360347}
+  m_LocalRotation: {x: -0.11185793, y: 0.0003251397, z: 0.00021648998, w: -0.99372417}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -1624,7 +1623,7 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1397651107634780}
-  m_LocalRotation: {x: 0.14780231, y: 0.015291451, z: -0.0010297463, w: 0.9888982}
+  m_LocalRotation: {x: 0.14779985, y: -0.0005467504, z: 0.0013372955, w: 0.9890163}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -1747,8 +1746,8 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1161085389233400}
-  m_LocalRotation: {x: -0, y: 0.015832972, z: -0, w: -0.99987465}
-  m_LocalPosition: {x: 180.9, y: 100.4, z: 90.7}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 2.7669702, y: 0.038, z: -0.51575017}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4349900735965994}
@@ -2112,7 +2111,7 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1800025744778346}
-  m_LocalRotation: {x: 0.13035521, y: 0.015345167, z: -0.00076246297, w: 0.9913483}
+  m_LocalRotation: {x: -0.13034943, y: 0.00028219973, z: -0.00003662496, w: -0.99146813}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -2553,8 +2552,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sightLine: {fileID: 120750770452938384}
-  playerFire: {fileID: 114670005046272674}
-  segmentCount: 50
+  fireStrength: 450
+  segmentCount: 80
   segmentScale: 1
   segVelocity: {x: 0, y: 0, z: 0}
 --- !u!114 &114292609319661726
@@ -2784,19 +2783,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   profile: {fileID: 11400000, guid: 5a4f392b5d836d4408c9d2be38ebd117, type: 2}
---- !u!114 &114670005046272674
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1463869468879102}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fd40bb7c6d7552846b7124676d919536, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  fireStrength: 500
-  nextColor: {r: 1, g: 0, b: 0, a: 1}
 --- !u!114 &114711639144040512
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -3098,10 +3084,10 @@ CharacterController:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Height: 1.59
-  m_Radius: 0.21
+  m_Height: 1.55
+  m_Radius: 0.36
   m_SlopeLimit: 75
   m_StepOffset: 0.3
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
-  m_Center: {x: 0, y: 0.86, z: 0}
+  m_Center: {x: 0, y: 0.88, z: 0}

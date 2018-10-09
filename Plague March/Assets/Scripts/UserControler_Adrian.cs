@@ -37,7 +37,7 @@ public class UserControler_Adrian : MonoBehaviour
         //locks Cursor in Center of Screen and makes Non visable
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
-        Cursor.lockState = CursorLockMode.None;
+        //Cursor.lockState = CursorLockMode.None;
 
         haveKey1 = false;
         haveKey2 = false;

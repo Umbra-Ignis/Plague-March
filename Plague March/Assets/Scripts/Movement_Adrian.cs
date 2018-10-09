@@ -179,7 +179,7 @@ public class Movement_Adrian : MonoBehaviour
     {
         if (crouch && m_IsGrounded)
         {
-            CharControler.center = new Vector3(0, 0.6f, 0);
+            CharControler.center = new Vector3(0, 0.55f, 0);
             CharControler.height = 1.0f;
             m_Crouching = true;
             m_WalkSpeed = 1.2f;
