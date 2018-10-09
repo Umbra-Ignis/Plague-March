@@ -15,6 +15,9 @@ public class Infection_Adrian : MonoBehaviour {
     //Infection Multiplyer For Infection Level
     public float m_fInfectionMultiplyer = 0;
 
+    //How Quick Infection Is reduced
+    public float m_freduceInfection = 0;
+
     //How close the ai is before infection takes effect
     //float m_fInfectionDistance = 0;
 
@@ -27,12 +30,14 @@ public class Infection_Adrian : MonoBehaviour {
     public Image YouDead = null;
     public Image InfectionBar = null;
 
+
     
 
 
 
     private void Awake()
     {
+
         foreach (GameObject go in GameObject.FindGameObjectsWithTag("Infected"))
         {
             m_lEnemies.Add(go.GetComponent<Transform>());
@@ -47,19 +52,32 @@ public class Infection_Adrian : MonoBehaviour {
         {
             m_fDistanceToNearestEnemy = Vector3.Distance(GetClosestEnemy(m_lEnemies, this.transform).position, this.transform.position);
 
+
             //If Distance is close
             if (m_fDistanceToNearestEnemy <= m_fDistanceUntilInfection)
             {
+                //Increasing infection amount
+                Material mat = Instantiate(InfectionBar.material);
+                mat.SetFloat("_opacity", m_fInfection / 100);
+                InfectionBar.material = mat;
+
                 //Accumulate Infection over time using the multiplyer
                 m_fInfection += m_fInfectionMultiplyer * Time.deltaTime;
+            }
+            else
+            {
+                //Reduce Infection Over time
+                m_fInfection -= m_freduceInfection * Time.deltaTime;
 
-                //Increasing infection amount
-                InfectionBar.fillAmount = m_fInfection / 100;
+                if (m_fInfection <= 0)
+                {
+                    m_fInfection = 0;
+                }
             }
 
             if (m_fInfection >= 100)
             {
-                //end game
+                
             }
         }
 	}

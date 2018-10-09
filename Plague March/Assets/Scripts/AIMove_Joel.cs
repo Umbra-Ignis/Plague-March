@@ -84,7 +84,10 @@ public class AIMove_Joel : MonoBehaviour
         forward = true;
 
         //Sets the current target for the AI to approach
-        currentTarg = targets[targVal].position;
+        if (targets != null)
+        {
+            currentTarg = targets[targVal].position;
+        }
 
         //Sets Timer Patrol
         timerPatrol = 0f;

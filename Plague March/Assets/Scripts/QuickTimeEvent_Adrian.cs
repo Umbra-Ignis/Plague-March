@@ -26,9 +26,6 @@ public class QuickTimeEvent_Adrian : MonoBehaviour
     //Distance to closest enemy
     float m_fDistanceToClosestEnemy;
 
-    //Is in event
-    bool m_bInEvent = false;
-
     //Times Pressed
     float m_fTimesPressed = 0;
 
@@ -78,8 +75,11 @@ public class QuickTimeEvent_Adrian : MonoBehaviour
             //if distance to the closest enemy is less than or equal to distance set in inspector
             if (m_fDistanceToClosestEnemy <= m_fStartQuickTimeDistance)
             {
-                Border.enabled = true;
-                Bar.enabled = true;
+                if (Border != null || Bar != null)
+                {
+                    Border.enabled = true;
+                    Bar.enabled = true;
+                }
                 Bar.fillAmount = m_fTimesPressed / 100;
 
                 Closestenemy = m_iaInfectionScript.GetClosestEnemy(m_lEnemies, transform);

@@ -39,8 +39,8 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1490187986834842}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 141.43, y: 100.064, z: 145.72}
-  m_LocalScale: {x: 0.3, y: 0.3, z: 0.3}
+  m_LocalPosition: {x: -11.35, y: 1.46, z: 12.2}
+  m_LocalScale: {x: 0.01, y: 0.01, z: 0.01}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -59,7 +59,7 @@ MeshRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_Materials:
-  - {fileID: 2100000, guid: a3384ef3e2313034f9016ad8a1f3999f, type: 2}
+  - {fileID: 2100000, guid: 075c90795d6a09b45b00510e54277b47, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -85,7 +85,7 @@ MeshFilter:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1490187986834842}
-  m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
+  m_Mesh: {fileID: 4300000, guid: 58c05b0abbb79fd44baf40e60f2a25e8, type: 3}
 --- !u!54 &54738789214202170
 Rigidbody:
   m_ObjectHideFlags: 1
@@ -94,7 +94,7 @@ Rigidbody:
   m_GameObject: {fileID: 1490187986834842}
   serializedVersion: 2
   m_Mass: 70
-  m_Drag: 0.1
+  m_Drag: 0.16
   m_AngularDrag: 0.2
   m_UseGravity: 1
   m_IsKinematic: 0
@@ -114,6 +114,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   AlertRadius: 8.5
   HitFloorEffect: {fileID: 0}
+  canPickup: 0
 --- !u!135 &135048398785079442
 SphereCollider:
   m_ObjectHideFlags: 1
@@ -124,7 +125,7 @@ SphereCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.5
+  m_Radius: 4.44
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!135 &135468586347075694
 SphereCollider:
@@ -136,5 +137,5 @@ SphereCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 3.6765575
+  m_Radius: 60.5
   m_Center: {x: 0, y: 0, z: 0}

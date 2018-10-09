@@ -21,8 +21,6 @@ public class DoorOpen_Joel : MonoBehaviour
     private UserControler_Adrian user;
     private bool opened;
 
-    private bool open;
-
     public GameObject doorRight;
     public GameObject doorLeft;
 
@@ -32,7 +30,6 @@ public class DoorOpen_Joel : MonoBehaviour
         noEntry.enabled = false;
         entry.enabled = false;
         closeDoor.enabled = false;
-        open = false;
         user = Gerard.GetComponent<UserControler_Adrian>();
         opened = false;
     }

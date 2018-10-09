@@ -10,8 +10,8 @@ public class Trajectory_Simulation : MonoBehaviour
     // Reference to the LineRenderer we will use to display the simulated path
     public LineRenderer sightLine;
 
-    // Reference to a Component that holds information about fire strength, location of cannon, etc.
-    public PlayerFire playerFire;
+    //Fire Strength
+    public float fireStrength = 500;
 
     // Number of segments to calculate - more gives a smoother line
     public int segmentCount = 20;
@@ -26,7 +26,7 @@ public class Trajectory_Simulation : MonoBehaviour
 
     private void Start(){}
 
-    void Update()
+    void FixedUpdate()
     {
         simulatePath();
     }
@@ -45,7 +45,7 @@ public class Trajectory_Simulation : MonoBehaviour
         segments[0] = transform.position;
 
         // The initial velocity
-        segVelocity = (Camera.main.transform.forward + Camera.main.transform.up) * playerFire.fireStrength * Time.deltaTime;
+        segVelocity = (Camera.main.transform.forward + Camera.main.transform.up) * fireStrength * Time.deltaTime;
         velBeforeGrav = segVelocity;
         //Debug.Log(Camera.main.transform.forward + Camera.main.transform.up * Time.deltaTime);
         //Debug.DrawRay(this.transform.position, Camera.main.transform.forward + Camera.main.transform.up, Color.blue);
