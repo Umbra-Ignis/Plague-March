@@ -52,15 +52,14 @@ public class Infection_Adrian : MonoBehaviour {
         {
             m_fDistanceToNearestEnemy = Vector3.Distance(GetClosestEnemy(m_lEnemies, this.transform).position, this.transform.position);
 
+            //Increasing infection amount
+            Material mat = Instantiate(InfectionBar.material);
+            mat.SetFloat("_opacity", m_fInfection / 100);
+            InfectionBar.material = mat;
 
             //If Distance is close
             if (m_fDistanceToNearestEnemy <= m_fDistanceUntilInfection)
             {
-                //Increasing infection amount
-                Material mat = Instantiate(InfectionBar.material);
-                mat.SetFloat("_opacity", m_fInfection / 100);
-                InfectionBar.material = mat;
-
                 //Accumulate Infection over time using the multiplyer
                 m_fInfection += m_fInfectionMultiplyer * Time.deltaTime;
             }
