@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.Animations;
 
 public class QuickTimeEvent_Adrian : MonoBehaviour
 {
@@ -41,6 +42,8 @@ public class QuickTimeEvent_Adrian : MonoBehaviour
     public Image Bar = null;
     public Image Border = null;
 
+    public GameObject QuickTimeCouple;
+
     // Use this for initialization
     void Start()
     {
@@ -75,6 +78,7 @@ public class QuickTimeEvent_Adrian : MonoBehaviour
             //if distance to the closest enemy is less than or equal to distance set in inspector
             if (m_fDistanceToClosestEnemy <= m_fStartQuickTimeDistance)
             {
+                QuickTimeCouple.SetActive(true);
                 if (Border != null || Bar != null)
                 {
                     Border.enabled = true;
