@@ -98,7 +98,6 @@ public class Pickup_Joel : MonoBehaviour
                 tooltip.enabled = false;
                 popupImage.enabled = true;
                 opened = true;
-                other.GetComponent<UserControler_Adrian>().obtainedKey((int)type + 1);
                 if(partEffect != null)
                 {
                     partEffect.Stop();
@@ -114,6 +113,7 @@ public class Pickup_Joel : MonoBehaviour
                 //Switches the bool to ensure the item cannot be picked up again, and to 
                 //ensure the false option is not displayed to the player
                 toBePickedUp = false;
+                other.GetComponent<UserControler_Adrian>().obtainedKey((int)type + 1);
             }
         }
     }
