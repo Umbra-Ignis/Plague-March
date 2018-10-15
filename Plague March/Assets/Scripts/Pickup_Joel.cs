@@ -21,6 +21,7 @@ public class Pickup_Joel : MonoBehaviour
 {
     //Allows each item to be set to a different key item index
     public pickupType type;
+
     //Tip that comes up indicating to the player what actions to take to pick up the item
     public Text tooltip;
     //Allows access to the UI controller to turn UI images on and off
@@ -29,10 +30,15 @@ public class Pickup_Joel : MonoBehaviour
     private UIController_Joel ui;
     //Stores whether the item has been picked up yet or not
     private bool toBePickedUp;
-
+    //Stores whether the image has been opened or not
     private bool opened;
-
+    //Takes in the image that pops up when the note is interacted with
     public Image popupImage;
+    //Stores whether this object will turn on another or not
+    public bool turnOnOther;
+    //If picking up one item is to turn on another, this should be set to the key it turns on
+    public GameObject turnOnObject;
+    public ParticleSystem partEffect;
 
     // Use this for initialization
     void Start()
@@ -44,6 +50,11 @@ public class Pickup_Joel : MonoBehaviour
         //Sets the item to be allowed to be picked up
         toBePickedUp = true;
         opened = false;
+        if (turnOnOther)
+        {
+            turnOnObject.GetComponent<SphereCollider>().enabled = false;
+            partEffect.Stop();
+        }
     }
 
     // Update is called once per frame
@@ -62,6 +73,12 @@ public class Pickup_Joel : MonoBehaviour
             //ensure the false option is not displayed to the player
             toBePickedUp = false;
             opened = false;
+
+            if(turnOnOther)
+            {
+                turnOnObject.GetComponent<SphereCollider>().enabled = true;
+                partEffect.Play();
+            }
         }
     }
 
@@ -74,7 +91,7 @@ public class Pickup_Joel : MonoBehaviour
             //Turns on the tooltip text to direct the player which actions to take to pick up the item
             tooltip.enabled = true;
             //Checks if the player completes the above stated actions
-            if(Input.GetKeyDown(KeyCode.E))
+            if(Input.GetKeyDown(KeyCode.E) && (int)type >= 4)
             {
                 Time.timeScale = 0;
 
@@ -82,6 +99,21 @@ public class Pickup_Joel : MonoBehaviour
                 popupImage.enabled = true;
                 opened = true;
                 other.GetComponent<UserControler_Adrian>().obtainedKey((int)type + 1);
+                if(partEffect != null)
+                {
+                    partEffect.Stop();
+                }
+            }
+
+            else if(Input.GetKeyDown(KeyCode.E))
+            {
+                tooltip.enabled = false;
+                //Turns on the UI image of this selected item
+                ui.TurnOnItem((int)type);
+                //Turns off the tooltip text of this item as it can no longer be picked up
+                //Switches the bool to ensure the item cannot be picked up again, and to 
+                //ensure the false option is not displayed to the player
+                toBePickedUp = false;
             }
         }
     }
