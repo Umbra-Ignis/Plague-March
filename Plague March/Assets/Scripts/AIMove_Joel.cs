@@ -65,6 +65,7 @@ public class AIMove_Joel : MonoBehaviour
 
     private bool oneWaypoint;
 
+    public Transform startWaypoint;
 
     // Use this for initialization
     void Start ()
@@ -84,7 +85,7 @@ public class AIMove_Joel : MonoBehaviour
         forward = true;
 
         //Sets the current target for the AI to approach
-        if (targets != null)
+        if (targets.Length != 0)
         {
             currentTarg = targets[targVal].position;
         }
@@ -103,7 +104,6 @@ public class AIMove_Joel : MonoBehaviour
         {
             oneWaypoint = false;
         }
-
     }
 	
 	// Update is called once per frame
@@ -192,7 +192,7 @@ public class AIMove_Joel : MonoBehaviour
         if (distanceToWaypoint >= stoppingDistance)
         {
             //Checks that the current selected target actually exists
-            if (targets[targVal] != null)
+            if (targets.Length != 0)
             {
                 //If it does exist, the position of the target becomes the new target of the agent
                 agent.SetDestination(currentTarg);
@@ -265,7 +265,10 @@ public class AIMove_Joel : MonoBehaviour
                     }
 
                     //Sets the current target to the newly determined waypoint
-                    currentTarg = targets[targVal].position;
+                    if (targets.Length != 0)
+                    {
+                        currentTarg = targets[targVal].position;
+                    }
 
                     //Resets the timer back to 0 for the next waypoint delay
                     timerPatrol = 0;
@@ -441,5 +444,10 @@ public class AIMove_Joel : MonoBehaviour
     public void SetAlertTimer(float alertTimer)
     {
         timerAlert = alertTimer;
+    }
+
+    public void ResetPos()
+    {
+        transform.position = startWaypoint.position;
     }
 }

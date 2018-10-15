@@ -1,5 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Animations;
@@ -44,11 +43,15 @@ public class QuickTimeEvent_Adrian : MonoBehaviour
 
     public GameObject QuickTimeCouple;
 
+    private bool end;
+
     // Use this for initialization
     void Start()
     {
         m_iaInfectionScript = GetComponent<Infection_Adrian>();
         m_maMoveScript = GetComponent<Movement_Adrian>();
+
+        end = false;
     }
 
     private void Awake()
@@ -64,7 +67,6 @@ public class QuickTimeEvent_Adrian : MonoBehaviour
     {
         if (m_lEnemies != null)
         {
-
             //gets closest enemy
             m_fDistanceToClosestEnemy = Vector3.Distance(m_iaInfectionScript.GetClosestEnemy(m_lEnemies, transform).position, transform.position);
 
@@ -95,17 +97,12 @@ public class QuickTimeEvent_Adrian : MonoBehaviour
                 {
                     Ai.SetChase();
 
-                    // FIX THIS
-                    //transform.LookAt(Closestenemy);
-                    //transform.rotation = Quaternion.Euler(0, transform.rotation.y, 0);
-
-                    Debug.Log("QUICK");
                     //Hold players Position
                     m_maMoveScript.SetQuicktime(true);
                 }
+
                 Ai.agent.isStopped = true;
                 Ai.anim.SetFloat("Blend", 0.0f);
-
 
                 if (Input.GetKeyDown(KeyCode.Space))
                 {
@@ -126,12 +123,31 @@ public class QuickTimeEvent_Adrian : MonoBehaviour
 
                 if (m_fTimesPressed >= 100)
                 {
+                    end = true;
                     Border.enabled = false;
                     Bar.enabled = false;
+                    m_fTimesPressed = 0;
+                    //QuickTimeCouple.SetActive(false);
                     m_maMoveScript.SetQuicktime(false);
+                    ResetInfected();
                     Ai.SetPatrol();
                 }
             }
         }
+    }
+
+    public bool getEnd()
+    {
+        return end;
+    }
+
+    public void setEnd(bool b)
+    {
+        end = b;
+    }
+
+    private void ResetInfected()
+    {
+        Ai.ResetPos();
     }
 }
