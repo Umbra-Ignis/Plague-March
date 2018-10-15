@@ -30,6 +30,10 @@ public class Pickup_Joel : MonoBehaviour
     //Stores whether the item has been picked up yet or not
     private bool toBePickedUp;
 
+    private bool opened;
+
+    public Image popupImage;
+
     // Use this for initialization
     void Start()
     {
@@ -39,10 +43,27 @@ public class Pickup_Joel : MonoBehaviour
         ui = TooltipCanvas.GetComponent<UIController_Joel>();
         //Sets the item to be allowed to be picked up
         toBePickedUp = true;
+        opened = false;
     }
 
     // Update is called once per frame
-    void Update(){} //DELIBERATLY LEFT BLANK
+    void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Space) && opened)
+        {
+            Time.timeScale = 1;
+            popupImage.enabled = false;
+
+            //Turns on the UI image of this selected item
+            ui.TurnOnItem((int)type);
+
+            //Turns off the tooltip text of this item as it can no longer be picked up
+            //Switches the bool to ensure the item cannot be picked up again, and to 
+            //ensure the false option is not displayed to the player
+            toBePickedUp = false;
+            opened = false;
+        }
+    }
 
     //Detects when another object enters the trigger of this object
     private void OnTriggerStay(Collider other)
@@ -55,13 +76,11 @@ public class Pickup_Joel : MonoBehaviour
             //Checks if the player completes the above stated actions
             if(Input.GetKeyDown(KeyCode.E))
             {
-                //Turns on the UI image of this selected item
-                ui.TurnOnItem((int)type);
-                //Turns off the tooltip text of this item as it can no longer be picked up
+                Time.timeScale = 0;
+
                 tooltip.enabled = false;
-                //Switches the bool to ensure the item cannot be picked up again, and to 
-                //ensure the false option is not displayed to the player
-                toBePickedUp = false;
+                popupImage.enabled = true;
+                opened = true;
                 other.GetComponent<UserControler_Adrian>().obtainedKey((int)type + 1);
             }
         }

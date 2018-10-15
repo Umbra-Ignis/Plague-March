@@ -34,7 +34,7 @@ public class QTEAnim_Joel : MonoBehaviour
             timer += Time.deltaTime;
             anim.SetBool("QTEnd", true);
 
-            if (timer >= 2.0f)
+            if (timer >= 1.9f)
             {
                 QT.SetActive(false);
                 timer = 0.0f;
