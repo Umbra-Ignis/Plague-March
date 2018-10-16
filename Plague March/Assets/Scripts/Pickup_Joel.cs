@@ -39,6 +39,9 @@ public class Pickup_Joel : MonoBehaviour
     //If picking up one item is to turn on another, this should be set to the key it turns on
     public GameObject turnOnObject;
     public ParticleSystem partEffect;
+    public Text acquiredText;
+
+    private float textTimer;
 
     // Use this for initialization
     void Start()
@@ -55,6 +58,8 @@ public class Pickup_Joel : MonoBehaviour
             turnOnObject.GetComponent<SphereCollider>().enabled = false;
             partEffect.Stop();
         }
+        acquiredText.enabled = false;
+        textTimer = 0;
     }
 
     // Update is called once per frame
@@ -64,6 +69,7 @@ public class Pickup_Joel : MonoBehaviour
         {
             Time.timeScale = 1;
             popupImage.enabled = false;
+            acquiredText.enabled = true;
 
             //Turns on the UI image of this selected item
             ui.TurnOnItem((int)type);
@@ -79,6 +85,17 @@ public class Pickup_Joel : MonoBehaviour
                 turnOnObject.GetComponent<SphereCollider>().enabled = true;
                 partEffect.Play();
             }
+        }
+
+        if(acquiredText.enabled == true)
+        {
+            textTimer += Time.deltaTime;
+        }
+
+        if(textTimer >= 5.0f)
+        {
+            acquiredText.enabled = false;
+            textTimer = 0.0f;
         }
     }
 
@@ -107,6 +124,7 @@ public class Pickup_Joel : MonoBehaviour
             else if(Input.GetKeyDown(KeyCode.E))
             {
                 tooltip.enabled = false;
+                acquiredText.enabled = true;
                 //Turns on the UI image of this selected item
                 ui.TurnOnItem((int)type);
                 //Turns off the tooltip text of this item as it can no longer be picked up
