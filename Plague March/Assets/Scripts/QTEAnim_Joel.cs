@@ -18,6 +18,7 @@ public class QTEAnim_Joel : MonoBehaviour
     void Start()
     {
         anim = GetComponent<Animator>();
+        Gerard = GameObject.FindGameObjectWithTag("Player");
         qtScript = Gerard.GetComponent<QuickTimeEvent_Adrian>();
         anim.SetBool("QTEnd", false);
         timer = 0.0f;
