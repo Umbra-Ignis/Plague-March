@@ -69,7 +69,7 @@ public class Pickup_Joel : MonoBehaviour
         {
             Time.timeScale = 1;
             popupImage.enabled = false;
-            acquiredText.enabled = true;
+            acquiredText.enabled = false;
 
             //Turns on the UI image of this selected item
             ui.TurnOnItem((int)type);
@@ -113,6 +113,7 @@ public class Pickup_Joel : MonoBehaviour
                 Time.timeScale = 0;
 
                 tooltip.enabled = false;
+                acquiredText.enabled = true;
                 popupImage.enabled = true;
                 opened = true;
                 if(partEffect != null)

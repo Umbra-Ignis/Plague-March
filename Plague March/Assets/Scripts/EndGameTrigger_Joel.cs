@@ -19,6 +19,8 @@ public class EndGameTrigger_Joel : MonoBehaviour {
     {
         if(other.CompareTag("Player"))
         {
+            Cursor.lockState = CursorLockMode.None;
+            Cursor.visible = true;
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex - 1);
         }
     }
