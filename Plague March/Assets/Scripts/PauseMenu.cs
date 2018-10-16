@@ -2,6 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+#if UNITY_EDITOR
+using UnityEditor;
+#endif
 
 public class PauseMenu : MonoBehaviour
 {
@@ -63,6 +66,8 @@ public class PauseMenu : MonoBehaviour
         Debug.Log("Quitting Game...");
         Application.Quit();
         //Allows quit button to work while playing in editor
+#if UNITY_EDITOR
         UnityEditor.EditorApplication.isPlaying = false;
+#endif
     }
 }
