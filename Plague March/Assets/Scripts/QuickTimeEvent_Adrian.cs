@@ -45,6 +45,9 @@ public class QuickTimeEvent_Adrian : MonoBehaviour
 
     private bool end;
 
+    private float m_fendedQuickTimer;
+
+
     // Use this for initialization
     void Start()
     {
@@ -52,6 +55,8 @@ public class QuickTimeEvent_Adrian : MonoBehaviour
         m_maMoveScript = GetComponent<Movement_Adrian>();
 
         end = false;
+
+        m_fendedQuickTimer = 0;
     }
 
     private void Awake()
@@ -65,6 +70,8 @@ public class QuickTimeEvent_Adrian : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        m_fendedQuickTimer += Time.deltaTime;
+
         if (m_lEnemies != null)
         {
             //gets closest enemy
@@ -78,9 +85,10 @@ public class QuickTimeEvent_Adrian : MonoBehaviour
             }
 
             //if distance to the closest enemy is less than or equal to distance set in inspector
-            if (m_fDistanceToClosestEnemy <= m_fStartQuickTimeDistance)
+            if (m_fDistanceToClosestEnemy <= m_fStartQuickTimeDistance && m_fendedQuickTimer >= 5.0f)
             {
                 QuickTimeCouple.SetActive(true);
+
                 if (Border != null || Bar != null)
                 {
                     Border.enabled = true;
@@ -129,6 +137,7 @@ public class QuickTimeEvent_Adrian : MonoBehaviour
                     m_fTimesPressed = 0;
                     //QuickTimeCouple.SetActive(false);
                     m_maMoveScript.SetQuicktime(false);
+                    m_fendedQuickTimer = 0.0f;
                     ResetInfected();
                     Ai.SetPatrol();
                 }
