@@ -1662,11 +1662,11 @@ GameObject:
   - component: {fileID: 4032177027046152}
   m_Layer: 0
   m_Name: QuickTimePrefab
-  m_TagString: Untagged
+  m_TagString: QTE Couple
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!1 &1579363264675210
 GameObject:
   m_ObjectHideFlags: 1
@@ -2991,7 +2991,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1571581070003788}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 25.757633, y: -10.650549, z: 19.276093}
+  m_LocalPosition: {x: -31.612446, y: -10.19, z: 6.573024}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4418472623032354}
@@ -5598,9 +5598,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 94270687af0c8244a9f5f78c2e707e1d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timesPressed: 0
   Gerard: {fileID: 0}
   QT: {fileID: 1571581070003788}
+  end: 0
 --- !u!124 &124339354752916832
 Behaviour:
   m_ObjectHideFlags: 1

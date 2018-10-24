@@ -81,7 +81,7 @@ public class QuickTimeEvent_Adrian : MonoBehaviour
             if (m_fDistanceToClosestEnemy >= m_fStartQuickTimeDistance)
             {
                 m_fAttackAgain = 0;
-                m_fTimesPressed = 0;
+                m_fTimesPressed = 50;
             }
 
             //if distance to the closest enemy is less than or equal to distance set in inspector
@@ -125,6 +125,7 @@ public class QuickTimeEvent_Adrian : MonoBehaviour
                 if (m_fTimesPressed < 0)
                 {
                     m_fTimesPressed = 0;
+                    m_iaInfectionScript.m_fInfection = 100;
                 }
 
                 m_fAttackAgain += 1 * Time.deltaTime;
@@ -134,7 +135,7 @@ public class QuickTimeEvent_Adrian : MonoBehaviour
                     end = true;
                     Border.enabled = false;
                     Bar.enabled = false;
-                    m_fTimesPressed = 0;
+                    m_fTimesPressed = 50;
                     //QuickTimeCouple.SetActive(false);
                     m_maMoveScript.SetQuicktime(false);
                     m_fendedQuickTimer = 0.0f;
