@@ -63,6 +63,7 @@ public class UserControler_Adrian : MonoBehaviour
 
 
 
+
         if (m_Cam != null)
         {
             m_CamForward = Vector3.Scale(m_Cam.forward, new Vector3(1, 0, 1)).normalized;
@@ -80,6 +81,8 @@ public class UserControler_Adrian : MonoBehaviour
 
         // pass all parameters to the Movement control script
         m_Character.Move(m_Move, crouch, m_Jump, m_Sprinting);
+        //Pass Map Button Press
+        m_Character.MapToggle(Input.GetKeyDown(KeyCode.M));
         m_Jump = false;
     }
 

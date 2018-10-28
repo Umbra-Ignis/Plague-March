@@ -12,7 +12,7 @@ public class Movement_Adrian : MonoBehaviour
 {
 
     private float m_StationaryTurnSpeed = 180;
-    private float m_MovingTurnSpeed = 360;
+    private float m_MovingTurnSpeed = 500;
     private float m_RunCycleLegOffset = 0.2f; //specific to the character in sample assets, will need to be modified to work with others
     [Range(0.1f, 4f)] [SerializeField] float m_WalkSpeed = .8f;
     [Range(0.1f, 4f)] [SerializeField] float m_SprintSpeed = 1.2f;
@@ -36,6 +36,18 @@ public class Movement_Adrian : MonoBehaviour
     float m_TurnAmount;
     //Check If Grounded
     bool m_IsGrounded;
+    //Sprint Timer
+    float m_fSprintTimer;
+    //Sprint Duration
+    public float m_fSprintDuration = 5.0f;
+    //Time till run again
+    public float m_fRunAgainTime = 2.5f;
+    //Ready to sprint bool used for check
+    bool m_bReadyToSprint;
+    //Map Image
+    public Image Map;
+    //Map Open Bool
+    bool MapOpen = false;
 
     const float k_Half = 0.5f;
     //Cap Height
@@ -66,11 +78,19 @@ public class Movement_Adrian : MonoBehaviour
         m_CapsuleHeight = CharControler.height;
         m_CapsuleCenter = CharControler.center;
         m_Crouching = false;
+        //Set is aiming
         aiming = false;
+        //Set Quicktime
         m_bQuicktime = false;
-
+        //Set timer to current duration sprint
+        m_fSprintTimer = m_fSprintDuration;
+        //Set Ready to sprint
+        m_bReadyToSprint = true;
+        //Sets Rock Ui
         RockPickUpUi.enabled = false;
+        //Sets Aim Ui
         AimRockUI.enabled = false;
+        //Sets Throw Rock Ui
         ThrowRockUI.enabled = false;
     }
 
@@ -113,15 +133,44 @@ public class Movement_Adrian : MonoBehaviour
             CheckGroundStatus();
             m_TurnAmount = Mathf.Atan2(move.x, move.z);
 
-            if (sprinting)
+            //If Button Press and bool True Sprint
+            if (sprinting && m_bReadyToSprint)
             {
                 //Adds Sprinting Speed
                 m_ForwardAmount = move.z * m_SprintSpeed;
+                //Starts Sprint Timer Reducing time
+                m_fSprintTimer -= Time.deltaTime;
+
+                //Sets Bool To False if condition is met
+                if (m_fSprintTimer <= 0)
+                {
+                    m_bReadyToSprint = false;
+                }
+
+                //if timer hits 0 reset
+                if (m_fSprintTimer <= 0)
+                {
+                    m_fSprintTimer = 0;
+                }
             }
             else
             {
                 //Adds Walking Speed
                 m_ForwardAmount = move.z * m_WalkSpeed;
+                //Starts Sprint Timer Adding time
+                m_fSprintTimer += Time.deltaTime;
+
+                //Sets Bool To true if condition is met
+                if (m_fSprintTimer >= m_fRunAgainTime)
+                {
+                    m_bReadyToSprint = true;
+                }
+
+                //Resets timer if out of Paramaters
+                if (m_fSprintTimer >= m_fSprintDuration)
+                {
+                    m_fSprintTimer = m_fSprintDuration;
+                }
             }
 
             ApplyExtraTurnRotation();
@@ -354,5 +403,31 @@ public class Movement_Adrian : MonoBehaviour
     public void SetForwardAmount(float amount)
     {
         m_ForwardAmount = amount;
+    }
+
+    public void MapToggle(bool Mbutton)
+    {
+        //Input checks
+        if (Mbutton)
+        {
+            if (MapOpen)
+            {
+                MapOpen = false;
+            }
+            else
+            {
+                MapOpen = true;
+            }
+        }
+
+        //Opening And Closing Image
+        if (MapOpen)
+        {
+            Map.enabled = true;
+        }
+        else
+        {
+            Map.enabled = false;
+        }
     }
 }
