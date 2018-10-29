@@ -22,6 +22,8 @@ GameObject:
   - component: {fileID: 33417399047107384}
   - component: {fileID: 23872909962425870}
   - component: {fileID: 95665794014876862}
+  - component: {fileID: 135422887865030462}
+  - component: {fileID: 114937107190459656}
   m_Layer: 0
   m_Name: Key_2
   m_TagString: Untagged
@@ -35,13 +37,13 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1065856952158774}
-  m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 135.63573, y: 100.997, z: 133.67819}
+  m_LocalRotation: {x: 0.695792, y: 0.028969422, z: -0.0125559475, w: 0.717549}
+  m_LocalPosition: {x: 148.331, y: 101.019, z: 208.478}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 92.20801, y: 218.714, z: 215.348}
 --- !u!23 &23872909962425870
 MeshRenderer:
   m_ObjectHideFlags: 1
@@ -100,3 +102,34 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
+--- !u!114 &114937107190459656
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1065856952158774}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9c770e69ac2de89409f9bba65e97a5b3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  type: 1
+  tooltip: {fileID: 0}
+  TooltipCanvas: {fileID: 0}
+  popupImage: {fileID: 0}
+  turnOnOther: 0
+  turnOnObject: {fileID: 0}
+  partEffect: {fileID: 0}
+  acquiredText: {fileID: 0}
+--- !u!135 &135422887865030462
+SphereCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1065856952158774}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 1.6918763
+  m_Center: {x: 0, y: 0, z: 0}
