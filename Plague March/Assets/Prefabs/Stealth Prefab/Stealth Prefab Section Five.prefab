@@ -1821,7 +1821,7 @@ GameObject:
   - component: {fileID: 114364238069804516}
   - component: {fileID: 135480660147357398}
   m_Layer: 0
-  m_Name: Rock
+  m_Name: Throwing_Rock
   m_TagString: Rock
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2307,8 +2307,8 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1949429003823846}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -8.833893, y: -0.49149323, z: 10.295776}
-  m_LocalScale: {x: 0.01, y: 0.01, z: 0.01}
+  m_LocalPosition: {x: -8.833893, y: -0.466, z: 10.295776}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4380245156441696}
   m_RootOrder: 8
@@ -3875,7 +3875,7 @@ MeshRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_Materials:
-  - {fileID: 2100000, guid: 075c90795d6a09b45b00510e54277b47, type: 2}
+  - {fileID: 2100000, guid: 2bc62b82f79370640a4a8ec7a2327d38, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -3956,7 +3956,7 @@ MeshFilter:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1949429003823846}
-  m_Mesh: {fileID: 4300000, guid: 58c05b0abbb79fd44baf40e60f2a25e8, type: 3}
+  m_Mesh: {fileID: 4300000, guid: e0ec69eef052aed4cbd008eb1399b274, type: 3}
 --- !u!33 &33666797819712246
 MeshFilter:
   m_ObjectHideFlags: 1
@@ -4233,7 +4233,7 @@ SphereCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 60.5
+  m_Radius: 1
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!135 &135710188269686946
 SphereCollider:
@@ -4269,7 +4269,7 @@ SphereCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 4.44
+  m_Radius: 0.1
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!135 &135958466022162196
 SphereCollider:

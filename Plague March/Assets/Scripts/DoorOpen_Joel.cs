@@ -51,46 +51,50 @@ public class DoorOpen_Joel : MonoBehaviour
 
     private void OnTriggerStay(Collider other)
     {
-        if(user.haveKey((int)keyRequired + 1))
+        if (other.CompareTag("Player"))
         {
-            if (!opened)
-            {
-                entry.enabled = true;
-                closeDoor.enabled = false;
-            }
-
-            if(opened)
-            {
-                entry.enabled = false;
-                closeDoor.enabled = true;
-            }
-
-            if (Input.GetKeyDown(KeyCode.E))
+            if (user.haveKey((int)keyRequired + 1))
             {
                 if (!opened)
                 {
-                    opened = true;
+                    entry.enabled = true;
+                    closeDoor.enabled = false;
+                }
+
+                if (opened)
+                {
                     entry.enabled = false;
-                    doorLeft.transform.Rotate(new Vector3(0, 1, 0), -96.0f);
-                    doorRight.transform.Rotate(new Vector3(0, 1, 0), 96.0f);
                     closeDoor.enabled = true;
                 }
 
-                else
+                if (Input.GetKeyDown(KeyCode.E))
                 {
-                    opened = false;
-                    closeDoor.enabled = false;
-                    doorLeft.transform.Rotate(new Vector3(0, 1, 0), 96.0f);
-                    doorRight.transform.Rotate(new Vector3(0, 1, 0), -96.0f);
-                    entry.enabled = true;
+                    if (!opened)
+                    {
+                        opened = true;
+                        entry.enabled = false;
+                        doorLeft.transform.Rotate(new Vector3(0, 1, 0), -96.0f);
+                        doorRight.transform.Rotate(new Vector3(0, 1, 0), 96.0f);
+                        closeDoor.enabled = true;
+                    }
+
+                    else
+                    {
+                        opened = false;
+                        closeDoor.enabled = false;
+                        doorLeft.transform.Rotate(new Vector3(0, 1, 0), 96.0f);
+                        doorRight.transform.Rotate(new Vector3(0, 1, 0), -96.0f);
+                        entry.enabled = true;
+                    }
                 }
+            }
+
+            else
+            {
+                noEntry.enabled = true;
             }
         }
 
-        else
-        {
-            noEntry.enabled = true;
-        }
     }
 
     private void OnTriggerExit(Collider other)
