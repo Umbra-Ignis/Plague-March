@@ -21,26 +21,47 @@ public class Pickup_Joel : MonoBehaviour
 {
     //Allows each item to be set to a different key item index
     public pickupType type;
-
     //Tip that comes up indicating to the player what actions to take to pick up the item
     public Text tooltip;
     //Allows access to the UI controller to turn UI images on and off
     public Canvas TooltipCanvas;
+    //Takes in the image that pops up when the note is interacted with
+    public Image popupImage;
+    //Takes in a text element that shows to the player what they have picked up
+    public Text acquiredText;
+
+    [Space]
+    [Space]
+
+    //Stores whether this item will turn on the activation of another
+    public bool turnOnOther;
+    //If picking up one item is to turn on another, this should be set to the key it turns on
+    public GameObject turnOnObject;
+    //Takes in a reference to a particle effect to turn on if there is a second item to be turned on
+    public ParticleSystem partEffect;
+
+    [Space]
+    [Space]
+
+    //Stores whether inspecting the note will also pickup a key
+    public bool noteNKey;
+    //Stores which key is picked up at this time
+    public pickupType keyNumber;
+    //Takes a reference to the key object to turn it off once picked up
+    public GameObject keyObject;
+    //Takes in a text element that shows to the player what they have picked up
+    public Text acquiredKeyText;
+
+    //================================================================================================================
+    //PRIVATES
+    //================================================================================================================
     //Stores the reference to the UI controller script in order to turn on and off item images
     private UIController_Joel ui;
     //Stores whether the item has been picked up yet or not
     private bool toBePickedUp;
     //Stores whether the image has been opened or not
     private bool opened;
-    //Takes in the image that pops up when the note is interacted with
-    public Image popupImage;
-    //Stores whether this object will turn on another or not
-    public bool turnOnOther;
-    //If picking up one item is to turn on another, this should be set to the key it turns on
-    public GameObject turnOnObject;
-    public ParticleSystem partEffect;
-    public Text acquiredText;
-
+    //Stores how long the popup text is displayed to the screen
     private float textTimer;
 
     // Use this for initialization
@@ -77,8 +98,14 @@ public class Pickup_Joel : MonoBehaviour
             //Turns off the tooltip text of this item as it can no longer be picked up
             //Switches the bool to ensure the item cannot be picked up again, and to 
             //ensure the false option is not displayed to the player
-            toBePickedUp = false;
             opened = false;
+
+            if(noteNKey)
+            {
+                ui.TurnOnItem((int)keyNumber);
+                keyObject.SetActive(false);
+                acquiredKeyText.enabled = true;
+            }
 
             if(turnOnOther)
             {
@@ -87,14 +114,15 @@ public class Pickup_Joel : MonoBehaviour
             }
         }
 
-        if(acquiredText.enabled == true)
+        if(acquiredKeyText.enabled == true)
         {
             textTimer += Time.deltaTime;
         }
 
         if(textTimer >= 5.0f)
         {
-            acquiredText.enabled = false;
+            acquiredKeyText.enabled = false;
+            acquiredKeyText.gameObject.SetActive(false);
             textTimer = 0.0f;
         }
     }
@@ -113,6 +141,10 @@ public class Pickup_Joel : MonoBehaviour
                 Time.timeScale = 0;
 
                 tooltip.enabled = false;
+                if(acquiredKeyText.enabled == true)
+                {
+                    acquiredKeyText.enabled = false;
+                }
                 acquiredText.enabled = true;
                 popupImage.enabled = true;
                 opened = true;
