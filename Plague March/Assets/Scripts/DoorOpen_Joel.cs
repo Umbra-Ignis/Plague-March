@@ -31,6 +31,10 @@ public class DoorOpen_Joel : MonoBehaviour
     public GameObject doorRight;
     //Takes a reference to the left side of the gate
     public GameObject doorLeft;
+    //Takes reference to the single door if there is only one
+    public GameObject m_goSingleDoor;
+
+    public bool m_bSingleDoor;
 
     // Use this for initialization
     void Start()
@@ -51,7 +55,7 @@ public class DoorOpen_Joel : MonoBehaviour
 
     private void OnTriggerStay(Collider other)
     {
-        if (other.CompareTag("Player"))
+        if (other.CompareTag("Player") && !m_bSingleDoor)
         {
             if (user.haveKey((int)keyRequired + 1))
             {
@@ -89,6 +93,47 @@ public class DoorOpen_Joel : MonoBehaviour
                 }
             }
 
+            else
+            {
+                noEntry.enabled = true;
+            }
+        }
+
+        else if (other.CompareTag("Player") && m_bSingleDoor)
+        {
+            if (user.haveKey((int)keyRequired + 1))
+            {
+                if (!opened)
+                {
+                    entry.enabled = true;
+                    closeDoor.enabled = false;
+                }
+
+                if (opened)
+                {
+                    entry.enabled = false;
+                    closeDoor.enabled = true;
+                }
+
+                if (Input.GetKeyDown(KeyCode.E))
+                {
+                    if (!opened)
+                    {
+                        opened = true;
+                        entry.enabled = false;
+                        m_goSingleDoor.transform.Rotate(new Vector3(0, 1, 0), -96.0f);
+                        closeDoor.enabled = true;
+                    }
+
+                    else
+                    {
+                        opened = false;
+                        closeDoor.enabled = false;
+                        m_goSingleDoor.transform.Rotate(new Vector3(0, 1, 0), 96.0f);
+                        entry.enabled = true;
+                    }
+                }
+            }
             else
             {
                 noEntry.enabled = true;

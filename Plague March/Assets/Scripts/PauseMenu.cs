@@ -12,12 +12,15 @@ public class PauseMenu : MonoBehaviour
     public static bool GameIsPaused =  false;
 
     public GameObject pauseMenuUI;
+    public bool quickTime;
 
 
 	// Update is called once per frame
 	void Update ()
     {
-	    if (Input.GetKeyDown(KeyCode.Escape))
+        quickTime = GameObject.FindGameObjectWithTag("Player").GetComponent<Movement_Adrian>().m_bQuicktime;
+
+	    if (Input.GetKeyDown(KeyCode.Escape) && !quickTime)
         {
             //Sets Cursor to visable and not locked to the window
             Cursor.lockState = CursorLockMode.None;

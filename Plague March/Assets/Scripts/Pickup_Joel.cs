@@ -52,6 +52,14 @@ public class Pickup_Joel : MonoBehaviour
     //Takes in a text element that shows to the player what they have picked up
     public Text acquiredKeyText;
 
+    [Space]
+    [Space]
+
+    //Audio that is going to be played when note closes
+    public AudioClip AudioToBePlayed;
+    //Audio Source
+    AudioSource audio;
+
     //================================================================================================================
     //PRIVATES
     //================================================================================================================
@@ -63,6 +71,7 @@ public class Pickup_Joel : MonoBehaviour
     private bool opened;
     //Stores how long the popup text is displayed to the screen
     private float textTimer;
+    private bool eUp;
 
     // Use this for initialization
     void Start()
@@ -81,36 +90,49 @@ public class Pickup_Joel : MonoBehaviour
         }
         acquiredText.enabled = false;
         textTimer = 0;
+
+        //Get Audio Source
+        audio = GameObject.FindGameObjectWithTag("AudioSource").GetComponent<AudioSource>();
+
+        eUp = true;
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space) && opened)
+        if (Input.GetKeyDown(KeyCode.E) && opened)
         {
-            Time.timeScale = 1;
-            popupImage.enabled = false;
-            acquiredText.enabled = false;
-
-            //Turns on the UI image of this selected item
-            ui.TurnOnItem((int)type);
-
-            //Turns off the tooltip text of this item as it can no longer be picked up
-            //Switches the bool to ensure the item cannot be picked up again, and to 
-            //ensure the false option is not displayed to the player
-            opened = false;
-
-            if(noteNKey)
+            if (eUp)
             {
-                ui.TurnOnItem((int)keyNumber);
-                keyObject.SetActive(false);
-                acquiredKeyText.enabled = true;
+                Time.timeScale = 1;
+                popupImage.enabled = false;
+                acquiredText.enabled = false;
+
+                //Turns on the UI image of this selected item
+                ui.TurnOnItem((int)type);
+
+                //Turns off the tooltip text of this item as it can no longer be picked up
+                //Switches the bool to ensure the item cannot be picked up again, and to 
+                //ensure the false option is not displayed to the player
+                opened = false;
+
+                if (noteNKey)
+                {
+                    ui.TurnOnItem((int)keyNumber);
+                    keyObject.SetActive(false);
+                    acquiredKeyText.enabled = true;
+                }
+
+                if (turnOnOther)
+                {
+                    turnOnObject.GetComponent<SphereCollider>().enabled = true;
+                    partEffect.Play();
+                }
             }
 
-            if(turnOnOther)
+            else
             {
-                turnOnObject.GetComponent<SphereCollider>().enabled = true;
-                partEffect.Play();
+                eUp = true;
             }
         }
 
@@ -140,17 +162,26 @@ public class Pickup_Joel : MonoBehaviour
             {
                 Time.timeScale = 0;
 
+                eUp = false;
+
                 tooltip.enabled = false;
                 if(acquiredKeyText.enabled == true)
                 {
                     acquiredKeyText.enabled = false;
                 }
+
                 acquiredText.enabled = true;
                 popupImage.enabled = true;
                 opened = true;
                 if(partEffect != null)
                 {
                     partEffect.Stop();
+                }
+
+                //If Audio is not null play sound on note open
+                if (AudioToBePlayed != null)
+                {
+                    audio.PlayOneShot(AudioToBePlayed);
                 }
             }
 
