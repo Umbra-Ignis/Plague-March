@@ -48,6 +48,8 @@ public class Movement_Adrian : MonoBehaviour
     public Image Map;
     //Map Open Bool
     bool MapOpen = false;
+    //Bool Stop for sound;
+    bool StoppedForSound = false;
 
     const float k_Half = 0.5f;
     //Cap Height
@@ -124,7 +126,7 @@ public class Movement_Adrian : MonoBehaviour
         }
 
         //If not aiming and not in a quicktime event
-        if (!aiming && !m_bQuicktime)
+        if (!aiming && !m_bQuicktime && !StoppedForSound)
         {
             if (move.magnitude > 1f)
                 move.Normalize();
@@ -388,6 +390,16 @@ public class Movement_Adrian : MonoBehaviour
     public void stopCharacter()
     {
         aiming = true;
+    }
+    //Stop movement when sound is playing
+    public void SoundStop()
+    {
+        StoppedForSound = true;
+    }
+    //Start movement when sound is playing
+    public void SoundStart()
+    {
+        StoppedForSound = false;
     }
 
     public void rockThrown()
