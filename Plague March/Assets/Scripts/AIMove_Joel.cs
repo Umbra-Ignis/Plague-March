@@ -66,6 +66,8 @@ public class AIMove_Joel : MonoBehaviour
     private bool oneWaypoint;
 
     public Transform startWaypoint;
+    private CharacterController charCont;
+    private CapsuleCollider infectedCapsule;
 
     // Use this for initialization
     void Start ()
@@ -74,6 +76,9 @@ public class AIMove_Joel : MonoBehaviour
         agent = GetComponent<NavMeshAgent>();
         //Gets the Animator component from the AI to alter the animations
         anim = GetComponent<Animator>();
+
+        charCont = GetComponent<CharacterController>();
+        infectedCapsule = GetComponent<CapsuleCollider>();
 
         //Sets the AI's default behaviour to patrol
         SetPatrol();
@@ -111,6 +116,16 @@ public class AIMove_Joel : MonoBehaviour
     {
         //Calculates how far the AI is from its current target
         distanceToWaypoint = Vector3.Distance(currentTarg, agent.transform.position);
+
+        if(Input.GetKeyDown(KeyCode.Space))
+        {
+            preRagdoll();
+        }
+
+        if (Input.GetKeyDown(KeyCode.V))
+        {
+            initRagdoll();
+        }
 
         if (rock)
         {
@@ -449,5 +464,19 @@ public class AIMove_Joel : MonoBehaviour
     public void ResetPos()
     {
         transform.position = startWaypoint.position;
+    }
+
+    public void preRagdoll()
+    {
+        anim.speed = 0;
+        agent.isStopped = true;
+        charCont.enabled = false;
+        infectedCapsule.enabled = false;
+    }
+
+    public void initRagdoll()
+    {
+        anim.enabled = false;
+        tag = "Dead";
     }
 }

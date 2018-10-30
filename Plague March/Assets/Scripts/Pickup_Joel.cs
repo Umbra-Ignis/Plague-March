@@ -152,6 +152,10 @@ public class Pickup_Joel : MonoBehaviour
                 {
                     partEffect.Stop();
                 }
+                if(noteNKey)
+                {
+                    other.GetComponent<UserControler_Adrian>().obtainedKey((int)keyNumber + 1);
+                }
             }
 
             else if(Input.GetKeyDown(KeyCode.E))
