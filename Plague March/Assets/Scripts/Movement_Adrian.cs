@@ -59,7 +59,8 @@ public class Movement_Adrian : MonoBehaviour
     //Crouching
     bool m_Crouching;
     // QTevent started
-    bool m_bQuicktime;
+    [HideInInspector]
+    public bool m_bQuicktime;
 
 
     private bool aiming;

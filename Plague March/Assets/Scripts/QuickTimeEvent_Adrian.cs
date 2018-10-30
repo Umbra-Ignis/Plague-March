@@ -100,6 +100,7 @@ public class QuickTimeEvent_Adrian : MonoBehaviour
 
                 Ai = Closestenemy.GetComponentInParent<AIMove_Joel>();
                 Ai.agent.isStopped = true;
+                Ai.preRagdoll();
 
                 if (m_fAttackAgain <= 0)
                 {
@@ -139,8 +140,8 @@ public class QuickTimeEvent_Adrian : MonoBehaviour
                     //QuickTimeCouple.SetActive(false);
                     m_maMoveScript.SetQuicktime(false);
                     m_fendedQuickTimer = 0.0f;
-                    ResetInfected();
-                    Ai.SetPatrol();
+                    Ai.initRagdoll();
+                    //Ai.SetPatrol();
                 }
             }
         }
