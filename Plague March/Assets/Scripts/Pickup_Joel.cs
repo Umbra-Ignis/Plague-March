@@ -92,9 +92,17 @@ public class Pickup_Joel : MonoBehaviour
         textTimer = 0;
 
         //Get Audio Source
-        audio = GameObject.FindGameObjectWithTag("AudioSource").GetComponent<AudioSource>();
+        if (audio != null)
+        {
+            audio = GameObject.FindGameObjectWithTag("AudioSource").GetComponent<AudioSource>();
+        }
 
         eUp = true;
+
+        if (noteNKey)
+        {
+            acquiredKeyText.enabled = false;
+        }
     }
 
     // Update is called once per frame

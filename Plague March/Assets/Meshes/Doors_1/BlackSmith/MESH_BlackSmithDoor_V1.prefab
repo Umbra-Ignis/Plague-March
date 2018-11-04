@@ -22,6 +22,7 @@ GameObject:
   - component: {fileID: 33157561325005570}
   - component: {fileID: 23918249129008110}
   - component: {fileID: 95098019939865798}
+  - component: {fileID: 65627630366605644}
   m_Layer: 0
   m_Name: MESH_BlackSmithDoor_V1
   m_TagString: Untagged
@@ -35,13 +36,13 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1016312483395410}
-  m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalRotation: {x: -0, y: 0.7152483, z: -0, w: 0.6988705}
+  m_LocalPosition: {x: 189.486, y: 103.912125, z: 150.54}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 91.327, z: 0}
 --- !u!23 &23918249129008110
 MeshRenderer:
   m_ObjectHideFlags: 1
@@ -83,6 +84,18 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1016312483395410}
   m_Mesh: {fileID: 4300000, guid: 27b1dd55c2bef4c4b8a5c6b498b8b048, type: 3}
+--- !u!65 &65627630366605644
+BoxCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1016312483395410}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.10416341, y: 1.9054925, z: 1.3863413}
+  m_Center: {x: 0, y: 0.9527463, z: 0.6858611}
 --- !u!95 &95098019939865798
 Animator:
   serializedVersion: 3
