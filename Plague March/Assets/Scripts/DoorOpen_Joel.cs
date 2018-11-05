@@ -25,7 +25,8 @@ public class DoorOpen_Joel : MonoBehaviour
     //Stores a reference to the players script
     private UserControler_Adrian user;
     //Stores whether the door is has been opened or not
-    private bool opened;
+    [HideInInspector]
+    public bool opened;
 
     //Takes a reference to the right side of the gate
     public GameObject doorRight;
@@ -39,6 +40,8 @@ public class DoorOpen_Joel : MonoBehaviour
     public bool alwaysOpen;
 
     private bool hasRequiredKey = false;
+
+    private bool permaLock = false;
 
     // Use this for initialization
     void Start()
@@ -72,7 +75,7 @@ public class DoorOpen_Joel : MonoBehaviour
     {
         if (other.CompareTag("Player") && !m_bSingleDoor)
         {
-            if (hasRequiredKey)
+            if (hasRequiredKey && !permaLock)
             {
                 if (!opened)
                 {
@@ -165,5 +168,15 @@ public class DoorOpen_Joel : MonoBehaviour
             entry.enabled = false;
             closeDoor.enabled = false;
         }
+    }
+
+    public void CloseDoor()
+    {
+        opened = false;
+        closeDoor.enabled = false;
+        doorLeft.transform.Rotate(new Vector3(0, 1, 0), 96.0f);
+        doorRight.transform.Rotate(new Vector3(0, 1, 0), -96.0f);
+
+        permaLock = true;
     }
 }
