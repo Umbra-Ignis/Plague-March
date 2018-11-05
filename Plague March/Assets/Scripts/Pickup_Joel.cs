@@ -84,7 +84,7 @@ public class Pickup_Joel : MonoBehaviour
         //Obtains reference to the UI controller script
         if (TooltipCanvas != null)
         {
-             ui = TooltipCanvas.GetComponent<UIController_Joel>();
+            ui = TooltipCanvas.GetComponent<UIController_Joel>();
         }
         //Sets the item to be allowed to be picked up
         toBePickedUp = true;
@@ -102,9 +102,9 @@ public class Pickup_Joel : MonoBehaviour
         textTimer = 0;
 
         //Get Audio Source
-    
+
         audio = GameObject.FindGameObjectWithTag("AudioSource").GetComponent<AudioSource>();
-        
+
 
         eUp = true;
 
@@ -154,13 +154,13 @@ public class Pickup_Joel : MonoBehaviour
         }
         if (acquiredKeyText != null)
         {
-            if(acquiredKeyText.enabled == true)
+            if (acquiredKeyText.enabled == true)
             {
                 textTimer += Time.deltaTime;
             }
         }
 
-        if(textTimer >= 5.0f)
+        if (textTimer >= 5.0f)
         {
             acquiredKeyText.enabled = false;
             acquiredKeyText.gameObject.SetActive(false);
@@ -172,19 +172,22 @@ public class Pickup_Joel : MonoBehaviour
     private void OnTriggerStay(Collider other)
     {
         //Checks if the other object is the player to avoid unneccessary calls
-        if(other.CompareTag("Player") && toBePickedUp)
+        if (other.CompareTag("Player") && toBePickedUp)
         {
             //Turns on the tooltip text to direct the player which actions to take to pick up the item
-            tooltip.enabled = true;
+            if (tooltip != null)
+            {
+                tooltip.enabled = true;
+            }
             //Checks if the player completes the above stated actions
-            if(Input.GetKeyDown(KeyCode.E) && (int)type >= 4)
+            if (Input.GetKeyDown(KeyCode.E) && (int)type >= 4)
             {
                 Time.timeScale = 0;
 
                 eUp = false;
 
                 tooltip.enabled = false;
-                if(acquiredKeyText.enabled == true)
+                if (acquiredKeyText.enabled == true)
                 {
                     acquiredKeyText.enabled = false;
                 }
@@ -193,7 +196,7 @@ public class Pickup_Joel : MonoBehaviour
                 popupImage.enabled = true;
                 opened = true;
 
-                if(partEffect != null)
+                if (partEffect != null)
                 {
                     partEffect.Stop();
                 }
@@ -205,8 +208,12 @@ public class Pickup_Joel : MonoBehaviour
                 }
             }
 
-            else if(Input.GetKeyDown(KeyCode.E))
+            else if (Input.GetKeyDown(KeyCode.E))
             {
+                if (tooltip != null || acquiredText)
+                {
+
+                }
                 tooltip.enabled = false;
                 acquiredText.enabled = true;
                 //Turns on the UI image of this selected item
@@ -224,7 +231,11 @@ public class Pickup_Joel : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            tooltip.enabled = false;
+            if (tooltip != false)
+            {
+                tooltip.enabled = false;
+            }
         }
     }
+
 }

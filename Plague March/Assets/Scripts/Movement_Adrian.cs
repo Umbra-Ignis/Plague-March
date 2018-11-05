@@ -50,6 +50,14 @@ public class Movement_Adrian : MonoBehaviour
     bool MapOpen = false;
     //Bool Stop for sound;
     bool StoppedForSound = false;
+    //Bool For Intro
+    bool m_bIntro = true;
+    //Timer for intro
+    float m_fIntroTimer = 19;
+    //Audio clip for intro
+    public AudioClip Intro;
+    //Gets main audio source
+    AudioSource audio;
 
     const float k_Half = 0.5f;
     //Cap Height
@@ -95,10 +103,35 @@ public class Movement_Adrian : MonoBehaviour
         AimRockUI.enabled = false;
         //Sets Throw Rock Ui
         ThrowRockUI.enabled = false;
+
+        audio = GameObject.FindGameObjectWithTag("AudioSource").GetComponent<AudioSource>();
     }
 
     public void Move(Vector3 move, bool crouch, bool jump, bool sprinting)
     {
+
+        if (m_bIntro)
+        {
+            if (m_fIntroTimer >= 19)
+            {
+                audio.PlayOneShot(Intro);
+            }
+
+            m_fIntroTimer -= Time.deltaTime;
+
+            if (m_fIntroTimer <= 16.0f)
+            {
+                SoundStop();
+            }
+
+            if (m_fIntroTimer <= 0)
+            {
+                SoundStart();
+                m_bIntro = false;
+            }
+        }
+        
+
         if (rockCount > 0)
         {
             if (AimRockUI != null && ThrowRockUI != null)
