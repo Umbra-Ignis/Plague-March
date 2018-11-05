@@ -77,9 +77,15 @@ public class Pickup_Joel : MonoBehaviour
     void Start()
     {
         //Ensures the text is initially turned off
-        tooltip.enabled = false;
+        if (tooltip != null)
+        {
+            tooltip.enabled = false;
+        }
         //Obtains reference to the UI controller script
-        ui = TooltipCanvas.GetComponent<UIController_Joel>();
+        if (TooltipCanvas != null)
+        {
+             ui = TooltipCanvas.GetComponent<UIController_Joel>();
+        }
         //Sets the item to be allowed to be picked up
         toBePickedUp = true;
         opened = false;
@@ -88,14 +94,17 @@ public class Pickup_Joel : MonoBehaviour
             turnOnObject.GetComponent<SphereCollider>().enabled = false;
             partEffect.Stop();
         }
-        acquiredText.enabled = false;
+        if (acquiredText != null)
+        {
+            acquiredText.enabled = false;
+        }
+
         textTimer = 0;
 
         //Get Audio Source
-        if (audio != null)
-        {
-            audio = GameObject.FindGameObjectWithTag("AudioSource").GetComponent<AudioSource>();
-        }
+    
+        audio = GameObject.FindGameObjectWithTag("AudioSource").GetComponent<AudioSource>();
+        
 
         eUp = true;
 
@@ -143,10 +152,12 @@ public class Pickup_Joel : MonoBehaviour
                 eUp = true;
             }
         }
-
-        if(acquiredKeyText.enabled == true)
+        if (acquiredKeyText != null)
         {
-            textTimer += Time.deltaTime;
+            if(acquiredKeyText.enabled == true)
+            {
+                textTimer += Time.deltaTime;
+            }
         }
 
         if(textTimer >= 5.0f)
@@ -181,6 +192,7 @@ public class Pickup_Joel : MonoBehaviour
                 acquiredText.enabled = true;
                 popupImage.enabled = true;
                 opened = true;
+
                 if(partEffect != null)
                 {
                     partEffect.Stop();
