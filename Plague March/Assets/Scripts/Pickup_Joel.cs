@@ -175,7 +175,10 @@ public class Pickup_Joel : MonoBehaviour
         if(other.CompareTag("Player") && toBePickedUp)
         {
             //Turns on the tooltip text to direct the player which actions to take to pick up the item
-            tooltip.enabled = true;
+            if (tooltip != null)
+            {
+                tooltip.enabled = true;
+            }
             //Checks if the player completes the above stated actions
             if(Input.GetKeyDown(KeyCode.E) && (int)type >= 4)
             {
@@ -207,6 +210,10 @@ public class Pickup_Joel : MonoBehaviour
 
             else if(Input.GetKeyDown(KeyCode.E))
             {
+                if (tooltip != null || acquiredText)
+                {
+
+                }
                 tooltip.enabled = false;
                 acquiredText.enabled = true;
                 //Turns on the UI image of this selected item
@@ -224,7 +231,10 @@ public class Pickup_Joel : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            tooltip.enabled = false;
+            if (tooltip != false)
+            {
+                tooltip.enabled = false;
+            }
         }
     }
 }

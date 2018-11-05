@@ -13,6 +13,7 @@ public class PauseMenu : MonoBehaviour
 
     public GameObject pauseMenuUI;
     public bool quickTime;
+    AudioSource audio;
 
 
 	// Update is called once per frame
@@ -20,7 +21,9 @@ public class PauseMenu : MonoBehaviour
     {
         quickTime = GameObject.FindGameObjectWithTag("Player").GetComponent<Movement_Adrian>().m_bQuicktime;
 
-	    if (Input.GetKeyDown(KeyCode.Escape) && !quickTime)
+        audio = GameObject.FindGameObjectWithTag("AudioSource").GetComponent<AudioSource>();
+
+        if (Input.GetKeyDown(KeyCode.Escape) && !quickTime)
         {
             //Sets Cursor to visable and not locked to the window
             Cursor.lockState = CursorLockMode.None;
@@ -29,10 +32,6 @@ public class PauseMenu : MonoBehaviour
             if (GameIsPaused)
             {
                 Resume();
-                //Sets Cursor to not visable and locked to the window
-                Cursor.lockState = CursorLockMode.Locked;
-                Cursor.lockState = CursorLockMode.None;
-                Cursor.visible = false;
             }
             else
             {
@@ -47,6 +46,8 @@ public class PauseMenu : MonoBehaviour
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = false;
 
+        audio.UnPause();
+
         pauseMenuUI.SetActive(false);
         Time.timeScale = 1f;
         GameIsPaused = false;
@@ -56,6 +57,7 @@ public class PauseMenu : MonoBehaviour
     {
         pauseMenuUI.SetActive(true);
         Time.timeScale = 0f;
+        audio.Pause();
         GameIsPaused = true;
     }
     public void LoadMenu()
