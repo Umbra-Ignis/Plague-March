@@ -36,6 +36,10 @@ public class DoorOpen_Joel : MonoBehaviour
 
     public bool m_bSingleDoor;
 
+    public bool alwaysOpen;
+
+    private bool hasRequiredKey = false;
+
     // Use this for initialization
     void Start()
     {
@@ -48,16 +52,27 @@ public class DoorOpen_Joel : MonoBehaviour
         user = Gerard.GetComponent<UserControler_Adrian>();
         //Ensures the door is set to closed intially
         opened = false;
+
+        if(alwaysOpen)
+        {
+            hasRequiredKey = true;
+        }
     }
 
     // Update is called once per frame
-    void Update(){} //DELIBERATLY LEFT BLANK
+    void Update()
+    {
+        if(user.haveKey((int)keyRequired + 1))
+        {
+            hasRequiredKey = true;
+        }
+    }
 
     private void OnTriggerStay(Collider other)
     {
         if (other.CompareTag("Player") && !m_bSingleDoor)
         {
-            if (user.haveKey((int)keyRequired + 1))
+            if (hasRequiredKey)
             {
                 if (!opened)
                 {
@@ -101,7 +116,7 @@ public class DoorOpen_Joel : MonoBehaviour
 
         else if (other.CompareTag("Player") && m_bSingleDoor)
         {
-            if (user.haveKey((int)keyRequired + 1))
+            if (hasRequiredKey)
             {
                 if (!opened)
                 {
