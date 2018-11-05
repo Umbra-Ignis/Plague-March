@@ -420,27 +420,30 @@ public class Movement_Adrian : MonoBehaviour
 
     public void MapToggle(bool Mbutton)
     {
-        //Input checks
-        if (Mbutton)
+        if (Map != null)
         {
+            //Input checks
+            if (Mbutton)
+            {
+                if (MapOpen)
+                {
+                    MapOpen = false;
+                }
+                else
+                {
+                    MapOpen = true;
+                }
+            }
+
+            //Opening And Closing Image
             if (MapOpen)
             {
-                MapOpen = false;
+                Map.enabled = true;
             }
             else
             {
-                MapOpen = true;
+                Map.enabled = false;
             }
-        }
-
-        //Opening And Closing Image
-        if (MapOpen)
-        {
-            Map.enabled = true;
-        }
-        else
-        {
-            Map.enabled = false;
         }
     }
 }
