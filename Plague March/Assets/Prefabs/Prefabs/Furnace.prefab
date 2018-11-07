@@ -22,9 +22,10 @@ GameObject:
   - component: {fileID: 33710566402877852}
   - component: {fileID: 23928711207777202}
   - component: {fileID: 95565105257400200}
+  - component: {fileID: 65045383061832750}
   m_Layer: 0
   m_Name: Furnace
-  m_TagString: Untagged
+  m_TagString: House
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -35,13 +36,13 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1678495366862940}
-  m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 7.020709, y: 0.0068372684, z: -8.19209}
+  m_LocalRotation: {x: -0, y: 0.70710677, z: -0, w: 0.7071068}
+  m_LocalPosition: {x: 194.43, y: 103.912125, z: 149.871}
   m_LocalScale: {x: 0.01, y: 0.01, z: 0.01}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 90.00001, z: 0}
 --- !u!23 &23928711207777202
 MeshRenderer:
   m_ObjectHideFlags: 1
@@ -83,6 +84,18 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1678495366862940}
   m_Mesh: {fileID: 4300000, guid: 9da5692588f8d754790d82f513c03a18, type: 3}
+--- !u!65 &65045383061832750
+BoxCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1678495366862940}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 341.60504, y: 663.371, z: 185.93256}
+  m_Center: {x: 97.05224, y: 331.00177, z: 0.0017471313}
 --- !u!95 &95565105257400200
 Animator:
   serializedVersion: 3

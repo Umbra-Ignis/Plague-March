@@ -58,6 +58,8 @@ public class Movement_Adrian : MonoBehaviour
     public AudioClip Intro;
     //Gets main audio source
     AudioSource audio;
+    //DEBUG Waiting Bool
+    public bool waiting;
 
     const float k_Half = 0.5f;
     //Cap Height
@@ -109,28 +111,31 @@ public class Movement_Adrian : MonoBehaviour
 
     public void Move(Vector3 move, bool crouch, bool jump, bool sprinting)
     {
-
-        if (m_bIntro)
+        //remove this check
+        if (waiting)
         {
-            if (m_fIntroTimer >= 19)
+            if (m_bIntro)
             {
-                audio.PlayOneShot(Intro);
-            }
+                if (m_fIntroTimer >= 19)
+                {
+                    audio.PlayOneShot(Intro);
+                }
 
-            m_fIntroTimer -= Time.deltaTime;
+                m_fIntroTimer -= Time.deltaTime;
 
-            if (m_fIntroTimer <= 16.0f)
-            {
-                SoundStop();
-            }
+                if (m_fIntroTimer <= 16.0f)
+                {
+                    SoundStop();
+                }
 
-            if (m_fIntroTimer <= 0)
-            {
-                SoundStart();
-                m_bIntro = false;
+                if (m_fIntroTimer <= 0)
+                {
+                    SoundStart();
+                    m_bIntro = false;
+                }
             }
         }
-        
+
 
         if (rockCount > 0)
         {
@@ -379,9 +384,9 @@ public class Movement_Adrian : MonoBehaviour
     {
         // check whether conditions are right to allow a jump:
         //if (jump && !crouch && animator.GetCurrentAnimatorStateInfo(0).IsName("Grounded"))
-       // {
-         //   CharControler.transform.Translate(new Vector3(0, 1, 0));
-       // }
+        // {
+        //   CharControler.transform.Translate(new Vector3(0, 1, 0));
+        // }
     }
 
     void CheckGroundStatus()
