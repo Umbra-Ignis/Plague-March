@@ -79,6 +79,8 @@ public class Movement_Adrian : MonoBehaviour
 
     public GameObject spawnpoint = null;
 
+    public bool fadeIn;
+
     // Use this for initialization
     void Start()
     {
@@ -109,25 +111,27 @@ public class Movement_Adrian : MonoBehaviour
 
     public void Move(Vector3 move, bool crouch, bool jump, bool sprinting)
     {
-
-        if (m_bIntro)
+        if (fadeIn)
         {
-            if (m_fIntroTimer >= 19)
+            if (m_bIntro)
             {
-                audio.PlayOneShot(Intro);
-            }
+                if (m_fIntroTimer >= 19)
+                {
+                    audio.PlayOneShot(Intro);
+                }
 
-            m_fIntroTimer -= Time.deltaTime;
+                m_fIntroTimer -= Time.deltaTime;
 
-            if (m_fIntroTimer <= 16.0f)
-            {
-                SoundStop();
-            }
+                if (m_fIntroTimer <= 16.0f)
+                {
+                    SoundStop();
+                }
 
-            if (m_fIntroTimer <= 0)
-            {
-                SoundStart();
-                m_bIntro = false;
+                if (m_fIntroTimer <= 0)
+                {
+                    SoundStart();
+                    m_bIntro = false;
+                }
             }
         }
         

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.AI;
 
 
 public class Infection_Adrian : MonoBehaviour {
@@ -30,18 +31,19 @@ public class Infection_Adrian : MonoBehaviour {
     public Image YouDead = null;
     public Image InfectionBar = null;
 
+    private Movement_Adrian moveScript;
 
-    
-
-
+    public NavMeshAgent[] agentGroup;
 
     private void Awake()
     {
-
         foreach (GameObject go in GameObject.FindGameObjectsWithTag("Infected"))
         {
             m_lEnemies.Add(go.GetComponent<Transform>());
         }
+
+        GameObject scriptGetter = GameObject.FindGameObjectWithTag("Player");
+        moveScript = scriptGetter.GetComponent<Movement_Adrian>();
     }
 
 	// Update is called once per frame
@@ -78,10 +80,24 @@ public class Infection_Adrian : MonoBehaviour {
             {
                 
             }
+
+            Debug.Log(moveScript.m_bQuicktime);
+            //=========================================================================================================
+            if(moveScript.m_bQuicktime)
+            {
+                if(agentGroup != null)
+                {
+                    for (int i = 0; i < agentGroup.Length; i++)
+                    {
+                        agentGroup[i].isStopped = true;
+                    }
+                }
+            }
+            //======================================================================================================
         }
 	}
 
-    //Where i found this code
+    //Where I found this code
     //https://answers.unity.com/questions/1236558/finding-nearest-game-object.html
     public Transform GetClosestEnemy(List<Transform> ListOfEnemies, Transform fromThis)
     {
