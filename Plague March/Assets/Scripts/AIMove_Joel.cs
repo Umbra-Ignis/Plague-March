@@ -490,7 +490,7 @@ public class AIMove_Joel : MonoBehaviour
         anim.enabled = false;
         tag = "Dead";
         infectionCP.SetActive(false);
-        GetComponentInChildren<DetectionOverlap>().alive = false;
+        GetComponentInChildren<DetectionOverlap>().m_bAlive = false;
 
     }
 }
