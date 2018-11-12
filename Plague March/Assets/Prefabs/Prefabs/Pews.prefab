@@ -22,6 +22,7 @@ GameObject:
   - component: {fileID: 33391574344463252}
   - component: {fileID: 23304965971948370}
   - component: {fileID: 95179464504693082}
+  - component: {fileID: 65058273381057772}
   m_Layer: 0
   m_Name: Pews
   m_TagString: Untagged
@@ -36,7 +37,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1350306440021716}
   m_LocalRotation: {x: -0, y: 0.040752403, z: -0, w: 0.9991693}
-  m_LocalPosition: {x: 180.973, y: 103.91187, z: 193.769}
+  m_LocalPosition: {x: 185.71, y: 103.91187, z: 193.43}
   m_LocalScale: {x: 0.01, y: 0.01, z: 0.01}
   m_Children: []
   m_Father: {fileID: 0}
@@ -83,6 +84,18 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1350306440021716}
   m_Mesh: {fileID: 4300000, guid: 21e98795b6cca7b47bf458e81f25d0b2, type: 3}
+--- !u!65 &65058273381057772
+BoxCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1350306440021716}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 219.97035, y: 118.17294, z: 71.258354}
+  m_Center: {x: -55.06038, y: 59.11129, z: -2.8647416}
 --- !u!95 &95179464504693082
 Animator:
   serializedVersion: 3

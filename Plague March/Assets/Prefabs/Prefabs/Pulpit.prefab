@@ -22,6 +22,7 @@ GameObject:
   - component: {fileID: 33571930079482580}
   - component: {fileID: 23957839381687596}
   - component: {fileID: 95656736849337376}
+  - component: {fileID: 65767373873451382}
   m_Layer: 0
   m_Name: Pulpit
   m_TagString: Untagged
@@ -83,6 +84,18 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1200977453495104}
   m_Mesh: {fileID: 4300000, guid: 7824f7bb70d96b1498ff0a0933495ab3, type: 3}
+--- !u!65 &65767373873451382
+BoxCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1200977453495104}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 131.0801, y: 129.31319, z: 113.827}
+  m_Center: {x: -0.000007629397, y: 63.003033, z: 0.000015258795}
 --- !u!95 &95656736849337376
 Animator:
   serializedVersion: 3
