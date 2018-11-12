@@ -9,10 +9,16 @@ public class LoadingSceneControl : MonoBehaviour {
     
     public GameObject LoadingScreenPanel;
     public Image LoadingBar;
+    public Image ToolTip = null;
     AsyncOperation async;
 
     private void Start()
     {
+        if (ToolTip != false)
+        {
+            ToolTip.enabled = false;
+        }
+
         LoadingBar.fillAmount = 0;
     }
 
@@ -33,8 +39,17 @@ public class LoadingSceneControl : MonoBehaviour {
             //PLAY LOADING ANIM
             if (async.progress == 0.9f)
             {
+
                 LoadingBar.fillAmount = 1;
-                async.allowSceneActivation = true;
+                if (ToolTip != null)
+                {
+                    ToolTip.enabled = true;
+                }
+
+                if (Input.GetKeyDown(KeyCode.Space))
+                {
+                    async.allowSceneActivation = true;
+                }
             }
             yield return null;
         }
