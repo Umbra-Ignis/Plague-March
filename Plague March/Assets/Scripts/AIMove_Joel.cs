@@ -99,6 +99,10 @@ public class AIMove_Joel : MonoBehaviour
         {
             currentTarg = targets[targVal].position;
         }
+        else
+        {
+            Idle();
+        }
 
         //Sets Timer Patrol
         timerPatrol = 0f;
@@ -133,7 +137,7 @@ public class AIMove_Joel : MonoBehaviour
                 //Ensures the AI is able to move to its new waypoint
                 agent.isStopped = false;
                 //Ensures the AI's animation is set to walk
-                anim.SetFloat("Blend", 0.0f);
+                Walking();
 
                 //Sets the new destination to the currently stored destination
                 agent.SetDestination(currentTarg);
@@ -146,7 +150,7 @@ public class AIMove_Joel : MonoBehaviour
                     //Stops the agent from moving
                     agent.isStopped = true;
                     //Sets the animation of the agent so they look around
-                    anim.SetFloat("Blend", 0.5f);
+                    Idle();
 
                 }
 
@@ -156,7 +160,7 @@ public class AIMove_Joel : MonoBehaviour
                     //The agent is able to move
                     agent.isStopped = false;
                     //The animation is set back to walking
-                    anim.SetFloat("Blend", 0.0f);
+                    Walking();
                     //The wait timer is set back to 0 so that if it is hit again, it will begin from the start
                     m_rockWaitTimer = 0;
                     //The agent is set back to the patrol state
@@ -198,7 +202,7 @@ public class AIMove_Joel : MonoBehaviour
     void Patrol()
     {
         //Sets the animation of the agent to walking
-        anim.SetFloat("Blend", 0.0f);
+        Walking();
 
         //Sets the agents speed to the speed passed in through the inspector
         agent.speed = m_Speed;
@@ -226,7 +230,10 @@ public class AIMove_Joel : MonoBehaviour
             agent.isStopped = true;
 
             //Sets the agents animation to looking around
-            anim.SetFloat("Blend", 0.5f);
+            if (!chasing)
+            {
+                Idle();
+            }
 
             if(!oneWaypoint)
             {
@@ -243,7 +250,7 @@ public class AIMove_Joel : MonoBehaviour
                     }
 
                     //Ensures the agent animation is set back to walking
-                    anim.SetFloat("Blend", 0.0f);
+                    Walking();
 
                     if (!loop)
                     {
@@ -309,7 +316,7 @@ public class AIMove_Joel : MonoBehaviour
         agent.isStopped = true;
 
         //Sets the agents animation to looking around
-        anim.SetFloat("Blend", 0.5f);
+        Running();
 
         //Begins a timer to count how long the agent has been alert for
         timerAlert += Time.deltaTime;
@@ -332,7 +339,7 @@ public class AIMove_Joel : MonoBehaviour
     void Chase()
     {
         //Sets the agents animation to running
-        anim.SetFloat("Blend", 1.0f);
+        Running();
         
         //Finds the object tagger with player
         player = GameObject.FindGameObjectWithTag("Player");
@@ -492,5 +499,26 @@ public class AIMove_Joel : MonoBehaviour
         infectionCP.SetActive(false);
         GetComponentInChildren<DetectionOverlap>().alive = false;
 
+    }
+
+    void Walking()
+    {
+        anim.SetBool("Walking", true);
+        anim.SetBool("Running", false);
+        anim.SetBool("Idle", false);
+    }
+
+    void Running()
+    {
+        anim.SetBool("Walking", false);
+        anim.SetBool("Running", true);
+        anim.SetBool("Idle", false);
+    }
+
+    void Idle()
+    {
+        anim.SetBool("Walking", false);
+        anim.SetBool("Running", false);
+        anim.SetBool("Idle", true);
     }
 }
