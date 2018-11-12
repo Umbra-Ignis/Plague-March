@@ -58,6 +58,8 @@ public class Movement_Adrian : MonoBehaviour
     public AudioClip Intro;
     //Gets main audio source
     AudioSource audio;
+    //DEBUG Waiting Bool
+    public bool waiting;
 
     const float k_Half = 0.5f;
     //Cap Height
@@ -78,8 +80,6 @@ public class Movement_Adrian : MonoBehaviour
     public Text ThrowRockUI;
 
     public GameObject spawnpoint = null;
-
-    public bool fadeIn;
 
     // Use this for initialization
     void Start()
@@ -111,7 +111,8 @@ public class Movement_Adrian : MonoBehaviour
 
     public void Move(Vector3 move, bool crouch, bool jump, bool sprinting)
     {
-        if (fadeIn)
+        //remove this check
+        if (waiting)
         {
             if (m_bIntro)
             {
@@ -134,7 +135,7 @@ public class Movement_Adrian : MonoBehaviour
                 }
             }
         }
-        
+
 
         if (rockCount > 0)
         {
@@ -383,9 +384,9 @@ public class Movement_Adrian : MonoBehaviour
     {
         // check whether conditions are right to allow a jump:
         //if (jump && !crouch && animator.GetCurrentAnimatorStateInfo(0).IsName("Grounded"))
-       // {
-         //   CharControler.transform.Translate(new Vector3(0, 1, 0));
-       // }
+        // {
+        //   CharControler.transform.Translate(new Vector3(0, 1, 0));
+        // }
     }
 
     void CheckGroundStatus()
