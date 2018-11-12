@@ -881,6 +881,12 @@ Transform:
   m_PrefabParentObject: {fileID: 4170187136279296, guid: f8d7649debb5268428d32f28a4dfaca7,
     type: 2}
   m_PrefabInternal: {fileID: 56199455}
+--- !u!114 &60282537 stripped
+MonoBehaviour:
+  m_PrefabParentObject: {fileID: 114344508193107564, guid: 5ad3e3a963e7c2d4eb35b226d881d2df,
+    type: 2}
+  m_PrefabInternal: {fileID: 891108033}
+  m_Script: {fileID: -765806418, guid: f70555f144d8491a825f0804e09c671c, type: 3}
 --- !u!1001 &60909841
 Prefab:
   m_ObjectHideFlags: 0
@@ -5389,6 +5395,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   LoadingScreenPanel: {fileID: 2080559204}
   LoadingBar: {fileID: 2052505755}
+  LoadBorder: {fileID: 60282537}
+  ToolTip: {fileID: 961602348}
 --- !u!4 &318969179
 Transform:
   m_ObjectHideFlags: 0
@@ -15794,6 +15802,12 @@ Transform:
   m_PrefabParentObject: {fileID: 4170187136279296, guid: f8d7649debb5268428d32f28a4dfaca7,
     type: 2}
   m_PrefabInternal: {fileID: 959454836}
+--- !u!114 &961602348 stripped
+MonoBehaviour:
+  m_PrefabParentObject: {fileID: 114411785858027850, guid: 5ad3e3a963e7c2d4eb35b226d881d2df,
+    type: 2}
+  m_PrefabInternal: {fileID: 891108033}
+  m_Script: {fileID: -765806418, guid: f70555f144d8491a825f0804e09c671c, type: 3}
 --- !u!1001 &973543395
 Prefab:
   m_ObjectHideFlags: 0

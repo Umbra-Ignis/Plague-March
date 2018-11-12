@@ -7,8 +7,9 @@ using UnityEngine.SceneManagement;
 public class LoadingSceneControl : MonoBehaviour {
 
     
-    public GameObject LoadingScreenPanel;
-    public Image LoadingBar;
+    public GameObject LoadingScreenPanel = null;
+    public Image LoadingBar = null;
+    public Image LoadBorder = null;
     public Image ToolTip = null;
     AsyncOperation async;
 
@@ -41,6 +42,16 @@ public class LoadingSceneControl : MonoBehaviour {
             {
 
                 LoadingBar.fillAmount = 1;
+                if (LoadBorder != null)
+                {
+                    LoadBorder.enabled = false;
+                }
+
+                if (LoadingBar != null)
+                {
+                    LoadingBar.enabled = false;
+                }
+
                 if (ToolTip != null)
                 {
                     ToolTip.enabled = true;
