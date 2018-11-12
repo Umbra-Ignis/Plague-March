@@ -46,11 +46,12 @@ public class AIMove_Joel : MonoBehaviour
     //Rock wait timer
     private float m_rockWaitTimer;
 
-
     //Stores a reference to the current target of the AI
+    [HideInInspector]
     public Vector3 currentTarg;
 
     //Stores the animator of the actor in which needs to be altered
+    [HideInInspector]
     public Animator anim;
 
     //Used to store the int of the current target
@@ -68,6 +69,10 @@ public class AIMove_Joel : MonoBehaviour
     public Transform startWaypoint;
     private CharacterController charCont;
     private CapsuleCollider infectedCapsule;
+
+    private bool QTE;
+
+    public GameObject infectionCP;
 
     // Use this for initialization
     void Start ()
@@ -109,76 +114,73 @@ public class AIMove_Joel : MonoBehaviour
         {
             oneWaypoint = false;
         }
+
+        QTE = GameObject.FindGameObjectWithTag("Player").GetComponent<Movement_Adrian>().m_bQuicktime;
     }
 	
 	// Update is called once per frame
 	void Update ()
     {
-        //Calculates how far the AI is from its current target
-        distanceToWaypoint = Vector3.Distance(currentTarg, agent.transform.position);
-
-        if(Input.GetKeyDown(KeyCode.Space))
+        if (tag != "Dead")
         {
-            preRagdoll();
-        }
+            QTE = GameObject.FindGameObjectWithTag("Player").GetComponent<Movement_Adrian>().m_bQuicktime;
 
-        if (Input.GetKeyDown(KeyCode.V))
-        {
-            initRagdoll();
-        }
+            //Calculates how far the AI is from its current target
+            distanceToWaypoint = Vector3.Distance(currentTarg, agent.transform.position);
 
-        if (rock)
-        {
-            //Ensures the AI is able to move to its new waypoint
-            agent.isStopped = false;
-            //Ensures the AI's animation is set to walk
-            anim.SetFloat("Blend", 0.0f);
-
-            //Sets the new destination to the currently stored destination
-            agent.SetDestination(currentTarg);
-
-            //Checks how far away the AI is from the rocks position
-            if (Vector3.Distance(agent.transform.position, currentTarg) <= 3)
+            if (rock)
             {
-                //Begins a timer to keep the AI at the rocks location for a given amount of time
-                m_rockWaitTimer += Time.deltaTime;
-                //Stops the agent from moving
-                agent.isStopped = true;
-                //Sets the animation of the agent so they look around
-                anim.SetFloat("Blend", 0.5f);
-
-            }
-
-            //If the wait timer becomes greater than the given wait time
-            if (m_rockWaitTimer >= m_rockWaitTime)
-            {
-                //The agent is able to move
+                //Ensures the AI is able to move to its new waypoint
                 agent.isStopped = false;
-                //The animation is set back to walking
+                //Ensures the AI's animation is set to walk
                 anim.SetFloat("Blend", 0.0f);
-                //The wait timer is set back to 0 so that if it is hit again, it will begin from the start
-                m_rockWaitTimer = 0;
-                //The agent is set back to the patrol state
-                SetPatrol();
+
+                //Sets the new destination to the currently stored destination
+                agent.SetDestination(currentTarg);
+
+                //Checks how far away the AI is from the rocks position
+                if (Vector3.Distance(agent.transform.position, currentTarg) <= 3)
+                {
+                    //Begins a timer to keep the AI at the rocks location for a given amount of time
+                    m_rockWaitTimer += Time.deltaTime;
+                    //Stops the agent from moving
+                    agent.isStopped = true;
+                    //Sets the animation of the agent so they look around
+                    anim.SetFloat("Blend", 0.5f);
+
+                }
+
+                //If the wait timer becomes greater than the given wait time
+                if (m_rockWaitTimer >= m_rockWaitTime)
+                {
+                    //The agent is able to move
+                    agent.isStopped = false;
+                    //The animation is set back to walking
+                    anim.SetFloat("Blend", 0.0f);
+                    //The wait timer is set back to 0 so that if it is hit again, it will begin from the start
+                    m_rockWaitTimer = 0;
+                    //The agent is set back to the patrol state
+                    SetPatrol();
+                }
             }
-        }
 
-        //Checks if the AI is patrolling, if it is, it will set its behavior to patrol between waypoints
-        if (patrolling)
-        {
-            Patrol();
-        }
+            //Checks if the AI is patrolling, if it is, it will set its behavior to patrol between waypoints
+            if (patrolling)
+            {
+                Patrol();
+            }
 
-        //Checks if the AI is alerted, if it is, it will set its behavior to stop and check if the player stays within the vision cone for a certain amount of time
-        if (alerted)
-        {
-            Alert();
-        }
+            //Checks if the AI is alerted, if it is, it will set its behavior to stop and check if the player stays within the vision cone for a certain amount of time
+            if (alerted)
+            {
+                Alert();
+            }
 
-        //Checks if the AI is chasing, if it is, it will set its behavior to chase the player until they escape the vision cone
-        if (chasing)
-        {
-            Chase();
+            //Checks if the AI is chasing, if it is, it will set its behavior to chase the player until they escape the vision cone
+            if (chasing)
+            {
+                Chase();
+            }
         }
     }
     //====================================================================
@@ -201,7 +203,10 @@ public class AIMove_Joel : MonoBehaviour
         //Sets the agents speed to the speed passed in through the inspector
         agent.speed = m_Speed;
         //Ensures the agent can move, to avoid any conflicts when moving from other behaviours
-        agent.isStopped = false;
+        if (agent.isStopped && !QTE)
+        {
+            agent.isStopped = false;
+        }
 
         //Checks how far the agent is from its current waypoint
         if (distanceToWaypoint >= stoppingDistance)
@@ -232,7 +237,10 @@ public class AIMove_Joel : MonoBehaviour
                 if (timerPatrol >= waypointWaitTime)
                 {
                     //Starts Agent Moving Again
-                    agent.isStopped = false;
+                    if (agent.isStopped && !QTE)
+                    {
+                        agent.isStopped = false;
+                    }
 
                     //Ensures the agent animation is set back to walking
                     anim.SetFloat("Blend", 0.0f);
@@ -309,7 +317,10 @@ public class AIMove_Joel : MonoBehaviour
         //Checks if the timer has reached a certain amount of time
         if(timerAlert >= m_fChaseWaitTime)
         {
-            agent.isStopped = false;
+            if (agent.isStopped && !QTE)
+            {
+                agent.isStopped = false;
+            }
             //Speeds up the agent to run after the player at a higher speedS
             agent.speed = m_Speed * chaseSpeedMultiplier;
             //If it has, the NPC will be switched to a chase state to chase the player
@@ -478,5 +489,8 @@ public class AIMove_Joel : MonoBehaviour
     {
         anim.enabled = false;
         tag = "Dead";
+        infectionCP.SetActive(false);
+        GetComponentInChildren<DetectionOverlap>().alive = false;
+
     }
 }

@@ -4,12 +4,15 @@ public class DetectionOverlap : MonoBehaviour
 {
     private AIMove_Joel moveScript;
     private bool alerted;
+    [HideInInspector]
+    public bool alive;
 
     // Use this for initialization
     void Start()
     {
         moveScript = GetComponentInParent<AIMove_Joel>();
         alerted = false;
+        alive = true;
     }
 
     // Update is called once per frame
@@ -17,7 +20,7 @@ public class DetectionOverlap : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Player"))
+        if (other.CompareTag("Player") && alive)
         {
             RaycastHit hitCheck;
 
@@ -52,7 +55,7 @@ public class DetectionOverlap : MonoBehaviour
 
     private void OnTriggerStay(Collider other)
     {
-        if(other.CompareTag("Player"))
+        if(other.CompareTag("Player") && alive)
         {
             RaycastHit hit;
 

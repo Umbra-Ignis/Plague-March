@@ -61,15 +61,17 @@ public class QuickTimeEvent_Adrian : MonoBehaviour
 
     private void Awake()
     {
-        foreach (GameObject go in GameObject.FindGameObjectsWithTag("Infected"))
-        {
-            m_lEnemies.Add(go.GetComponent<Transform>());
-        }
     }
 
     // Update is called once per frame
     void Update()
     {
+        m_lEnemies.Clear();
+        foreach (GameObject go in GameObject.FindGameObjectsWithTag("Infected"))
+        {
+            m_lEnemies.Add(go.GetComponent<Transform>());
+        }
+
         m_fendedQuickTimer += Time.deltaTime;
 
         if (m_lEnemies != null)
@@ -137,11 +139,9 @@ public class QuickTimeEvent_Adrian : MonoBehaviour
                     Border.enabled = false;
                     Bar.enabled = false;
                     m_fTimesPressed = 50;
-                    //QuickTimeCouple.SetActive(false);
                     m_maMoveScript.SetQuicktime(false);
                     m_fendedQuickTimer = 0.0f;
                     Ai.initRagdoll();
-                    //Ai.SetPatrol();
                 }
             }
         }

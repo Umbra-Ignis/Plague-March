@@ -81,8 +81,6 @@ public class Infection_Adrian : MonoBehaviour {
                 
             }
 
-            Debug.Log(moveScript.m_bQuicktime);
-            //=========================================================================================================
             if(moveScript.m_bQuicktime)
             {
                 if(agentGroup != null)
@@ -93,7 +91,6 @@ public class Infection_Adrian : MonoBehaviour {
                     }
                 }
             }
-            //======================================================================================================
         }
 	}
 
@@ -113,7 +110,6 @@ public class Infection_Adrian : MonoBehaviour {
         //For each enemy in the list of enemies
         foreach (Transform Enemy in ListOfEnemies)
         {
-
             Vector3 directionToTarget = Enemy.position - currentPosition;
             float dSqrToTarget = directionToTarget.sqrMagnitude;
             if (dSqrToTarget < closestDistanceSqr)
