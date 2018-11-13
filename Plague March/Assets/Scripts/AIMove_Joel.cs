@@ -10,9 +10,9 @@ public class AIMove_Joel : MonoBehaviour
     //Determines Speed
     [Range(1f, 50f)] public float m_Speed = 1f;
     //Distance agent Will stop Relative to waypoint
-    [Range(1f, 50f)] public float stoppingDistance = 4f;
+    [Range(1f, 50f)] public float stoppingDistance;
     //Sets how much faster the chasing state will be, 1 being the same speed as patrol
-    [Range(1f, 20f)]public float chaseSpeedMultiplier;
+    [Range(1f, 20f)] public float chaseSpeedMultiplier;
     //Time Before Start Chasing
     [Range(1f, 10f)] public float m_fChaseWaitTime;
 
@@ -75,7 +75,7 @@ public class AIMove_Joel : MonoBehaviour
     public GameObject infectionCP;
 
     // Use this for initialization
-    void Start ()
+    void Start()
     {
         //Gets the NavMesh agent component from the AI to set waypoints and such
         agent = GetComponent<NavMeshAgent>();
@@ -99,6 +99,7 @@ public class AIMove_Joel : MonoBehaviour
         {
             currentTarg = targets[targVal].position;
         }
+
         else
         {
             Idle();
@@ -109,7 +110,7 @@ public class AIMove_Joel : MonoBehaviour
         //Sets Rock wait timer
         m_rockWaitTimer = 1f;
 
-        if(targets.Length == 1)
+        if (targets.Length == 1)
         {
             oneWaypoint = true;
         }
@@ -121,9 +122,9 @@ public class AIMove_Joel : MonoBehaviour
 
         QTE = GameObject.FindGameObjectWithTag("Player").GetComponent<Movement_Adrian>().m_bQuicktime;
     }
-	
-	// Update is called once per frame
-	void Update ()
+
+    // Update is called once per frame
+    void Update()
     {
         if (tag != "Dead")
         {
@@ -213,7 +214,7 @@ public class AIMove_Joel : MonoBehaviour
         }
 
         //Checks how far the agent is from its current waypoint
-        if (distanceToWaypoint >= stoppingDistance)
+        if (distanceToWaypoint >= stoppingDistance && patrolling)
         {
             //Checks that the current selected target actually exists
             if (targets.Length != 0)
@@ -235,10 +236,10 @@ public class AIMove_Joel : MonoBehaviour
                 Idle();
             }
 
-            if(!oneWaypoint)
+            if (!oneWaypoint)
             {
-            //Timer begins to increase to store how long the agent has spent at the location
-            timerPatrol += Time.deltaTime;
+                //Timer begins to increase to store how long the agent has spent at the location
+                timerPatrol += Time.deltaTime;
 
                 //Once the agent has spent the desired amount of time there
                 if (timerPatrol >= waypointWaitTime)
@@ -316,13 +317,13 @@ public class AIMove_Joel : MonoBehaviour
         agent.isStopped = true;
 
         //Sets the agents animation to looking around
-        Running();
+        Idle();
 
         //Begins a timer to count how long the agent has been alert for
         timerAlert += Time.deltaTime;
 
         //Checks if the timer has reached a certain amount of time
-        if(timerAlert >= m_fChaseWaitTime)
+        if (timerAlert >= m_fChaseWaitTime)
         {
             if (agent.isStopped && !QTE)
             {
@@ -340,7 +341,7 @@ public class AIMove_Joel : MonoBehaviour
     {
         //Sets the agents animation to running
         Running();
-        
+
         //Finds the object tagger with player
         player = GameObject.FindGameObjectWithTag("Player");
 
@@ -350,65 +351,6 @@ public class AIMove_Joel : MonoBehaviour
         currentTarg = player.transform.position;
 
         timerAlert = 0;
-    }
-
-    //Sets the new patrol point for the AI, generally used from other scripts to allow for situational patrol points to be added
-    public void SetPatrolPoint(Transform pos)
-    {
-        //Sets the agents current destination to the passed in position
-        agent.SetDestination(pos.position);
-        //Stores the current target of the agent
-        currentTarg = pos.position;
-
-        if (Vector3.Distance(pos.position, agent.transform.position) <= 5.0f)
-        {
-            if (!loop)
-            {
-                //Checks if the AI has reached the end of the array of waypoints
-                if (targVal == targets.Length - 1)
-                {
-                    //Sets forward to false so the AI progresses backwards through the array of waypoints
-                    forward = false;
-                }
-
-                //If the AI was progressing backwards, this checks whether the AI has reached the end of the list
-                if (targVal == 0)
-                {
-                    //And sets it to go back through the array progressing forwards
-                    forward = true;
-                }
-
-                //If the AI is progressing forward, the next waypoint is the one after the current
-                if (forward)
-                {
-                    targVal++;
-                }
-
-                //If the AI is progressing forward, the next waypoint is the one before the current
-                else
-                {
-                    targVal--;
-                }
-            }
-
-            else
-            {
-                if (targVal == targets.Length - 1)
-                {
-                    targVal = 0;
-                }
-
-                else
-                {
-                    targVal++;
-                }
-            }
-
-            //Sets the current target to the newly determined waypoint
-            //currentTarg = targets[targVal].position;
-            rock = false;
-            SetPatrol();
-        }
     }
 
     //Sets the AI's behaviour to patrol between its waypoints
@@ -460,6 +402,26 @@ public class AIMove_Joel : MonoBehaviour
         chasing = false;
         rock = true;
     }
+    void Walking()
+    {
+        anim.SetBool("Walking", true);
+        anim.SetBool("Running", false);
+        anim.SetBool("Idle", false);
+    }
+
+    void Running()
+    {
+        anim.SetBool("Walking", false);
+        anim.SetBool("Running", true);
+        anim.SetBool("Idle", false);
+    }
+
+    void Idle()
+    {
+        anim.SetBool("Walking", false);
+        anim.SetBool("Running", false);
+        anim.SetBool("Idle", true);
+    }
 
     public void ApproachRock(Transform pos)
     {
@@ -467,12 +429,6 @@ public class AIMove_Joel : MonoBehaviour
         currentTarg = pos.position;
     }
 
-    public void ApproachLastPos(Vector3 LastPosititon)
-    {
-        //Last position player exit detection cone
-        currentTarg = LastPosititon;
-    }
-    
     //Setter for timer alert 
     public void SetAlertTimer(float alertTimer)
     {
@@ -499,26 +455,5 @@ public class AIMove_Joel : MonoBehaviour
         infectionCP.SetActive(false);
         GetComponentInChildren<DetectionOverlap>().m_bAlive = false;
 
-    }
-
-    void Walking()
-    {
-        anim.SetBool("Walking", true);
-        anim.SetBool("Running", false);
-        anim.SetBool("Idle", false);
-    }
-
-    void Running()
-    {
-        anim.SetBool("Walking", false);
-        anim.SetBool("Running", true);
-        anim.SetBool("Idle", false);
-    }
-
-    void Idle()
-    {
-        anim.SetBool("Walking", false);
-        anim.SetBool("Running", false);
-        anim.SetBool("Idle", true);
     }
 }

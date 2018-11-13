@@ -12,8 +12,6 @@ public class RockThrower_Adrian : MonoBehaviour
     private Trajectory_Simulation sim;
     private Vector3 velocity;
 
-
-
     private void Start()
     {
         moveScript = GetComponent<Movement_Adrian>();
