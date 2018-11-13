@@ -43,7 +43,6 @@ public class PauseMenu : MonoBehaviour
     {
         //Sets Cursor to not visable and locked to the window
         Cursor.lockState = CursorLockMode.Locked;
-        Cursor.lockState = CursorLockMode.None;
         Cursor.visible = false;
 
         audio.UnPause();
