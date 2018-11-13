@@ -28,6 +28,8 @@ public class DoorOpen_Joel : MonoBehaviour
     [HideInInspector]
     public bool opened;
 
+    public AudioClip doorOpen = null;
+
     //Takes a reference to the right side of the gate
     public GameObject doorRight;
     //Takes a reference to the left side of the gate
@@ -93,20 +95,18 @@ public class DoorOpen_Joel : MonoBehaviour
                 {
                     if (!opened)
                     {
-                        opened = true;
                         entry.enabled = false;
                         doorLeft.transform.Rotate(new Vector3(0, 1, 0), -96.0f);
                         doorRight.transform.Rotate(new Vector3(0, 1, 0), 96.0f);
                         closeDoor.enabled = true;
-                    }
+                        opened = true;
 
-                    else
-                    {
-                        opened = false;
-                        closeDoor.enabled = false;
-                        doorLeft.transform.Rotate(new Vector3(0, 1, 0), 96.0f);
-                        doorRight.transform.Rotate(new Vector3(0, 1, 0), -96.0f);
-                        entry.enabled = true;
+                        Debug.Log("OPEN");
+
+                        if (doorOpen != null)
+                        {
+                            GameObject.FindGameObjectWithTag("AudioSource").GetComponent<AudioSource>().PlayOneShot(doorOpen);
+                        }
                     }
                 }
             }
@@ -141,14 +141,11 @@ public class DoorOpen_Joel : MonoBehaviour
                         entry.enabled = false;
                         m_goSingleDoor.transform.Rotate(new Vector3(0, 1, 0), -96.0f);
                         closeDoor.enabled = true;
-                    }
 
-                    else
-                    {
-                        opened = false;
-                        closeDoor.enabled = false;
-                        m_goSingleDoor.transform.Rotate(new Vector3(0, 1, 0), 96.0f);
-                        entry.enabled = true;
+                        if (doorOpen != null)
+                        {
+                            GameObject.FindGameObjectWithTag("AudioSource").GetComponent<AudioSource>().PlayOneShot(doorOpen);
+                        }
                     }
                 }
             }

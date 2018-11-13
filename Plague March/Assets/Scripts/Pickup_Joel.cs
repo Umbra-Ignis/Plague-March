@@ -57,6 +57,8 @@ public class Pickup_Joel : MonoBehaviour
 
     //Audio that is going to be played when note closes
     public AudioClip AudioToBePlayed;
+    //Play Audio Once
+    bool Played = false;
     //Audio Source
     AudioSource audio;
 
@@ -200,11 +202,14 @@ public class Pickup_Joel : MonoBehaviour
                 {
                     partEffect.Stop();
                 }
-
-                //If Audio is not null play sound on note open
-                if (AudioToBePlayed != null)
+                if (!Played)
                 {
-                    audio.PlayOneShot(AudioToBePlayed);
+                    //If Audio is not null play sound on note open
+                    if (AudioToBePlayed != null)
+                    {
+                        audio.PlayOneShot(AudioToBePlayed);
+                        Played = true;
+                    }
                 }
             }
 
