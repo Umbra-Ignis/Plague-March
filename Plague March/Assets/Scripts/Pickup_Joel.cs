@@ -22,7 +22,7 @@ public class Pickup_Joel : MonoBehaviour
     //Allows each item to be set to a different key item index
     public pickupType type;
     //Tip that comes up indicating to the player what actions to take to pick up the item
-    public Text tooltip;
+    public Image tooltip;
     //Allows access to the UI controller to turn UI images on and off
     public Canvas TooltipCanvas;
     //Takes in the image that pops up when the note is interacted with

@@ -75,9 +75,9 @@ public class Movement_Adrian : MonoBehaviour
 
     private bool aiming;
 
-    public Text RockPickUpUi;
-    public Text AimRockUI;
-    public Text ThrowRockUI;
+    public Image RockPickUpUi;
+    public Image AimRockUI;
+    public Image ThrowRockUI;
 
     public GameObject spawnpoint = null;
 
