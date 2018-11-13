@@ -217,6 +217,11 @@ public class Pickup_Joel : MonoBehaviour
                         Played = true;
                     }
                 }
+
+                if(noteNKey)
+                {
+                    other.GetComponent<UserControler_Adrian>().obtainedKey((int)keyNumber + 1);
+                }
             }
 
             else if (Input.GetKeyDown(KeyCode.E))
