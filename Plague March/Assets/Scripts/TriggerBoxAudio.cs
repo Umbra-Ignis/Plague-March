@@ -2,18 +2,31 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TriggerBoxAudio : MonoBehaviour {
+public class TriggerBoxAudio : MonoBehaviour
+{
 
     //Audio Bools For Certain Areas check inspector for selection
     public bool m_bStopAndPlaySound;
     //Audio Bools For Certain Areas check inspector for selection
     public bool m_bWalkThroughSound;
+    //Play audio with new camera
+    public bool m_bNewCameraSound;
+    //Audio Bool For Church
+    public bool m_bChurchCameraLight;
 
     //Start Timer
     bool m_bStartTimer = false;
 
+    bool m_bIsPlaying = false;
+
     //Audio manager setup
     AudioSource audio;
+
+    //New Camera
+    public Camera NewCamera = null;
+
+    //Point Light For Church
+    public GameObject light = null;
 
     //Gets Player to stop moving
     Movement_Adrian Player;
@@ -22,7 +35,7 @@ public class TriggerBoxAudio : MonoBehaviour {
     public AudioClip AudioToBePlayed;
 
     //Audio Timer For Movement
-    float m_fTimer; 
+    float m_fTimer;
 
     private void Awake()
     {
@@ -34,7 +47,7 @@ public class TriggerBoxAudio : MonoBehaviour {
     private void Update()
     {
         if (m_bStartTimer)
-        {   
+        {
             m_fTimer -= Time.deltaTime;
 
             if (m_fTimer <= 0)
@@ -49,7 +62,7 @@ public class TriggerBoxAudio : MonoBehaviour {
         }
     }
 
-    private void OnTriggerEnter(Collider other)
+    private void OnTriggerStay(Collider other)
     {
         if (m_bStopAndPlaySound)
         {
@@ -65,6 +78,65 @@ public class TriggerBoxAudio : MonoBehaviour {
             m_bStartTimer = true;
             audio.PlayOneShot(AudioToBePlayed);
             m_bWalkThroughSound = false;
+        }
+
+        if (m_bNewCameraSound)
+        {
+            if (NewCamera != null)
+            {
+                NewCamera.enabled = true;
+            }
+
+            if (NewCamera.enabled == true && !m_bIsPlaying)
+            {
+                m_bStartTimer = true;
+                Player.SoundStop();
+                m_fTimer = AudioToBePlayed.length;
+                audio.PlayOneShot(AudioToBePlayed);
+                m_bIsPlaying = true;
+            }
+
+            if (!m_bStartTimer)
+            {
+                if (NewCamera != null)
+                {
+                    NewCamera.enabled = false;
+                    m_bNewCameraSound = false;
+                }
+            }
+        }
+        if (m_bChurchCameraLight)
+        {
+            if (NewCamera != null)
+            {
+                NewCamera.enabled = true;
+            }
+
+            if (NewCamera.enabled == true && !m_bIsPlaying)
+            {
+                if (light != null)
+                {
+                    light.SetActive(true);
+                }
+                m_bStartTimer = true;
+                Player.SoundStop();
+                m_fTimer = AudioToBePlayed.length;
+                audio.PlayOneShot(AudioToBePlayed);
+                m_bIsPlaying = true;
+            }
+
+            if (!m_bStartTimer)
+            {
+                if (NewCamera != null)
+                {
+                    if (light != null)
+                    {
+                        light.SetActive(false);
+                    }
+                    NewCamera.enabled = false;
+                    m_bNewCameraSound = false;
+                }
+            }
         }
 
     }

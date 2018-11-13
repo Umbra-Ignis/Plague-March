@@ -123,7 +123,7 @@ public class Movement_Adrian : MonoBehaviour
 
                 m_fIntroTimer -= Time.deltaTime;
 
-                if (m_fIntroTimer <= 16.0f)
+                if (m_fIntroTimer <= 18.0f)
                 {
                     SoundStop();
                 }
