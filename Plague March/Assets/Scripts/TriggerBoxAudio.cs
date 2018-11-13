@@ -20,13 +20,13 @@ public class TriggerBoxAudio : MonoBehaviour
     bool m_bIsPlaying = false;
 
     //Audio manager setup
-    AudioSource audio;
+    new AudioSource audio;
 
     //New Camera
     public Camera NewCamera = null;
 
     //Point Light For Church
-    public GameObject light = null;
+    public new GameObject light = null;
 
     //Gets Player to stop moving
     Movement_Adrian Player;

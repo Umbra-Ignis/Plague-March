@@ -56,8 +56,9 @@ public class Movement_Adrian : MonoBehaviour
     float m_fIntroTimer = 19;
     //Audio clip for intro
     public AudioClip Intro;
+
     //Gets main audio source
-    AudioSource audio;
+    new AudioSource audio;
     //DEBUG Waiting Bool
     public bool waiting;
 

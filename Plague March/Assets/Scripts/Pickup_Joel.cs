@@ -28,7 +28,7 @@ public class Pickup_Joel : MonoBehaviour
     //Takes in the image that pops up when the note is interacted with
     public Image popupImage;
     //Takes in a text element that shows to the player what they have picked up
-    public Text acquiredText;
+    public Image acquiredText;
 
     [Space]
     [Space]
@@ -50,7 +50,7 @@ public class Pickup_Joel : MonoBehaviour
     //Takes a reference to the key object to turn it off once picked up
     public GameObject keyObject;
     //Takes in a text element that shows to the player what they have picked up
-    public Text acquiredKeyText;
+    public Image acquiredKeyText;
 
     [Space]
     [Space]
@@ -59,8 +59,9 @@ public class Pickup_Joel : MonoBehaviour
     public AudioClip AudioToBePlayed;
     //Play Audio Once
     bool Played = false;
+
     //Audio Source
-    AudioSource audio;
+    new AudioSource audio;
 
     //================================================================================================================
     //PRIVATES
@@ -125,10 +126,13 @@ public class Pickup_Joel : MonoBehaviour
             {
                 Time.timeScale = 1;
                 popupImage.enabled = false;
-                acquiredText.enabled = false;
+                if (acquiredText != null)
+                {
+                    acquiredText.enabled = false;
+                }
 
-                //Turns on the UI image of this selected item
-                ui.TurnOnItem((int)type);
+                //Turns off the UI image of this selected item
+                ui.TurnOffItem((int)type);
 
                 //Turns off the tooltip text of this item as it can no longer be picked up
                 //Switches the bool to ensure the item cannot be picked up again, and to 
@@ -193,8 +197,10 @@ public class Pickup_Joel : MonoBehaviour
                 {
                     acquiredKeyText.enabled = false;
                 }
-
-                acquiredText.enabled = true;
+                if (acquiredText != null)
+                {
+                    acquiredText.enabled = true;
+                }
                 popupImage.enabled = true;
                 opened = true;
 
@@ -217,10 +223,9 @@ public class Pickup_Joel : MonoBehaviour
             {
                 if (tooltip != null || acquiredText)
                 {
-
+                    tooltip.enabled = false;
+                    acquiredText.enabled = true;
                 }
-                tooltip.enabled = false;
-                acquiredText.enabled = true;
                 //Turns on the UI image of this selected item
                 ui.TurnOnItem((int)type);
                 //Turns off the tooltip text of this item as it can no longer be picked up

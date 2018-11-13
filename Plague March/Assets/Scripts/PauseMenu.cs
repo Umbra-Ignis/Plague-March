@@ -13,7 +13,7 @@ public class PauseMenu : MonoBehaviour
 
     public GameObject pauseMenuUI;
     public bool quickTime;
-    AudioSource audio;
+    new AudioSource audio;
 
 
 	// Update is called once per frame
