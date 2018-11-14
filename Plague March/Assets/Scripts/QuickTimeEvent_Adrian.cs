@@ -40,6 +40,7 @@ public class QuickTimeEvent_Adrian : MonoBehaviour
 
     public Image Bar = null;
     public Image Border = null;
+    public Image Space = null;
 
     public GameObject QuickTimeCouple;
 
@@ -91,10 +92,11 @@ public class QuickTimeEvent_Adrian : MonoBehaviour
             {
                 QuickTimeCouple.SetActive(true);
 
-                if (Border != null || Bar != null)
+                if (Border != null || Bar != null || Space != null)
                 {
                     Border.enabled = true;
                     Bar.enabled = true;
+                    Space.enabled = true;
                 }
                 Bar.fillAmount = m_fTimesPressed / 100;
 
@@ -138,6 +140,7 @@ public class QuickTimeEvent_Adrian : MonoBehaviour
                     end = true;
                     Border.enabled = false;
                     Bar.enabled = false;
+                    Space.enabled = false;
                     m_fTimesPressed = 50;
                     m_maMoveScript.SetQuicktime(false);
                     m_fendedQuickTimer = 0.0f;

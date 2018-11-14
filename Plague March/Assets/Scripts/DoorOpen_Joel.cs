@@ -15,11 +15,9 @@ public class DoorOpen_Joel : MonoBehaviour
     //Stores the key number in which is required to open this door
     public keyR keyRequired;
     //Takes a reference to a UI element in which tells the player they cannot enter this door
-    public Text noEntry;
+    public Image noEntry;
     //Takes a reference to a UI element in which tells the player they can press a button to open this door
-    public Text entry;
-    //Takes a reference to a UI element in which tells the player they can press a button to close this
-    public Text closeDoor;
+    public Image entry;
     //Takes reference to the player to allow access to its script
     public GameObject Gerard;
     //Stores a reference to the players script
@@ -51,7 +49,6 @@ public class DoorOpen_Joel : MonoBehaviour
         //Disables all text elements to ensure they do not show
         noEntry.enabled = false;
         entry.enabled = false;
-        closeDoor.enabled = false;
         
         //Obtains the user controller script in which to be used later in the script
         user = Gerard.GetComponent<UserControler_Adrian>();
@@ -82,13 +79,11 @@ public class DoorOpen_Joel : MonoBehaviour
                 if (!opened)
                 {
                     entry.enabled = true;
-                    closeDoor.enabled = false;
                 }
 
                 if (opened)
                 {
                     entry.enabled = false;
-                    closeDoor.enabled = true;
                 }
 
                 if (Input.GetKeyDown(KeyCode.E))
@@ -98,7 +93,6 @@ public class DoorOpen_Joel : MonoBehaviour
                         entry.enabled = false;
                         doorLeft.transform.Rotate(new Vector3(0, 1, 0), -96.0f);
                         doorRight.transform.Rotate(new Vector3(0, 1, 0), 96.0f);
-                        closeDoor.enabled = true;
                         opened = true;
 
                         Debug.Log("OPEN");
@@ -124,13 +118,11 @@ public class DoorOpen_Joel : MonoBehaviour
                 if (!opened)
                 {
                     entry.enabled = true;
-                    closeDoor.enabled = false;
                 }
 
                 if (opened)
                 {
                     entry.enabled = false;
-                    closeDoor.enabled = true;
                 }
 
                 if (Input.GetKeyDown(KeyCode.E))
@@ -140,7 +132,6 @@ public class DoorOpen_Joel : MonoBehaviour
                         opened = true;
                         entry.enabled = false;
                         m_goSingleDoor.transform.Rotate(new Vector3(0, 1, 0), -96.0f);
-                        closeDoor.enabled = true;
 
                         if (doorOpen != null)
                         {
@@ -163,14 +154,12 @@ public class DoorOpen_Joel : MonoBehaviour
         {
             noEntry.enabled = false;
             entry.enabled = false;
-            closeDoor.enabled = false;
         }
     }
 
     public void CloseDoor()
     {
         opened = false;
-        closeDoor.enabled = false;
         doorLeft.transform.Rotate(new Vector3(0, 1, 0), 96.0f);
         doorRight.transform.Rotate(new Vector3(0, 1, 0), -96.0f);
 
