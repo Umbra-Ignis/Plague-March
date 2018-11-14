@@ -454,6 +454,8 @@ public class AIMove_Joel : MonoBehaviour
         tag = "Dead";
         infectionCP.SetActive(false);
         GetComponentInChildren<DetectionOverlap>().m_bAlive = false;
-
+        Half.enabled = true;
+        Open.enabled = false;
+        Red.enabled = false;
     }
 }

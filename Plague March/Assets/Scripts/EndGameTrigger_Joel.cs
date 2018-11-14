@@ -6,14 +6,10 @@ using UnityEngine;
 public class EndGameTrigger_Joel : MonoBehaviour {
 
 	// Use this for initialization
-	void Start () {
-		
-	}
+	void Start (){}
 	
 	// Update is called once per frame
-	void Update () {
-		
-	}
+	void Update (){}
 
     private void OnTriggerEnter(Collider other)
     {
@@ -21,7 +17,7 @@ public class EndGameTrigger_Joel : MonoBehaviour {
         {
             Cursor.lockState = CursorLockMode.None;
             Cursor.visible = true;
-            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex - 1);
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
         }
     }
 }
