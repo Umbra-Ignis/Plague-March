@@ -1,4 +1,11 @@
-﻿using UnityEngine;
+﻿//========================================================================================
+//UIController
+//
+//Functionality: Used to control certain UI, turning them on or off
+//
+//Author: Joel G
+//========================================================================================
+using UnityEngine;
 using UnityEngine.UI;
 
 public class UIController_Joel : MonoBehaviour
@@ -54,46 +61,6 @@ public class UIController_Joel : MonoBehaviour
             //Ensures the rock image is turned off if the player is not holding a rock
             rock.enabled = false;
         }
-        //========================================================================
-        //UNCOMMENT TO DEBUG UI ELEMENTS
-        //========================================================================
-
-        //if (Input.GetKeyDown(KeyCode.Keypad0))
-        //{
-        //    TurnOnItem(0);
-        //}
-        //if (Input.GetKeyDown(KeyCode.Keypad1))
-        //{
-        //    TurnOnItem(1);
-        //}
-        //if (Input.GetKeyDown(KeyCode.Keypad2))
-        //{
-        //    TurnOnItem(2);
-        //}
-        //if (Input.GetKeyDown(KeyCode.Keypad3))
-        //{
-        //    TurnOnItem(3);
-        //}
-        //if (Input.GetKeyDown(KeyCode.Keypad4))
-        //{
-        //    TurnOnItem(4);
-        //}
-        //if (Input.GetKeyDown(KeyCode.Keypad5))
-        //{
-        //    TurnOnItem(5);
-        //}
-        //if (Input.GetKeyDown(KeyCode.Keypad6))
-        //{
-        //    TurnOnItem(6);
-        //}
-        //if (Input.GetKeyDown(KeyCode.Keypad7))
-        //{
-        //    TurnOnItem(7);
-        //}
-        //if (Input.GetKeyDown(KeyCode.Keypad8))
-        //{
-        //    TurnOnItem(8);
-        //}
     }
 
     //Allows an items image to be turned on externally to this script

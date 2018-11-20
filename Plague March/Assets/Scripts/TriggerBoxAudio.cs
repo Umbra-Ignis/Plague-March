@@ -1,10 +1,14 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿//========================================================================================
+//TriggerBoxAudio
+//
+//Functionality: Used to play certain audio lines upon entering attached trigger boxes
+//
+//Author: Adrian P
+//========================================================================================
 using UnityEngine;
 
 public class TriggerBoxAudio : MonoBehaviour
 {
-
     //Audio Bools For Certain Areas check inspector for selection
     public bool m_bStopAndPlaySound;
     //Audio Bools For Certain Areas check inspector for selection
@@ -140,6 +144,4 @@ public class TriggerBoxAudio : MonoBehaviour
         }
 
     }
-
-
 }

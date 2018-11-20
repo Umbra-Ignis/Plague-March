@@ -1,5 +1,10 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿//========================================================================================
+//TwigFenceTrigger
+//
+//Functionality: Manages the standing up and laying down
+//
+//Author: Joel G
+//========================================================================================
 using UnityEngine;
 
 public class TwigFenceTrigger_Joel : MonoBehaviour

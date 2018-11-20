@@ -1,4 +1,13 @@
-﻿using UnityEngine;
+﻿//========================================================================================
+//AIMove_Joel
+//
+//Functionality: Used to control the AI within the game, the transitions between states
+//and the behaviour within states
+//
+//Author: Joel G
+//Altered by: Adrian P
+//========================================================================================
+using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.UI;
 

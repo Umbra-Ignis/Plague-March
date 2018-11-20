@@ -7,7 +7,6 @@
 //Altered by: Joel G
 //========================================================================================
 using UnityEngine;
-using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
 public class Credits : MonoBehaviour

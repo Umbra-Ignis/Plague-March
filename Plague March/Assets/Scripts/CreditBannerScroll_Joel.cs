@@ -1,5 +1,10 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿//========================================================================================
+//CreditBannerScroll_Joel
+//
+//Functionality: Used to move the credits up the screen whilst in the credits scene
+//
+//Author: Joel G
+//========================================================================================
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
@@ -20,12 +25,12 @@ public class CreditBannerScroll_Joel : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (bannerImg.transform.position.y <= 1700)
+        if (bannerImg.transform.position.y <= 2000)
         {
             bannerImg.transform.Translate(new Vector3(0.0f, 1.0f * scrollSpeedMultiplier, 0.0f));
         }
         
-        if(bannerImg.transform.position.y >= 1600)
+        if(bannerImg.transform.position.y >= 2000)
         {
             tooltipImage.enabled = true;
         }

@@ -1,5 +1,10 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿//========================================================================================
+//Trajectory Simulation
+//
+//Functionality: Used to create the line to show the player where the rock will be thrown
+//
+//Author: Adrian P
+//========================================================================================    
 using UnityEngine;
 
 /// <summary>

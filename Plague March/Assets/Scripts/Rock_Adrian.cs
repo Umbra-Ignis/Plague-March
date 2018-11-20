@@ -1,5 +1,11 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿//========================================================================================
+//Rock_Adrian
+//
+//Functionality: Script attached to the rock to alert the AI and to be picked up
+//
+//Author: Adrian P
+//Altered by: Joel G
+//========================================================================================
 using UnityEngine;
 
 public class Rock_Adrian : MonoBehaviour

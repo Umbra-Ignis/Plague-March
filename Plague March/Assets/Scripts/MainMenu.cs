@@ -1,4 +1,12 @@
-﻿using UnityEngine;
+﻿//========================================================================================
+//MainMenu
+//
+//Functionality: Adds funtionality to all buttons in the main menu
+//
+//Author: Adrian P
+//Altered by: Joel G
+//========================================================================================
+using UnityEngine;
 using UnityEngine.SceneManagement;
 #if UNITY_EDITOR
 using UnityEditor;

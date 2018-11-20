@@ -1,5 +1,10 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿//========================================================================================
+//PermalockTrigger
+//
+//Functionality: Attached to a trigger box to permanently lock a door upon entering
+//
+//Author: Joel G
+//========================================================================================
 using UnityEngine;
 
 public class PermalockTrigger : MonoBehaviour

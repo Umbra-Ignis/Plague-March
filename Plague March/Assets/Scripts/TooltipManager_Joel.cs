@@ -1,4 +1,11 @@
-﻿using UnityEngine;
+﻿//========================================================================================
+//TooltipManager
+//
+//Functionality: Used to manage the popping up and down of certain tooltips
+//
+//Author: Joel G
+//========================================================================================
+using UnityEngine;
 using UnityEngine.UI;
 
 public class TooltipManager_Joel : MonoBehaviour

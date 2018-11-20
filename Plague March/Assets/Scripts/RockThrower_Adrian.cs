@@ -1,7 +1,11 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿//========================================================================================
+//RockThrower_Adrian
+//
+//Functionality: Used to manage the throwing of the rock from the player
+//
+//Author: Adrian P
+//========================================================================================
 using UnityEngine;
-using UnityEngine.UI;
 
 public class RockThrower_Adrian : MonoBehaviour
 {
@@ -17,14 +21,11 @@ public class RockThrower_Adrian : MonoBehaviour
         moveScript = GetComponent<Movement_Adrian>();
         sim = spawnPoint.GetComponent<Trajectory_Simulation>();
         velocity = Vector3.zero;
-
-
     }
 
     private void Update()
     {
         velocity = sim.getVelocity();
-        Debug.Log("got velocity");
 
         if (Input.GetMouseButtonDown(0) && moveScript.GetRockCount() >= 0)
         {
@@ -45,7 +46,6 @@ public class RockThrower_Adrian : MonoBehaviour
 
             GameObject rock = Instantiate(RockPrefab, spawnPoint.transform.position, Camera.main.transform.localRotation);
             Rigidbody rb = rock.GetComponent<Rigidbody>();
-            //rb.AddForce((Camera.main.transform.forward + Camera.main.transform.up) * throwForce, ForceMode.VelocityChange);
             rb.velocity = velocity;
             moveScript.SubtractRockCount();
             moveScript.rockThrown();
@@ -56,7 +56,6 @@ public class RockThrower_Adrian : MonoBehaviour
     {
         if (moveScript.GetRockCount() > 0)
         {
-            Debug.Log("!!!!!");
             moveScript.stopCharacter();
         }
     }

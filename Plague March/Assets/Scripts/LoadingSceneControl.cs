@@ -1,5 +1,12 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿//========================================================================================
+//LoadingSceneControl
+//
+//Functionality: Operates the loading screen between the main menu and the game,
+//and loads the level whilst doing so.
+//
+//Author: Adrian P
+//========================================================================================
+using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;

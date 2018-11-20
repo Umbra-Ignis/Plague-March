@@ -1,5 +1,10 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿//========================================================================================
+//Teleport_Adrian
+//
+//Functionality: Used to teleport
+//
+//Author: Adrian P
+//========================================================================================
 using UnityEngine;
 
 public class Teleport_Adrian : MonoBehaviour
@@ -18,10 +23,7 @@ public class Teleport_Adrian : MonoBehaviour
     //Loading Screen Bool
     bool LoadingScreen;
 
-    private void Start()
-    {
-
-    }
+    private void Start(){}
 
     private void Update()
     {

@@ -1,5 +1,10 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿//========================================================================================
+//QTEAnim
+//
+//Functionality: Used to control the animation back and fouth to the QTE couple
+//
+//Author: Joel G
+//========================================================================================
 using UnityEngine;
 
 public class QTEAnim_Joel : MonoBehaviour

@@ -1,4 +1,13 @@
-﻿using UnityEngine;
+﻿//========================================================================================
+//Pickup_Joel
+//
+//Functionality: Attached to all itmes that can be picked up within the world, and
+//sends this information to the player
+//
+//Author: Joel G
+//Altered by: Adrian P
+//========================================================================================
+using UnityEngine;
 using UnityEngine.UI;
 
 //Stores each different key object that can be picked up

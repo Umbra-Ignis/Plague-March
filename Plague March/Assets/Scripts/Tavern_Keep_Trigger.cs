@@ -1,8 +1,14 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿//========================================================================================
+//TavernKeepTrigger
+//
+//Functionality: Called upon entering the tavern to trigger the "cut-scene" event
+//
+//Author: Adrian P
+//========================================================================================
 using UnityEngine;
 
-public class Tavern_Keep_Trigger : MonoBehaviour {
+public class Tavern_Keep_Trigger : MonoBehaviour
+{
 
     public Animator anim;
     float timer;
@@ -12,18 +18,20 @@ public class Tavern_Keep_Trigger : MonoBehaviour {
 
 
 
-	// Use this for initialization
-	void Start () {
+    // Use this for initialization
+    void Start()
+    {
         //anim = GetComponent<Animator>();
-        
+
         startTimer = false;
         playonce = true;
         timer = 0;
-	}
-	
-	// Update is called once per frame
-	void Update () {
-        Debug.Log( anim.GetFloat("Blend"));
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        Debug.Log(anim.GetFloat("Blend"));
         if (startTimer)
         {
             timer += Time.deltaTime;
@@ -32,7 +40,7 @@ public class Tavern_Keep_Trigger : MonoBehaviour {
         {
             timer = 20000.0f;
         }
-	}
+    }
 
     private void OnTriggerStay(Collider other)
     {

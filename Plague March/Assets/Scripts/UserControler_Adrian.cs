@@ -1,5 +1,11 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿//========================================================================================
+//UserController
+//
+//Functionality: Takes the user input and applies it to the characters movement
+//
+//Author: Adrian P
+//Altered by: Joel G
+//========================================================================================
 using UnityEngine;
 
 [RequireComponent(typeof(Movement_Adrian))]
@@ -60,9 +66,6 @@ public class UserControler_Adrian : MonoBehaviour
 
         //Sets Crouch Bool
         bool crouch = Input.GetKey(KeyCode.LeftControl);
-
-
-
 
         if (m_Cam != null)
         {

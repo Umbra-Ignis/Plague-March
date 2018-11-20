@@ -1,7 +1,15 @@
-﻿using System.Collections.Generic;
+﻿//========================================================================================
+//QuickTimeEvent_Adrian
+//
+//Functionality: Used to manage the whole quick time event system, transition to and from
+//and add infection to the player
+//
+//Author: Adrian P
+//Altered by: Joel G
+//========================================================================================
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using UnityEngine.Animations;
 
 public class QuickTimeEvent_Adrian : MonoBehaviour
 {
@@ -120,7 +128,6 @@ public class QuickTimeEvent_Adrian : MonoBehaviour
                 if (Input.GetKeyDown(KeyCode.Space))
                 {
                     m_fTimesPressed += m_fHowManyPresses;
-                    Debug.Log("Pressed");
                 }
 
                 //Increase over time

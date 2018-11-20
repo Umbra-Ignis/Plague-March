@@ -1,5 +1,11 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿//========================================================================================
+//Movement_Adrian
+//
+//Functionality: Used to control the players movement around the world
+//
+//Author: Adrian P
+//Altered by: Joel G
+//========================================================================================
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -248,7 +254,6 @@ public class Movement_Adrian : MonoBehaviour
             m_TurnAmount = 0;
 
 
-            Debug.Log("Stopped moving");
             UpdateAnimator(move);
 
             //ADD ARC HERE
@@ -338,12 +343,8 @@ public class Movement_Adrian : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Rock"))
         {
-            Debug.Log("Rock");
-
             if (Input.GetKey(KeyCode.E) && other.GetComponent<Rock_Adrian>().canPickup)
             {
-                Debug.Log("E");
-
                 other.gameObject.SetActive(false);
                 Destroy(other.gameObject);
                 rockCount++;
@@ -398,13 +399,11 @@ public class Movement_Adrian : MonoBehaviour
         {
             if (Physics.Raycast(transform.position + new Vector3(0, 0.5f, 0), Vector3.down, out raycastHit, 0.6f))
             {
-                Debug.Log("Grounded");
                 m_IsGrounded = true;
                 animator.applyRootMotion = true;
             }
             else
             {
-                Debug.Log("Not Grounded");
                 m_IsGrounded = false;
                 animator.applyRootMotion = false;
             }
@@ -413,13 +412,11 @@ public class Movement_Adrian : MonoBehaviour
         {
             if (Physics.Raycast(transform.position + new Vector3(0, 0.5f, 0), Vector3.down, out raycastHit, 0.6f))
             {
-                Debug.Log("Grounded");
                 m_IsGrounded = true;
                 animator.applyRootMotion = true;
             }
             else
             {
-                Debug.Log("Not Grounded");
                 m_IsGrounded = false;
                 animator.applyRootMotion = false;
             }

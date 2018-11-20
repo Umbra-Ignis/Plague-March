@@ -1,5 +1,11 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿//========================================================================================
+//PauseMenu
+//
+//Functionality: Used to operate the pause menu while in game
+//
+//Author: Adrian P
+//Altered by: Joel G
+//========================================================================================
 using UnityEngine;
 using UnityEngine.SceneManagement;
 #if UNITY_EDITOR
@@ -62,12 +68,10 @@ public class PauseMenu : MonoBehaviour
     public void LoadMenu()
     {
         Time.timeScale = 1f;
-        Debug.Log("Loading Menu...");
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex - 1);
     }
     public void QuitGame()
     {
-        Debug.Log("Quitting Game...");
         Application.Quit();
         //Allows quit button to work while playing in editor
 #if UNITY_EDITOR

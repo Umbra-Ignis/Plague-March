@@ -1,4 +1,12 @@
-﻿using UnityEngine;
+﻿//========================================================================================
+//DoorOpen_Joel
+//
+//Functionality: Attached to doors to allow them to open, close, lock and unlock
+//
+//Author: Joel G
+//Altered by: Adrian P
+//========================================================================================
+using UnityEngine;
 using UnityEngine.UI;
 
 //Dictates the type of keys that can be used to open doors

@@ -1,4 +1,12 @@
-﻿using System.Collections;
+﻿//========================================================================================
+//Infection_Adrian
+//
+//Functionality: Used to calculate and assign the how much the player has been infected
+//throughout the game
+//
+//Author: Adrian P
+//Altered by: Joel G
+//========================================================================================
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -76,10 +84,7 @@ public class Infection_Adrian : MonoBehaviour {
                 }
             }
 
-            if (m_fInfection >= 100)
-            {
-                
-            }
+            if (m_fInfection >= 100){}
 
             if(moveScript.m_bQuicktime)
             {

@@ -1,19 +1,25 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿//========================================================================================
+//EndGameTrigger_Joel
+//
+//Functionality: Attached to a trigger box to send the player to the credits upon
+//completeing the game
+//
+//Author: Joel G
+//========================================================================================
 using UnityEngine.SceneManagement;
 using UnityEngine;
 
-public class EndGameTrigger_Joel : MonoBehaviour {
+public class EndGameTrigger_Joel : MonoBehaviour
+{
+    // Use this for initialization
+    void Start() { }
 
-	// Use this for initialization
-	void Start (){}
-	
-	// Update is called once per frame
-	void Update (){}
+    // Update is called once per frame
+    void Update() { }
 
     private void OnTriggerEnter(Collider other)
     {
-        if(other.CompareTag("Player"))
+        if (other.CompareTag("Player"))
         {
             Cursor.lockState = CursorLockMode.None;
             Cursor.visible = true;
