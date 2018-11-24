@@ -6,23 +6,28 @@ using UnityEngine.SceneManagement;
 
 public class LoadingSceneControl : MonoBehaviour {
 
-    
+    //loading screen panel
     public GameObject LoadingScreenPanel = null;
+    //loading bar
     public Image LoadingBar = null;
+    //loading bar border
     public Image LoadBorder = null;
+    //loading bar border
     public Image ToolTip = null;
+    //async for loading progress
     AsyncOperation async;
 
     private void Start()
     {
         if (ToolTip != false)
         {
+            // disable tooltip
             ToolTip.enabled = false;
         }
 
         LoadingBar.fillAmount = 0;
     }
-
+    //start loading screen
     public void LoadScreenStart(int Level)
     {
         StartCoroutine(LoadingScreen(Level));
