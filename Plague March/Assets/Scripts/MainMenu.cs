@@ -32,11 +32,13 @@ public class MainMenu : MonoBehaviour
 
     public void PlayGame()
     {
+        //Starts main scene
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     }
 
     public void QuitGame()
     {
+        //Closes games
         Debug.Log ("QUIT");
         Application.Quit();
 

@@ -98,6 +98,7 @@ public class DoorOpen_Joel : MonoBehaviour
                 {
                     if (!opened)
                     {
+                        //dont open door if locked
                         entry.enabled = false;
                         doorLeft.transform.Rotate(new Vector3(0, 1, 0), -96.0f);
                         doorRight.transform.Rotate(new Vector3(0, 1, 0), 96.0f);
@@ -133,6 +134,7 @@ public class DoorOpen_Joel : MonoBehaviour
                     entry.enabled = false;
                 }
 
+                //If Key down open door
                 if (Input.GetKeyDown(KeyCode.E))
                 {
                     if (!opened)

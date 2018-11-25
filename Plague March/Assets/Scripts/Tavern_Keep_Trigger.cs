@@ -10,10 +10,15 @@ using UnityEngine;
 public class Tavern_Keep_Trigger : MonoBehaviour
 {
 
+    //Public animator
     public Animator anim;
+    //Timer for length of anim
     float timer;
+    //Starting timer for voice line
     bool startTimer;
+    //bool to play once
     bool playonce;
+    //How long animation lasts
     public float m_fHowLongToAnimate;
 
 
@@ -31,11 +36,11 @@ public class Tavern_Keep_Trigger : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Debug.Log(anim.GetFloat("Blend"));
         if (startTimer)
         {
             timer += Time.deltaTime;
         }
+        //Timer for length of voice line
         if (timer >= 20000.0f)
         {
             timer = 20000.0f;
@@ -48,12 +53,14 @@ public class Tavern_Keep_Trigger : MonoBehaviour
         {
             if (playonce)
             {
+                //Starts Talking
                 startTimer = true;
                 anim.SetBool("Talking", true);
             }
 
             if (timer >= m_fHowLongToAnimate)
             {
+                //Tavern keeper dead
                 anim.SetBool("Dead", true);
                 timer = 0;
                 startTimer = false;

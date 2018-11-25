@@ -13,30 +13,39 @@ using UnityEngine.SceneManagement;
 
 public class LoadingSceneControl : MonoBehaviour {
 
-    
+    //Loading screen as an object
     public GameObject LoadingScreenPanel = null;
+
+    [Space]
+    //Images for loading screen
     public Image LoadingBar = null;
     public Image LoadBorder = null;
     public Image ToolTip = null;
+    
+    //Async for loading Progress
     AsyncOperation async;
 
     private void Start()
     {
         if (ToolTip != false)
         {
+            //Turn tool tip off
             ToolTip.enabled = false;
         }
 
+        //Bar starts at zero
         LoadingBar.fillAmount = 0;
     }
 
     public void LoadScreenStart(int Level)
     {
+        //Starts loading level
         StartCoroutine(LoadingScreen(Level));
     }
 
     IEnumerator LoadingScreen(int Level)
     {
+        //Panels turn on and loading begins
         LoadingScreenPanel.SetActive(true);
         async = SceneManager.LoadSceneAsync(Level);
         async.allowSceneActivation = false;
@@ -63,7 +72,7 @@ public class LoadingSceneControl : MonoBehaviour {
                 {
                     ToolTip.enabled = true;
                 }
-
+                //If loaded and space is pressed change scenes
                 if (Input.GetKeyDown(KeyCode.Space))
                 {
                     async.allowSceneActivation = true;

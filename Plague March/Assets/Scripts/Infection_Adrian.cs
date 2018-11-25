@@ -101,6 +101,7 @@ public class Infection_Adrian : MonoBehaviour {
 
     //Where I found this code
     //https://answers.unity.com/questions/1236558/finding-nearest-game-object.html
+
     public Transform GetClosestEnemy(List<Transform> ListOfEnemies, Transform fromThis)
     {
         //Best Target

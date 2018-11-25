@@ -26,11 +26,12 @@ public class TooltipManager_Joel : MonoBehaviour
             tooltipImage.enabled = false;
         }
     }
-
+    
     private void OnTriggerEnter(Collider other)
     {
         if(other.CompareTag("Player"))
         {
+            //Tool Tip On
             tooltipImage.enabled = true;
         }
     }
@@ -39,6 +40,7 @@ public class TooltipManager_Joel : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
+            //Tool Tip On
             tooltipImage.enabled = true;
         }
     }
@@ -47,6 +49,7 @@ public class TooltipManager_Joel : MonoBehaviour
     {
         if(other.CompareTag("Player"))
         {
+            //Tool Tip Off
             tooltipImage.enabled = false;
         }
     }

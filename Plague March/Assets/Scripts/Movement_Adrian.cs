@@ -65,8 +65,6 @@ public class Movement_Adrian : MonoBehaviour
 
     //Gets main audio source
     new AudioSource audio;
-    //DEBUG Waiting Bool
-    public bool waiting;
 
     const float k_Half = 0.5f;
     //Cap Height
@@ -79,9 +77,10 @@ public class Movement_Adrian : MonoBehaviour
     [HideInInspector]
     public bool m_bQuicktime;
 
-
+    //Bool For Rock Throw Prediction
     private bool aiming;
 
+    //All ui for Rock Throwing
     public Image RockPickUpUi;
     public Image AimRockUI;
     public Image ThrowRockUI;
@@ -95,8 +94,10 @@ public class Movement_Adrian : MonoBehaviour
         animator = GetComponent<Animator>();
         //Gets character controller Component
         CharControler = GetComponent<CharacterController>();
+        //Collider Hight and width
         m_CapsuleHeight = CharControler.height;
         m_CapsuleCenter = CharControler.center;
+        //Crouching set
         m_Crouching = false;
         //Set is aiming
         aiming = false;
@@ -113,14 +114,13 @@ public class Movement_Adrian : MonoBehaviour
         //Sets Throw Rock Ui
         ThrowRockUI.enabled = false;
 
+        //Gets audio source
         audio = GameObject.FindGameObjectWithTag("AudioSource").GetComponent<AudioSource>();
     }
 
     public void Move(Vector3 move, bool crouch, bool jump, bool sprinting)
     {
-        //remove this check
-        if (waiting)
-        {
+        //Plays intro and stops movement
             if (m_bIntro)
             {
                 if (m_fIntroTimer >= 19)
@@ -141,11 +141,11 @@ public class Movement_Adrian : MonoBehaviour
                     m_bIntro = false;
                 }
             }
-        }
 
 
         if (rockCount > 0)
         {
+            //Ui Update for rock throwing ui
             if (AimRockUI != null && ThrowRockUI != null)
             {
                 if (Input.GetMouseButton(0))
@@ -249,6 +249,7 @@ public class Movement_Adrian : MonoBehaviour
         {
             ApplyExtraTurnRotation();
 
+            //Stops movement
             m_ForwardAmount = 0;
             m_rotationSpeed = 0;
             m_TurnAmount = 0;
@@ -262,6 +263,7 @@ public class Movement_Adrian : MonoBehaviour
                 spawnpoint.GetComponent<Trajectory_Simulation>().enabled = true;
                 spawnpoint.GetComponent<LineRenderer>().enabled = true;
 
+                //Camera faces forward from char
                 Quaternion charRot = Camera.main.transform.rotation;
                 charRot.x = 0;
                 charRot.z = 0;
@@ -275,6 +277,7 @@ public class Movement_Adrian : MonoBehaviour
     {
         if (crouch && m_IsGrounded)
         {
+            // Adjust crouch capsuale
             CharControler.center = new Vector3(0, 0.55f, 0);
             CharControler.height = 1.0f;
             m_Crouching = true;
@@ -283,6 +286,7 @@ public class Movement_Adrian : MonoBehaviour
         }
         else
         {
+            // Adjust crouch capsuale
             CharControler.center = m_CapsuleCenter;
             CharControler.height = m_CapsuleHeight;
             m_Crouching = false;
@@ -292,6 +296,7 @@ public class Movement_Adrian : MonoBehaviour
 
     void ApplyExtraTurnRotation()
     {
+        //Turning Smoothness
         float turnspeed = Mathf.Lerp(m_StationaryTurnSpeed, m_MovingTurnSpeed, m_ForwardAmount);
         transform.Rotate(0, m_TurnAmount * turnspeed * Time.deltaTime, 0);
     }
@@ -358,6 +363,7 @@ public class Movement_Adrian : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
+        //Rock Ui Adjustments
         if (other.gameObject.CompareTag("Rock") && RockPickUpUi != null && other.GetComponent<Rock_Adrian>().canPickup)
         {
             RockPickUpUi.enabled = true;
@@ -366,6 +372,7 @@ public class Movement_Adrian : MonoBehaviour
 
     private void OnTriggerExit(Collider other)
     {
+        //Rock Ui Adjustments
         if (other.gameObject.CompareTag("Rock") && RockPickUpUi != null)
         {
             RockPickUpUi.enabled = false;
@@ -375,6 +382,7 @@ public class Movement_Adrian : MonoBehaviour
 
     void HandleAirborneMovement()
     {
+        //Adds Sense of Gravity
         Vector3 velocity;
         velocity = CharControler.velocity;
         velocity.y -= 9.8f * Time.deltaTime;
@@ -399,11 +407,13 @@ public class Movement_Adrian : MonoBehaviour
         {
             if (Physics.Raycast(transform.position + new Vector3(0, 0.5f, 0), Vector3.down, out raycastHit, 0.6f))
             {
+                //Is Player Grounded
                 m_IsGrounded = true;
                 animator.applyRootMotion = true;
             }
             else
             {
+                //Is Player Not Grounded
                 m_IsGrounded = false;
                 animator.applyRootMotion = false;
             }
@@ -412,11 +422,13 @@ public class Movement_Adrian : MonoBehaviour
         {
             if (Physics.Raycast(transform.position + new Vector3(0, 0.5f, 0), Vector3.down, out raycastHit, 0.6f))
             {
+                //Is Player Grounded
                 m_IsGrounded = true;
                 animator.applyRootMotion = true;
             }
             else
             {
+                //Is Player Not Grounded
                 m_IsGrounded = false;
                 animator.applyRootMotion = false;
             }

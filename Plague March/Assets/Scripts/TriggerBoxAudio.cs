@@ -68,6 +68,7 @@ public class TriggerBoxAudio : MonoBehaviour
 
     private void OnTriggerStay(Collider other)
     {
+        //Stops Movement and plays sound
         if (m_bStopAndPlaySound)
         {
             m_bStartTimer = true;
@@ -77,6 +78,7 @@ public class TriggerBoxAudio : MonoBehaviour
             m_bStopAndPlaySound = false;
         }
 
+        //Walk through trigger and play sound
         if (m_bWalkThroughSound)
         {
             m_bStartTimer = true;
@@ -84,13 +86,15 @@ public class TriggerBoxAudio : MonoBehaviour
             m_bWalkThroughSound = false;
         }
 
+        //Camera movement and play sound
         if (m_bNewCameraSound)
         {
             if (NewCamera != null)
             {
+                //Turns camera on
                 NewCamera.enabled = true;
             }
-
+            //Stop movement and play voice line
             if (NewCamera.enabled == true && !m_bIsPlaying)
             {
                 m_bStartTimer = true;
@@ -109,13 +113,16 @@ public class TriggerBoxAudio : MonoBehaviour
                 }
             }
         }
+        //Plays same code as above but for church instance
         if (m_bChurchCameraLight)
         {
             if (NewCamera != null)
             {
+                //Turns camera on
                 NewCamera.enabled = true;
             }
 
+            //Stop movement and play voice line
             if (NewCamera.enabled == true && !m_bIsPlaying)
             {
                 if (light != null)
@@ -128,7 +135,7 @@ public class TriggerBoxAudio : MonoBehaviour
                 audio.PlayOneShot(AudioToBePlayed);
                 m_bIsPlaying = true;
             }
-
+            // Starts Timer and activates church light.
             if (!m_bStartTimer)
             {
                 if (NewCamera != null)
