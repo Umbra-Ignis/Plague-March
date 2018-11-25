@@ -42,13 +42,13 @@ public class DoorOpen_Joel : MonoBehaviour
     public GameObject doorLeft;
     //Takes reference to the single door if there is only one
     public GameObject m_goSingleDoor;
-
+    //Stores whether the door is a single door
     public bool m_bSingleDoor;
-
+    //Stores whether the door should always be unlocked
     public bool alwaysOpen;
-
+    //Stores whether the player has the needed key to unlock the door
     private bool hasRequiredKey = false;
-
+    //Stores whether the door has been permanently locked
     private bool permaLock = false;
 
     // Use this for initialization
@@ -63,8 +63,10 @@ public class DoorOpen_Joel : MonoBehaviour
         //Ensures the door is set to closed intially
         opened = false;
 
+        //Checks whether THIS door should be always unlocked
         if(alwaysOpen)
         {
+            //Cheats this by just stating that the player has the required key, even though there is no key required
             hasRequiredKey = true;
         }
     }
@@ -72,6 +74,7 @@ public class DoorOpen_Joel : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        //Continually checks if the player obtains the required key to open the door
         if(user.haveKey((int)keyRequired + 1))
         {
             hasRequiredKey = true;

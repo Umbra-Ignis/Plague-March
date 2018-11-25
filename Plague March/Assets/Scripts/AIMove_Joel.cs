@@ -69,18 +69,27 @@ public class AIMove_Joel : MonoBehaviour
     //Used to store whether the AI is progressing forward or backward through the waypoints
     private bool forward;
 
+    //Takes reference to the open eye sprite to apear in the UI, depending on the state of the AI
     public Image Open = null;
+    //Takes reference to the half open eye sprite to apear in the UI, depending on the state of the AI
     public Image Half = null;
+    //Takes reference to the red open eye sprite to apear in the UI, depending on the state of the AI
     public Image Red = null;
 
+    //Stores whether or not the AI only has one waypoint or not
     private bool oneWaypoint;
 
+    //Takes a reference to the starting waypoint of the AI
     public Transform startWaypoint;
+    //Stores a reference to the AI's character controller
     private CharacterController charCont;
+    //Stores a reference to the AI's capsule collider
     private CapsuleCollider infectedCapsule;
 
+    //Stores whether or not the quick time event is currently active
     private bool QTE;
 
+    //Takes reference to the AI's infection centrepoint
     public GameObject infectionCP;
 
     // Use this for initialization
@@ -90,7 +99,7 @@ public class AIMove_Joel : MonoBehaviour
         agent = GetComponent<NavMeshAgent>();
         //Gets the Animator component from the AI to alter the animations
         anim = GetComponent<Animator>();
-
+        //Gets the character controller component
         charCont = GetComponent<CharacterController>();
         infectedCapsule = GetComponent<CapsuleCollider>();
 
@@ -106,11 +115,14 @@ public class AIMove_Joel : MonoBehaviour
         //Sets the current target for the AI to approach
         if (targets.Length != 0)
         {
+            //Ensures the first target for the AI is set to the first waypoint in the array
             currentTarg = targets[targVal].position;
         }
 
+        //If there are no targets that exist
         else
         {
+            //The AI is set to idle in the position it is placed
             Idle();
         }
 
@@ -119,29 +131,38 @@ public class AIMove_Joel : MonoBehaviour
         //Sets Rock wait timer
         m_rockWaitTimer = 1f;
 
+        //Checks how many waypoints are in the targets array
         if (targets.Length == 1)
         {
+            //If there is only one waypoint, this is set to true to ensure the AI does not make any
+            //uneccessary animations
             oneWaypoint = true;
         }
 
+        //If there are multiple waypoints in the array
         else
         {
+            //This is set to false to ensure the appropriate animations play
             oneWaypoint = false;
         }
 
+        //Gets a bool off the player to determine whether the quick time event is currently active
         QTE = GameObject.FindGameObjectWithTag("Player").GetComponent<Movement_Adrian>().m_bQuicktime;
     }
 
     // Update is called once per frame
     void Update()
     {
+        //Checks whether the AI is dead as a result of a successful quick time event by the player
         if (tag != "Dead")
         {
+            //Updates the quick time event every frame to ensure as soon as the quicktime event begins, this AI does not continue
             QTE = GameObject.FindGameObjectWithTag("Player").GetComponent<Movement_Adrian>().m_bQuicktime;
 
             //Calculates how far the AI is from its current target
             distanceToWaypoint = Vector3.Distance(currentTarg, agent.transform.position);
 
+            //Checks if the AI has detected a rock throw
             if (rock)
             {
                 //Ensures the AI is able to move to its new waypoint
@@ -197,6 +218,7 @@ public class AIMove_Joel : MonoBehaviour
             }
         }
     }
+
     //====================================================================
     //Uncomment for AI target debugging
     //====================================================================
@@ -219,6 +241,7 @@ public class AIMove_Joel : MonoBehaviour
         //Ensures the agent can move, to avoid any conflicts when moving from other behaviours
         if (agent.isStopped && !QTE)
         {
+            //Frees the agent to ensure it can move
             agent.isStopped = false;
         }
 
@@ -245,6 +268,7 @@ public class AIMove_Joel : MonoBehaviour
                 Idle();
             }
 
+            //Checks if there is more than one waypoint
             if (!oneWaypoint)
             {
                 //Timer begins to increase to store how long the agent has spent at the location
@@ -293,11 +317,13 @@ public class AIMove_Joel : MonoBehaviour
 
                     else
                     {
+                        //Checks if the AI has reached the end of the array of waypoints
                         if (targVal == targets.Length - 1)
                         {
                             targVal = 0;
                         }
 
+                        //Sets the new waypoint to the one following the current one
                         else
                         {
                             targVal++;
@@ -377,6 +403,7 @@ public class AIMove_Joel : MonoBehaviour
         rock = false;
     }
 
+    //Sets the AI's behaviour to act alerted by the presence of the player or a rock
     public void SetAlert()
     {
         if (Open != null)
@@ -391,6 +418,7 @@ public class AIMove_Joel : MonoBehaviour
         rock = false;
     }
 
+    //Sets the AI's behaviour to chase the player until the player has escaped the AI's vision
     public void SetChase()
     {
         if (Red != null)
@@ -404,6 +432,8 @@ public class AIMove_Joel : MonoBehaviour
         chasing = true;
         rock = false;
     }
+
+    //Sets the AI to approach the location the rock has landed
     public void RockThrowBools()
     {
         patrolling = false;
@@ -411,6 +441,8 @@ public class AIMove_Joel : MonoBehaviour
         chasing = false;
         rock = true;
     }
+
+    //Sets the AI's animation to walking
     void Walking()
     {
         anim.SetBool("Walking", true);
@@ -418,6 +450,7 @@ public class AIMove_Joel : MonoBehaviour
         anim.SetBool("Idle", false);
     }
 
+    //Sets the AI's animation to running
     void Running()
     {
         anim.SetBool("Walking", false);
@@ -425,6 +458,7 @@ public class AIMove_Joel : MonoBehaviour
         anim.SetBool("Idle", false);
     }
 
+    //Sets the AI's animation to idle
     void Idle()
     {
         anim.SetBool("Walking", false);
@@ -432,6 +466,7 @@ public class AIMove_Joel : MonoBehaviour
         anim.SetBool("Idle", true);
     }
 
+    //Sets the destination of the AI's target to the location where the rock hit the ground
     public void ApproachRock(Transform pos)
     {
         agent.SetDestination(pos.position);
@@ -444,11 +479,13 @@ public class AIMove_Joel : MonoBehaviour
         timerAlert = alertTimer;
     }
 
+    //Resets the AI's position to its starting waypoint
     public void ResetPos()
     {
         transform.position = startWaypoint.position;
     }
 
+    //Sets up the AI to prepare to be ragdolled, and to ensure it is not interfereing while the quick time event is happening
     public void preRagdoll()
     {
         anim.speed = 0;
@@ -457,6 +494,7 @@ public class AIMove_Joel : MonoBehaviour
         infectedCapsule.enabled = false;
     }
 
+    //Ragdolls the AI and turns off everything on it to ensure it no longer interacts with the game
     public void initRagdoll()
     {
         anim.enabled = false;
